@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/safe-vault/safe-vault",
     "pages/analyse/analyse",
-    "pages/analyse-detail/analyse-detail"
+    "pages/analyse-detail/analyse-detail",
+    "pages/insurances/insurances"
   ],
   "window": {
     "backgroundTextStyle": "light",
