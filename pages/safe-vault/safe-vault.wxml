@@ -1,0 +1,15 @@
+<!--pages/safe-vault/safe-vault.wxml-->
+<import src="../common/header.wxml" />
+
+<view class="container">
+  <template is="head" data="{{...headInfo}}"></template>
+
+  <view class="body-list">
+    <view class='insurance-list' wx:for="{{insuranceList}}" wx:key="item.id">
+      <navigator class='insurance-list-item'>
+        <view class="insurance-list-item-title">{{item.title}}</view>
+        <view class="insurance-list-item-desc">{{item.desc}}</view>
+      </navigator>
+    </view>
+  </view>
+</view>

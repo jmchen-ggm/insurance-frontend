@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="header">
+    <view class="bb-input-area">
+      <input class="bb-input" placeholder='请输入你要查找的保险' />
+      <image class="bb-search-icon" src='/resources/index/img/search-icon.png'/>
+    </view>
+  </view>
+
+  <view class="menu">
+    <view class="flex-wrp" style="flex-direction:row;">
+      <block wx:for-items="{{menu1}}" wx:key="{{item.id}}">
+        <navigator class="flex-item" url="{{item.page}}" hover-class="none">
+          <image class='flex-item-image' src="{{item.img}}"/>
+          <text>{{item.title}}</text>
+        </navigator>
+      </block>
+    </view>
+    <view class="flex-wrp" style="flex-direction:row;">
+      <block wx:for-items="{{menu2}}" wx:key="{{item.id}}">
+        <navigator class="flex-item" url="{{item.page}}" hover-class="none">
+          <image class='flex-item-image' src="{{item.img}}"/>
+          <text>{{item.title}}</text>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+  <view class='bottom'>
+    <image class='bottom-image' src='/resources/index/img/bottom.png'></image>
+  </view>
+</view>

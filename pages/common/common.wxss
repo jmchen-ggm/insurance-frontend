@@ -1,0 +1,29 @@
+.page-head{
+  padding: 60rpx 50rpx 80rpx;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+.page-head-image {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+}
+.page-head-title{
+  display: inline-block;
+  padding: 0 40rpx 20rpx 40rpx;
+  font-size: 32rpx;
+  color: #BEBEBE;
+}
+.page-head-line{
+  margin: 0 auto;
+  width: 250rpx;
+  height: 5rpx;
+  background-color: #D8D8D8;
+}
+.page-head-desc{
+  padding-top: 20rpx;
+  color: #9B9B9B;
+  font-size: 32rpx;
+}

@@ -1,0 +1,9 @@
+<!--pages/analyse-detail/analyse-detail.wxml-->
+<view class="container">
+  <view class="analyse-detail-body">
+    <image class="analyse-detail-image" src="{{content[index].img}}"></image>
+    <view class="analyse-detail-title">{{content[index].title}}</view>
+    <view class="analyse-detail-divider"></view>
+    <view class="analyse-detail-desc">{{content[index].content}}</view>
+  </view>
+</view>

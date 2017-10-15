@@ -1,0 +1,26 @@
+/* pages/analyse-detail/analyse-detail.wxss */
+.analyse-detail-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+}
+
+.analyse-detail-title {
+  font-size: 50rpx;
+  margin-top: 60rpx;
+  margin-bottom: 60rpx;
+}
+
+.analyse-detail-divider {
+  width: 100%;
+  height: 10rpx;
+  background-color: #3d3d3d;
+}
+
+.analyse-detail-desc {
+  font-size: 30rpx;
+  margin-top: 60rpx;
+}
+

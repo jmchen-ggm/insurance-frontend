@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/safe-vault/safe-vault",
+    "pages/analyse/analyse",
+    "pages/analyse-detail/analyse-detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}
