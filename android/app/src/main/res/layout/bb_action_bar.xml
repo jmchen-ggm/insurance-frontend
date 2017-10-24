@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:background="@color/main_blue_color"
+                android:orientation="horizontal"
+                android:layout_height="@dimen/ActionBarHeight">
+
+    <ImageButton
+        android:id="@+id/back_ib"
+        android:layout_width="@dimen/ActionBarHeight"
+        android:layout_height="@dimen/ActionBarHeight"
+        android:background="@color/main_blue_color"
+        android:src="@drawable/back_icon"
+        android:contentDescription="TODO"/>
+
+    <TextView
+        android:id="@+id/title_tv"
+        style="@style/TitleTextStyle"
+        android:layout_marginLeft="8dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{title}"/>
+</RelativeLayout>

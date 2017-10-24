@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ActionBarHeight">48dp</dimen>
+
+    <dimen name="TitleTextSize">16dp</dimen>
+    <dimen name="HintTextSize">15dp</dimen>
+</resources>

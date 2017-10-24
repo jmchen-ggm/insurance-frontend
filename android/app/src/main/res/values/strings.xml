@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">android</string>
+    <string name="app_name">比比保险</string>
+    <string name="welcome_word">欢迎来到比比保险</string>
+
+    <!-- launcher UI  -->
+    <string name="launcher_label">Launcher</string>
+    <string name="search_hint">搜索想要的保险</string>
+    <string name="menu_compare_text">保险对比</string>
+    <string name="menu_evaluate_text">保险评价</string>
+    <string name="menu_consult_text">保险咨询</string>
+    <string name="menu_learn_text">保险课堂</string>
+
 </resources>
