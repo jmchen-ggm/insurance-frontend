@@ -1,18 +1,21 @@
 package com.bbinsurance.android.app.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.R
+import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
+import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.lib.util.PermissionUtil
-import kotlin.jvm.javaClass
+
 /**
  * Created by jiaminchen on 2017/10/23.
  */
 
 
-class LauncherUI : BaseActivity() {
+class LauncherUI : BaseActivity(), ListBaseUIComponent {
 
     override fun getLayoutId(): Int {
         return R.layout.launcher_ui
@@ -59,5 +62,13 @@ class LauncherUI : BaseActivity() {
     private var consultLayout : View ? = null
     private var evaluateLayout : View ? = null
     private var learnLayout : View ? = null
+
+    override fun onItemClick(view: View, dataItem: BaseDataItem, isHandled: Boolean) {
+
+    }
+
+    override fun getContext(): Context {
+        return LauncherUI@this
+    }
 
 }
