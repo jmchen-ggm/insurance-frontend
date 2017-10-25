@@ -5,17 +5,16 @@ import com.bbinsurance.android.lib.Constants
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.logging.SimpleFormatter
 
 /**
  * Created by jiaminchen on 2017/10/24.
  */
-class FileLog : ILog {
+class FileLog : IBBLog {
 
     private val MAX_LOG_LENGTH = 5 * 1024 * 1024L
 
     private var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS")
-    private var mmappedFileStorage : MMapFileStorage ? = null
+    private var mmappedFileStorage : MMapFileStorage
 
     constructor(logPath : String) {
         var logFile = File(logPath);
@@ -28,7 +27,7 @@ class FileLog : ILog {
     private var logLevel : Int = Constants.LogLevel.DEBUG
 
     @Synchronized fun appendToBuffer(log : String, appendToRealLog : Boolean) {
-        mmappedFileStorage!!.appendToBuffer(log.toByteArray(), appendToRealLog)
+        mmappedFileStorage.appendToBuffer(log.toByteArray(), appendToRealLog)
     }
 
     override fun d(tag: String, log: String) {

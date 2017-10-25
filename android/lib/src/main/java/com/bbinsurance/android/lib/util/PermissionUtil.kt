@@ -3,7 +3,7 @@ package com.bbinsurance.android.lib.util
 import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.app.Activity
-import com.bbinsurance.android.lib.log.Log
+import com.bbinsurance.android.lib.log.BBLog
 
 
 /**
@@ -23,14 +23,14 @@ open class PermissionUtil {
                     ActivityCompat.requestPermissions(activity, permissionArray, requestCode)
                 }
             } catch (e: Exception) {
-                Log.e(TAG, e, "verifyPermissions")
+                BBLog.e(TAG, e, "verifyPermissions")
             }
         }
 
         fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
-            Log.i(TAG, "onRequestPermissionsResult requestCode=%d", requestCode)
+            BBLog.i(TAG, "onRequestPermissionsResult requestCode=%d", requestCode)
             for (i in permissions!!.indices) {
-                Log.i(TAG, "permissions: %s grantResult", permissions!![i], grantResults!![i])
+                BBLog.i(TAG, "permissions: %s grantResult", permissions!![i], grantResults!![i])
             }
         }
     }

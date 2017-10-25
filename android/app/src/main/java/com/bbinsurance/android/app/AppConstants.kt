@@ -11,7 +11,8 @@ class AppConstants {
         val LOG_PATH = "log";
         val REQUST_PERMISSION = arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
-                "android.permission.READ_EXTERNAL_STORAGE"
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.INTERNET"
         )
 
         fun init () {

@@ -2,12 +2,10 @@ package com.bbinsurance.android.app.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import com.bbinsurance.android.app.R
-import com.bbinsurance.android.lib.log.Log
+import com.bbinsurance.android.lib.log.BBLog
 import com.bbinsurance.android.lib.util.PermissionUtil
 
 /**
@@ -21,7 +19,7 @@ abstract class BaseActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate")
+        BBLog.d(TAG, "onCreate")
         setContentView(getLayoutId())
         initView();
     }
@@ -46,32 +44,32 @@ abstract class BaseActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy")
+        BBLog.d(TAG, "onDestroy")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume")
+        BBLog.d(TAG, "onResume")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d(TAG, "onRestart")
+        BBLog.d(TAG, "onRestart")
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart")
+        BBLog.d(TAG, "onStart")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop")
+        BBLog.d(TAG, "onStop")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause")
+        BBLog.d(TAG, "onPause")
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {

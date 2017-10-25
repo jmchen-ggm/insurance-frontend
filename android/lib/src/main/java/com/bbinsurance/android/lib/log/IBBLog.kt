@@ -3,7 +3,7 @@ package com.bbinsurance.android.lib.log
 /**
  * Created by jiaminchen on 2017/10/24.
  */
-interface ILog {
+interface IBBLog {
     fun v(tag : String, log : String)
     fun d(tag : String, log : String)
     fun i(tag : String, log : String)

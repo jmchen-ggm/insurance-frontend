@@ -2,6 +2,7 @@ package com.bbinsurance.android.app.ui.adapter
 
 import android.content.Context
 import android.view.View
+import android.widget.ListView
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 
 /**
@@ -9,7 +10,9 @@ import com.bbinsurance.android.app.ui.item.BaseDataItem
  */
 interface ListBaseUIComponent {
 
-    fun getContext() : Context;
+    fun getContext() : Context
 
     fun onItemClick(view : View, dataItem : BaseDataItem, isHandled : Boolean)
+
+    fun getListView() : ListView
 }

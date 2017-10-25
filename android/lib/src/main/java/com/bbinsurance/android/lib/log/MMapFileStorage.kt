@@ -12,25 +12,25 @@ class MMapFileStorage {
     private val HEADER_OFFSET = 4;
 
     private var maxTempFileLength = MAX_BUFFER_SIZE
-    private var targetFile: File? = null
-    private var tempFile: File? = null
+    private var targetFile: File
+    private var tempFile: File
 
     constructor(targetFilePath : String) {
         targetFile = File(targetFilePath);
-        tempFile = File(targetFile!!.parentFile, "temp-" + targetFile!!.name);
+        tempFile = File(targetFile.parentFile, "temp-" + targetFile.name);
         init();
     }
 
-    var tempBuffer : MappedByteBuffer ? = null;
-    var tempRandomAccessFile : RandomAccessFile? = null;
+    private var tempBuffer : MappedByteBuffer ? = null
+    private var tempRandomAccessFile : RandomAccessFile? = null
 
     fun init() {
-        if (!targetFile!!.parentFile.exists()) {
-            targetFile!!.parentFile.mkdirs();
+        if (!targetFile.parentFile.exists()) {
+            targetFile.parentFile.mkdirs();
         }
-        if (tempFile!!.exists()) {
-            copyAppendTargetFile(tempFile!!, targetFile!!)
-            tempFile!!.delete()
+        if (tempFile.exists()) {
+            copyAppendTargetFile(tempFile, targetFile)
+            tempFile.delete()
         }
     }
 
@@ -40,8 +40,8 @@ class MMapFileStorage {
         try {
 
             if (tempRandomAccessFile == null) {
-                if (tempFile!!.exists()) {
-                    tempFile!!.createNewFile()
+                if (tempFile.exists()) {
+                    tempFile.createNewFile()
                 }
                 tempRandomAccessFile = RandomAccessFile(tempFile, "rw")
             }
@@ -57,10 +57,10 @@ class MMapFileStorage {
                     tempRandomAccessFile!!.close();
                 } catch (e : Exception) {
                 }
-                copyAppendTargetFile(tempFile!!, targetFile!!)
+                copyAppendTargetFile(tempFile, targetFile)
                 currentIndex = HEADER_OFFSET
-                tempFile!!.delete()
-                tempFile!!.createNewFile()
+                tempFile.delete()
+                tempFile.createNewFile()
                 tempRandomAccessFile = RandomAccessFile(tempFile, "rw")
                 tempBuffer = tempRandomAccessFile!!.channel.map(FileChannel.MapMode.READ_WRITE, 0, maxTempFileLength);
                 tempBuffer!!.putInt(currentIndex - HEADER_OFFSET);

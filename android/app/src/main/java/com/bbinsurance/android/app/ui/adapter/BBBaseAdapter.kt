@@ -4,15 +4,17 @@ import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.ui.item.BaseDataItem
-import com.bbinsurance.android.lib.log.Log
+import com.bbinsurance.android.app.ui.item.EmptyDataItem
+import com.bbinsurance.android.lib.log.BBLog
 
 /**
  * Created by jiaminchen on 17/10/25.
  */
 abstract class BBBaseAdapter : BaseAdapter {
     private val TAG = "BB.BBBaseAdapter"
-    private var uiComponent : ListBaseUIComponent ? = null
+    protected var uiComponent : ListBaseUIComponent
 
     constructor(uiComponent: ListBaseUIComponent) : super() {
         this.uiComponent = uiComponent
@@ -25,20 +27,20 @@ abstract class BBBaseAdapter : BaseAdapter {
         val dataItem : BaseDataItem ? = getItem(position)
         var returnView = convertView;
         if (returnView == null) {
-            returnView = dataItem!!.inflateView(uiComponent!!.getContext(),
+            returnView = dataItem!!.inflateView(uiComponent.getContext(),
                     parent, returnView)
         }
         var viewHolder = returnView.getTag() as BaseDataItem.BaseViewHolder
         // 如果已经填充过数据，就不需要再填充了
         if (!dataItem!!.isFillData) {
-            dataItem!!.fillData(uiComponent!!.getContext(), viewHolder)
+            dataItem!!.fillData(uiComponent.getContext(), viewHolder)
             dataItem!!.isFillData = true
         }
-        dataItem!!.fillView(uiComponent!!.getContext(), viewHolder)
+        dataItem!!.fillView(uiComponent.getContext(), viewHolder)
         return returnView
     }
 
-    override fun getItem(position: Int): BaseDataItem? {
+    override fun getItem(position: Int): BaseDataItem {
         if (itemCache.indexOfKey(position) >= 0) {
             return itemCache.get(position)
         } else {
@@ -47,7 +49,8 @@ abstract class BBBaseAdapter : BaseAdapter {
                 baseDataItem = createDataItem(position)
             }
             if (baseDataItem == null) {
-                Log.e(TAG, "getItem Occur error ! position = %d | count=%d", position, getCount())
+                baseDataItem = EmptyDataItem(position)
+                BBLog.e(TAG, "getItem Occur error ! position = %d | count=%d", position, getCount())
             } else {
                 itemCache.put(position, baseDataItem)
             }
@@ -63,5 +66,13 @@ abstract class BBBaseAdapter : BaseAdapter {
 
     override fun getCount(): Int {
         return this.count
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position)!!.viewType
+    }
+
+    override fun getViewTypeCount(): Int {
+        return UIConstants.ListViewType.Count
     }
 }

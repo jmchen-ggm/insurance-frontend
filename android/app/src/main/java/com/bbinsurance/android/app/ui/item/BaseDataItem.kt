@@ -9,20 +9,27 @@ import android.view.ViewGroup
  */
 open class BaseDataItem {
 
+    var position : Int
+    var viewType : Int
+
+    constructor(viewType : Int, position : Int) {
+        this.viewType = viewType
+        this.position = position
+    }
+
     var isFillData : Boolean = false
 
-    fun inflateView(context : Context, parent : ViewGroup?, convertView : View?) : View {
+    open fun inflateView(context : Context, parent : ViewGroup?, itemView : View?) : View {
         TODO()
     }
 
-    fun fillData(context: Context, viewHolder: BaseViewHolder) {
+    open fun fillData(context: Context, viewHolder: BaseViewHolder) {
 
     }
 
-    fun fillView(context: Context, viewHolder: BaseViewHolder) {
+    open fun fillView(context: Context, viewHolder: BaseViewHolder) {
 
     }
-
 
     open class BaseViewHolder {
 

@@ -10,4 +10,7 @@
     <string name="menu_consult_text">保险咨询</string>
     <string name="menu_learn_text">保险课堂</string>
 
+    <string name="recommend_insurance_title">今日推荐</string>
+
+    <string name="score_formatter" formatted="false">评分：%s分</string>
 </resources>

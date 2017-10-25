@@ -8,7 +8,7 @@
     <color name="normal_text_color">#353535</color>
     <color name="hint_text_color">#999999</color>
 
-
+    <color name="transparent">#00000000</color>
 
     <color name="grey_color_1">#e4e4e4</color>
     <color name="grey_color_2">#969696</color>
