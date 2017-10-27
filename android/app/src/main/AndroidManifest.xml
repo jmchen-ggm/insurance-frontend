@@ -27,5 +27,6 @@
         <activity android:name=".ui.InsuranceConsultUI" />
         <activity android:name=".ui.InsuranceEvaluateUI" />
         <activity android:name=".ui.InsuranceLearnUI" />
+        <activity android:name=".ui.webview.BBWebViewUI" />
     </application>
 </manifest>

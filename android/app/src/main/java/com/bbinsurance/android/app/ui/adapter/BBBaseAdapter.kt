@@ -75,4 +75,8 @@ abstract class BBBaseAdapter : BaseAdapter {
     override fun getViewTypeCount(): Int {
         return UIConstants.ListViewType.Count
     }
+
+    open fun handleItemClick(view : View?, dataItem : BaseDataItem, isHandle : Boolean) {
+
+    }
 }

@@ -1,24 +1,13 @@
 package com.bbinsurance.android.app.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ListView
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
 import com.bbinsurance.android.app.AppConstants
-import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
-import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.net.NetListener
-import com.bbinsurance.android.app.net.NetRequest
-import com.bbinsurance.android.app.net.NetResponse
-import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
+import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.RecommendInsuranceAdapter
-import com.bbinsurance.android.app.ui.item.BaseDataItem
-import com.bbinsurance.android.lib.log.BBLog
 import com.bbinsurance.android.lib.util.PermissionUtil
 
 /**
@@ -26,10 +15,7 @@ import com.bbinsurance.android.lib.util.PermissionUtil
  */
 
 
-class LauncherUI : BaseActivity(), ListBaseUIComponent {
-
-    private lateinit var recommendInsuranceLV : ListView
-    private lateinit var recommendInsuranceAdapter : RecommendInsuranceAdapter
+class LauncherUI : BaseListViewUI() {
 
     override fun getLayoutId(): Int {
         return R.layout.launcher_ui
@@ -46,20 +32,10 @@ class LauncherUI : BaseActivity(), ListBaseUIComponent {
 
         setBBTitle(R.string.app_name)
         backIB!!.visibility = View.GONE
-
-        recommendInsuranceAdapter.refreshRecommendInsuranceList()
     }
 
-    override fun initView() {
-        super.initView()
-
-        recommendInsuranceLV = findViewById(R.id.recommend_insurance_lv)
-
+    override fun getHeaderView(): View? {
         var headerView = LayoutInflater.from(getContext()).inflate(R.layout.launcher_header_view, null)
-        recommendInsuranceLV.addHeaderView(headerView)
-
-        recommendInsuranceAdapter = RecommendInsuranceAdapter(this)
-        recommendInsuranceLV.adapter = recommendInsuranceAdapter
 
         compareLayout = headerView.findViewById(R.id.compare_layout)
         compareLayout!!.setOnClickListener({
@@ -81,6 +57,7 @@ class LauncherUI : BaseActivity(), ListBaseUIComponent {
             var intent = Intent(LauncherUI@this, InsuranceLearnUI::class.java)
             startActivity(intent)
         })
+        return headerView
     }
 
     private var compareLayout : View ? = null
@@ -88,15 +65,11 @@ class LauncherUI : BaseActivity(), ListBaseUIComponent {
     private var evaluateLayout : View ? = null
     private var learnLayout : View ? = null
 
-    override fun onItemClick(view: View, dataItem: BaseDataItem, isHandled: Boolean) {
-
-    }
-
-    override fun getContext(): Context {
-        return LauncherUI@this
-    }
-
-    override fun getListView(): ListView {
-        return recommendInsuranceLV
+    private var recommendInsuranceAdapter : RecommendInsuranceAdapter ? = null
+    override fun getAdapter(): BBBaseAdapter {
+        if (recommendInsuranceAdapter == null) {
+            recommendInsuranceAdapter = RecommendInsuranceAdapter(this)
+        }
+        return recommendInsuranceAdapter!!
     }
 }

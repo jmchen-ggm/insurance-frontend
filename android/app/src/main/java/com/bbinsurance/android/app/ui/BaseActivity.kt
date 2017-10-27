@@ -21,7 +21,12 @@ abstract class BaseActivity : Activity() {
         super.onCreate(savedInstanceState)
         BBLog.d(TAG, "onCreate")
         setContentView(getLayoutId())
-        initView();
+        initData()
+        initView()
+    }
+
+    open fun initData() {
+
     }
 
     open fun initView() {

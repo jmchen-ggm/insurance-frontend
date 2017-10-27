@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.lib.log.BBLog
+import com.facebook.drawee.backends.pipeline.Fresco
 
 /**
  * Created by jiaminchen on 2017/10/23.
@@ -24,5 +25,6 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Fresco.initialize(this)
     }
 }

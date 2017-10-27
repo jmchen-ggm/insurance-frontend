@@ -19,11 +19,13 @@ open class ProtocolConstants {
     open class URI {
         companion object {
             val DataBin = "/data-bin/"
+            val ConfigBin = "/config-bin/"
         }
     }
 
     open class URL {
         companion object {
+            val FileServer = "http://120.78.175.235:8081/"
             val Data = "http://bb-insurance.cn/insuranceS/data/information"
         }
     }

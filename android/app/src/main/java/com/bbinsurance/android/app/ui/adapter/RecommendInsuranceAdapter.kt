@@ -21,7 +21,7 @@ class RecommendInsuranceAdapter : BBBaseAdapter{
     private var insuranceList : List<InsuranceEntity> = ArrayList<InsuranceEntity>()
 
     constructor(uiComponent: ListBaseUIComponent) : super(uiComponent) {
-
+        refreshRecommendInsuranceList()
     }
 
     override fun getCount(): Int {
@@ -40,7 +40,7 @@ class RecommendInsuranceAdapter : BBBaseAdapter{
         return dataItem
     }
 
-    fun refreshRecommendInsuranceList() {
+    private fun refreshRecommendInsuranceList() {
         var netRequest = NetRequest(ProtocolConstants.FunId.RecommendationInsurance, ProtocolConstants.URI.DataBin)
         var requestBody = JSONObject()
         requestBody.put("start", 0)

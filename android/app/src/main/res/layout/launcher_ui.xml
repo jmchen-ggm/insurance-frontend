@@ -9,7 +9,7 @@
              android:id="@+id/action_bar"/>
 
     <ListView
-        android:id="@+id/recommend_insurance_lv"
+        android:id="@+id/listview"
         android:layout_below="@id/action_bar"
         android:layout_width="match_parent"
         android:background="@null"

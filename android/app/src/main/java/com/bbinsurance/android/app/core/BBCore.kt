@@ -9,6 +9,7 @@ import com.bbinsurance.android.lib.BBHandler
 import com.bbinsurance.android.lib.Constants
 import com.bbinsurance.android.lib.log.BBLog
 import com.bbinsurance.android.lib.ueh.BBUncaughtExceptionHandler
+import com.facebook.drawee.backends.pipeline.Fresco
 import java.io.File
 
 /**
