@@ -30,7 +30,7 @@ open class PermissionUtil {
         fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
             BBLog.i(TAG, "onRequestPermissionsResult requestCode=%d", requestCode)
             for (i in permissions!!.indices) {
-                BBLog.i(TAG, "permissions: %s grantResult", permissions!![i], grantResults!![i])
+                BBLog.i(TAG, "permissions: %s grantResult", permissions[i], grantResults!![i])
             }
         }
     }

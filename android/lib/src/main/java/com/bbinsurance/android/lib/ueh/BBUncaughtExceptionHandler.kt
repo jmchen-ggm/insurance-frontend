@@ -17,7 +17,6 @@ class BBUncaughtExceptionHandler : Thread.UncaughtExceptionHandler {
             t = t.cause
         }
         t.printStackTrace(printWriter)
-        var exString = toVisualString(bos.toString())
         bos.close()
         BBLog.e(TAG, t, "uncaughtException\n")
     }
@@ -27,7 +26,7 @@ class BBUncaughtExceptionHandler : Thread.UncaughtExceptionHandler {
         if (null == src) {
             return null
         }
-        val chr = src.toCharArray() ?: return null
+        val chr = src.toCharArray()
         var i = 0
         while (i < chr.size) {
             if (chr[i].toInt() > 127) {

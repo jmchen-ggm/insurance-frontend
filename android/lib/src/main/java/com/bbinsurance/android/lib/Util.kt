@@ -5,7 +5,7 @@ package com.bbinsurance.android.lib
  */
 class Util {
     companion object {
-        fun isNullOrNil(str : String) : Boolean {
+        fun isNullOrNil(str : String ?) : Boolean {
             return str == null || str.isEmpty()
         }
 

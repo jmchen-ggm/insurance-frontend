@@ -48,7 +48,7 @@ class MMapFileStorage {
             if (tempBuffer == null) {
                 tempBuffer = tempRandomAccessFile!!.channel.map(FileChannel.MapMode.READ_WRITE, 0, maxTempFileLength);
             }
-            if (tempFile == null || tempBuffer == null) {
+            if (tempBuffer == null) {
                 return;
             }
             if (currentIndex + data.size > maxTempFileLength || forceAppendToTargetFile) {
@@ -86,9 +86,9 @@ class MMapFileStorage {
             dis = DataInputStream(fis);
             var tempLogLength = dis.readInt()
             var buffer = ByteArray(1024)
-            var read = 0
+            var read : Int
             var readLength = 0
-            var canRead = 0
+            var canRead : Int
             while (true) {
                 if (readLength + buffer.size > tempLogLength) {
                     canRead = tempLogLength - readLength
@@ -110,14 +110,14 @@ class MMapFileStorage {
         } finally {
             if (dis != null) {
                 try {
-                    dis!!.close()
+                    dis.close()
                 } catch (e: IOException) {
                 }
 
             }
             if (fos != null) {
                 try {
-                    fos!!.close()
+                    fos.close()
                 } catch (e: IOException) {
                 }
             }

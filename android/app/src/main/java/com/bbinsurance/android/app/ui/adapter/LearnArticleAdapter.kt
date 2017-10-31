@@ -54,11 +54,7 @@ class LearnArticleAdapter : BBBaseAdapter {
     }
 
     override fun getCount(): Int {
-        if (learnArticleList == null) {
-            return 0
-        } else {
-            return learnArticleList.size
-        }
+        return learnArticleList.size
     }
 
     override fun handleItemClick(view: View?, dataItem: BaseDataItem, isHandle: Boolean) {

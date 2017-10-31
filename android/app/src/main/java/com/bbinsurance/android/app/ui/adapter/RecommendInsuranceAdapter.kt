@@ -25,11 +25,7 @@ class RecommendInsuranceAdapter : BBBaseAdapter{
     }
 
     override fun getCount(): Int {
-        if (insuranceList == null) {
-            return 0
-        } else {
-            return insuranceList.size
-        }
+        return insuranceList.size
     }
 
     override fun createDataItem(position: Int): BaseDataItem {

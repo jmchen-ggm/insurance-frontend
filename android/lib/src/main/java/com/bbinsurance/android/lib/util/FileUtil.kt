@@ -31,7 +31,7 @@ class FileUtil {
             return outputBuffer.toByteArray()
         }
 
-        fun closeInputStream(inputStream: InputStream) {
+        fun closeInputStream(inputStream: InputStream ?) {
             if (inputStream != null) {
                 try {
                     inputStream.close()
@@ -40,7 +40,7 @@ class FileUtil {
             }
         }
 
-        fun closeOutputStream(outputStream: OutputStream) {
+        fun closeOutputStream(outputStream: OutputStream ?) {
             if (outputStream != null) {
                 try {
                     outputStream.close()

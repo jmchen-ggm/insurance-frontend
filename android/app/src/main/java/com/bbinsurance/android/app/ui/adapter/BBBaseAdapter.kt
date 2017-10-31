@@ -24,19 +24,19 @@ abstract class BBBaseAdapter : BaseAdapter {
     private var count = 0;
 
     override fun getView(position: Int, convertView : View?, parent: ViewGroup?): View {
-        val dataItem : BaseDataItem ? = getItem(position)
+        val dataItem : BaseDataItem = getItem(position)
         var returnView = convertView;
         if (returnView == null) {
-            returnView = dataItem!!.inflateView(uiComponent.getContext(),
+            returnView = dataItem.inflateView(uiComponent.getContext(),
                     parent, returnView)
         }
         var viewHolder = returnView.getTag() as BaseDataItem.BaseViewHolder
         // 如果已经填充过数据，就不需要再填充了
-        if (!dataItem!!.isFillData) {
-            dataItem!!.fillData(uiComponent.getContext(), viewHolder)
-            dataItem!!.isFillData = true
+        if (!dataItem.isFillData) {
+            dataItem.fillData(uiComponent.getContext(), viewHolder)
+            dataItem.isFillData = true
         }
-        dataItem!!.fillView(uiComponent.getContext(), viewHolder)
+        dataItem.fillView(uiComponent.getContext(), viewHolder)
         return returnView
     }
 
@@ -69,7 +69,7 @@ abstract class BBBaseAdapter : BaseAdapter {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return getItem(position)!!.viewType
+        return getItem(position).viewType
     }
 
     override fun getViewTypeCount(): Int {
