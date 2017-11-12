@@ -11,7 +11,6 @@ class InsuranceConsultUI : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setBBTitle(R.string.menu_consult_text)
     }
 
     override fun getLayoutId(): Int {

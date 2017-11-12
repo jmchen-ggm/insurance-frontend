@@ -168,5 +168,4 @@
             android:text="@string/recommend_insurance_title"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
-
 </LinearLayout>

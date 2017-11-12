@@ -1,21 +1,26 @@
 package com.bbinsurance.android.app.ui
 
-import android.app.Activity
 import android.os.Bundle
+import android.support.v7.app.ActionBar
+import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.lib.log.BBLog
-import com.bbinsurance.android.lib.util.PermissionUtil
+
 
 /**
  * Created by jiaminchen on 2017/10/24.
  */
-abstract class BaseActivity : Activity() {
+abstract class BaseActivity : AppCompatActivity() {
     val TAG = "BB.BaseActivity"
 
-    protected var titleTV : TextView ? = null
-    protected var backIB : ImageButton? = null
+    lateinit var actionBarView : View
+    lateinit var actionBarParams : ActionBar.LayoutParams
+    lateinit var titleTV : TextView
+    lateinit var backBtn : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +35,49 @@ abstract class BaseActivity : Activity() {
     }
 
     open fun initView() {
-        titleTV = findViewById(R.id.title_tv);
-        backIB = findViewById(R.id.back_ib);
-        backIB!!.setOnClickListener({
-            finish()
-        })
+        if (needActionBar()) {
+            initActionBar()
+        } else {
+            supportActionBar?.hide()
+        }
     }
 
-    fun setBBTitle(id : Int) {
-        titleTV!!.setText(id)
+    private fun initActionBar() {
+        actionBarView = LayoutInflater.from(this).inflate(R.layout.bb_action_bar, null)
+        actionBarParams = ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
+
+        titleTV = actionBarView.findViewById(R.id.title_tv)
+
+        if (getTitleId() != 0) {
+            titleTV.setText(getTitleId())
+        }
+
+        backBtn = actionBarView.findViewById<ImageButton>(R.id.back_ib)
+        if (getBackBtnVisible()) {
+            backBtn.visibility = View.VISIBLE
+            backBtn.setOnClickListener(getBackBtnListener())
+        } else {
+            backBtn.visibility = View.GONE
+        }
+
+        supportActionBar?.setCustomView(actionBarView, actionBarParams)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
     }
 
-    fun setBBTitle(title : CharSequence) {
-        titleTV!!.setText(title, TextView.BufferType.NORMAL)
+    open fun needActionBar() : Boolean {
+        return true;
+    }
+
+    open fun getTitleId() : Int {
+        return 0;
+    }
+
+    open fun getBackBtnVisible() : Boolean {
+        return true
+    }
+
+    open fun getBackBtnListener() : View.OnClickListener ? {
+        return null
     }
 
     abstract fun getLayoutId() : Int
@@ -77,7 +112,7 @@ abstract class BaseActivity : Activity() {
         BBLog.d(TAG, "onPause")
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
-        PermissionUtil.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

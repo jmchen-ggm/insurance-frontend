@@ -15,7 +15,6 @@ class InsuranceEvaluateUI : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setBBTitle(R.string.menu_evaluate_text)
     }
 
     override fun getLayoutId(): Int {

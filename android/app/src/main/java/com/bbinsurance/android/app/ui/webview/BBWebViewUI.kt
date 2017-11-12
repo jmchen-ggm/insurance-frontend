@@ -32,8 +32,6 @@ class BBWebViewUI : BaseActivity() {
     override fun initView() {
         super.initView()
 
-        setBBTitle(title)
-
         webView = findViewById(R.id.webview)
 
         val webSettings = webView.settings

@@ -11,7 +11,6 @@ class InsuranceCompareUI : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setBBTitle(R.string.menu_compare_text)
     }
 
     override fun getLayoutId(): Int {

@@ -1,13 +1,16 @@
 package com.bbinsurance.android.app.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.os.PersistableBundle
+import android.support.v4.app.Fragment
 import android.view.View
+import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.R
-import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
-import com.bbinsurance.android.app.ui.adapter.RecommendInsuranceAdapter
+import com.bbinsurance.android.app.ui.fragment.HomeFragmentUI
+import com.bbinsurance.android.app.ui.fragment.LearnFragment
+import com.bbinsurance.android.app.ui.fragment.MyFragmentUI
 import com.bbinsurance.android.lib.util.PermissionUtil
 
 /**
@@ -15,10 +18,35 @@ import com.bbinsurance.android.lib.util.PermissionUtil
  */
 
 
-class LauncherUI : BaseListViewUI() {
+class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
+
+    lateinit internal var bottomNavigationBar: BottomNavigationBar
 
     override fun getLayoutId(): Int {
         return R.layout.launcher_ui
+    }
+
+    private lateinit var homeFragment : Fragment
+    private lateinit var learnFragment : Fragment
+    private lateinit var myFragment : Fragment
+
+    override fun initView() {
+        super.initView()
+        bottomNavigationBar = findViewById(R.id.bottom_navigation_bar)
+        bottomNavigationBar
+                .addItem(BottomNavigationItem(R.drawable.tab_home_icon, R.string.tab_home).setActiveColorResource(R.color.main_blue_color))
+                .addItem(BottomNavigationItem(R.drawable.tab_learn_icon, R.string.tab_learn).setActiveColorResource(R.color.main_blue_color))
+                .addItem(BottomNavigationItem(R.drawable.tab_my_icon, R.string.tab_my).setActiveColorResource(R.color.main_blue_color))
+                .initialise();
+        bottomNavigationBar.setTabSelectedListener(this)
+
+        homeFragment = HomeFragmentUI()
+        learnFragment = LearnFragment()
+        myFragment = MyFragmentUI()
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.home_activity_frag_container, homeFragment)
+        }.commitAllowingStateLoss()
     }
 
     private val REQUEST_PERMISSION_CODE = 1;
@@ -29,47 +57,43 @@ class LauncherUI : BaseListViewUI() {
         for (permission in AppConstants.REQUST_PERMISSION) {
             PermissionUtil.verifyPermissions(this, permission, REQUEST_PERMISSION_CODE)
         }
-
-        setBBTitle(R.string.app_name)
-        backIB!!.visibility = View.GONE
     }
 
-    override fun getHeaderView(): View? {
-        var headerView = LayoutInflater.from(getContext()).inflate(R.layout.launcher_header_view, null)
-
-        compareLayout = headerView.findViewById(R.id.compare_layout)
-        compareLayout!!.setOnClickListener({
-            var intent = Intent(LauncherUI@this, InsuranceCompareUI::class.java)
-            startActivity(intent)
-        })
-        consultLayout = headerView.findViewById(R.id.consult_layout)
-        consultLayout!!.setOnClickListener({
-            var intent = Intent(LauncherUI@this, InsuranceConsultUI::class.java)
-            startActivity(intent)
-        })
-        evaluateLayout = headerView.findViewById(R.id.evaluate_layout)
-        evaluateLayout!!.setOnClickListener({
-            var intent = Intent(LauncherUI@this, InsuranceEvaluateUI::class.java)
-            startActivity(intent)
-        })
-        learnLayout = headerView.findViewById(R.id.learn_layout)
-        learnLayout!!.setOnClickListener({
-            var intent = Intent(LauncherUI@this, InsuranceLearnUI::class.java)
-            startActivity(intent)
-        })
-        return headerView
+    override fun getTitleId(): Int {
+        return R.string.tab_home
     }
 
-    private var compareLayout : View ? = null
-    private var consultLayout : View ? = null
-    private var evaluateLayout : View ? = null
-    private var learnLayout : View ? = null
+    override fun getBackBtnVisible(): Boolean {
+        return false
+    }
 
-    private var recommendInsuranceAdapter : RecommendInsuranceAdapter ? = null
-    override fun getAdapter(): BBBaseAdapter {
-        if (recommendInsuranceAdapter == null) {
-            recommendInsuranceAdapter = RecommendInsuranceAdapter(this)
+    override fun getBackBtnListener(): View.OnClickListener? {
+        return View.OnClickListener {
+            finish()
         }
-        return recommendInsuranceAdapter!!
+    }
+
+    override fun onTabReselected(position: Int) {
+    }
+
+    override fun onTabUnselected(position: Int) {
+    }
+
+    override fun onTabSelected(position: Int) {
+        replaceFragments(position);
+    }
+
+    private fun replaceFragments(position: Int) {
+        supportFragmentManager.beginTransaction().apply {
+            when (position) {
+                0 -> replace(R.id.home_activity_frag_container, homeFragment)
+                1 -> replace(R.id.home_activity_frag_container, learnFragment)
+                2 -> replace(R.id.home_activity_frag_container, myFragment)
+            }
+        }.commitAllowingStateLoss()
+    }
+
+    override fun needActionBar(): Boolean {
+        return false
     }
 }

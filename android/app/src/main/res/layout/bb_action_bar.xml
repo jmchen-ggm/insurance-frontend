@@ -11,10 +11,10 @@
         android:layout_height="@dimen/ActionBarHeight"
         android:background="@color/main_blue_color"
         android:src="@drawable/back_icon"
+        android:visibility="gone"
         android:contentDescription="TODO"/>
 
     <TextView
-        android:layout_toRightOf="@id/back_ib"
         android:id="@+id/title_tv"
         style="@style/TitleTextStyle"
         android:singleLine="true"

@@ -21,7 +21,6 @@ class InsuranceLearnUI : BaseListViewUI() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setBBTitle(R.string.menu_learn_text)
     }
 
     override fun getLayoutId(): Int {
