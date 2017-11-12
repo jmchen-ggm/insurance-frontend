@@ -59,9 +59,9 @@ class LearnArticleAdapter : BBBaseAdapter {
 
     override fun handleItemClick(view: View?, dataItem: BaseDataItem, isHandle: Boolean) {
         var learnArticleDataItem = dataItem as LearnArticleDataItem
-        var intent = Intent(uiComponent.getContext(), BBWebViewUI::class.java)
+        var intent = Intent(uiComponent.getComponentContext(), BBWebViewUI::class.java)
         intent.putExtra(UIConstants.IntentKey.KeyTitle, learnArticleDataItem.entity.title)
         intent.putExtra(UIConstants.IntentKey.KeyUrl, String.format("http://120.78.175.235:8081/html/articles/%d-content.html", learnArticleDataItem.entity.id))
-        uiComponent.getContext().startActivity(intent)
+        uiComponent.getComponentContext().startActivity(intent)
     }
 }

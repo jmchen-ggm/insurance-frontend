@@ -27,16 +27,16 @@ abstract class BBBaseAdapter : BaseAdapter {
         val dataItem : BaseDataItem = getItem(position)
         var returnView = convertView;
         if (returnView == null) {
-            returnView = dataItem.inflateView(uiComponent.getContext(),
+            returnView = dataItem.inflateView(uiComponent.getComponentContext(),
                     parent, returnView)
         }
         var viewHolder = returnView.getTag() as BaseDataItem.BaseViewHolder
         // 如果已经填充过数据，就不需要再填充了
         if (!dataItem.isFillData) {
-            dataItem.fillData(uiComponent.getContext(), viewHolder)
+            dataItem.fillData(uiComponent.getComponentContext(), viewHolder)
             dataItem.isFillData = true
         }
-        dataItem.fillView(uiComponent.getContext(), viewHolder)
+        dataItem.fillView(uiComponent.getComponentContext(), viewHolder)
         return returnView
     }
 

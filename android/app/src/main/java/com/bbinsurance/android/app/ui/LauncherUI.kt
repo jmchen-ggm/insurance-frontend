@@ -26,9 +26,9 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         return R.layout.launcher_ui
     }
 
-    private lateinit var homeFragment : Fragment
-    private lateinit var learnFragment : Fragment
-    private lateinit var myFragment : Fragment
+    private var homeFragment : Fragment ? = null
+    private var learnFragment : Fragment ? = null
+    private var myFragment : Fragment ? = null
 
     override fun initView() {
         super.initView()
@@ -40,13 +40,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
                 .initialise();
         bottomNavigationBar.setTabSelectedListener(this)
 
-        homeFragment = HomeFragmentUI()
-        learnFragment = LearnFragment()
-        myFragment = MyFragmentUI()
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.home_activity_frag_container, homeFragment)
-        }.commitAllowingStateLoss()
+        replaceFragments(0)
     }
 
     private val REQUEST_PERMISSION_CODE = 1;
@@ -56,20 +50,6 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
 
         for (permission in AppConstants.REQUST_PERMISSION) {
             PermissionUtil.verifyPermissions(this, permission, REQUEST_PERMISSION_CODE)
-        }
-    }
-
-    override fun getTitleId(): Int {
-        return R.string.tab_home
-    }
-
-    override fun getBackBtnVisible(): Boolean {
-        return false
-    }
-
-    override fun getBackBtnListener(): View.OnClickListener? {
-        return View.OnClickListener {
-            finish()
         }
     }
 
@@ -86,9 +66,24 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
     private fun replaceFragments(position: Int) {
         supportFragmentManager.beginTransaction().apply {
             when (position) {
-                0 -> replace(R.id.home_activity_frag_container, homeFragment)
-                1 -> replace(R.id.home_activity_frag_container, learnFragment)
-                2 -> replace(R.id.home_activity_frag_container, myFragment)
+                0 -> {
+                    if (homeFragment == null) {
+                        homeFragment = HomeFragmentUI()
+                    }
+                    replace(R.id.home_activity_frag_container, homeFragment)
+                }
+                1 -> {
+                    if (learnFragment == null) {
+                        learnFragment = LearnFragment()
+                    }
+                    replace(R.id.home_activity_frag_container, learnFragment)
+                }
+                2 -> {
+                    if (myFragment == null) {
+                        myFragment = MyFragmentUI()
+                    }
+                    replace(R.id.home_activity_frag_container, myFragment)
+                }
             }
         }.commitAllowingStateLoss()
     }
