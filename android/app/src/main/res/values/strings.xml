@@ -14,6 +14,8 @@
 
     <string name="score_formatter" formatted="false">评分：%s分</string>
 
+    <string name="comment">评论</string>
+
     <string name="tab_home">首 页</string>
     <string name="tab_learn">保险课堂</string>
     <string name="tab_my">我</string>

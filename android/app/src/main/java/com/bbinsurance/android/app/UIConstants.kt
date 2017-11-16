@@ -10,8 +10,9 @@ class UIConstants {
             var UnKnown = 0
             var RecommendInsurance = 1
             var LearnArticle = 2
+            var Comment = 3
 
-            var Count = 3
+            var Count = 4
         }
     }
 
