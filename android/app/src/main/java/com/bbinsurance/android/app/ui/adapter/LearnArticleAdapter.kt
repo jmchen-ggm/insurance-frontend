@@ -38,8 +38,7 @@ class LearnArticleAdapter : BBBaseAdapter {
     }
 
     private fun refreshLearnArticleList() {
-        var netRequest = NetRequest(ProtocolConstants.FunId.RecommendationInsurance, ProtocolConstants.URI.DataBin)
-        netRequest.url = ProtocolConstants.URL.FileServer + "data/article-list.json"
+        var netRequest = NetRequest(ProtocolConstants.FunId.FuncListArticle, ProtocolConstants.URI.DataBin)
         netRequest.uri = ProtocolConstants.URI.ConfigBin
         BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
             override fun onNetDone(netRequest: NetRequest, netResponse: NetResponse) {

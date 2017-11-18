@@ -30,7 +30,7 @@ abstract class BBBaseAdapter : BaseAdapter {
             returnView = dataItem.inflateView(uiComponent.getComponentContext(),
                     parent, returnView)
         }
-        var viewHolder = returnView.getTag() as BaseDataItem.BaseViewHolder
+        var viewHolder = returnView.tag as BaseDataItem.BaseViewHolder
         // 如果已经填充过数据，就不需要再填充了
         if (!dataItem.isFillData) {
             dataItem.fillData(uiComponent.getComponentContext(), viewHolder)

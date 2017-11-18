@@ -1,7 +1,6 @@
 package com.bbinsurance.android.app.net
 
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
+import com.bbinsurance.android.lib.util.TimeUtil
 import java.util.*
 
 /**
@@ -13,11 +12,7 @@ open class NetRequest {
     var uri : String = ""
     var sessionId : String = ""
     var timestamp : Long = 0L
-
-    var requestBody : ByteArray = ByteArray(0)
-
-    var url = ""
-    var requestMethod = ""
+    var body = ""
 
     constructor(funId : Int, uri : String) {
         this.funId = funId
@@ -27,8 +22,8 @@ open class NetRequest {
     }
 
     fun info() : String {
-        return String.format("{funId:%d uri:%s sessionId:%s timestamp:%d requestBody:%d url:%s requestMethod:%s}"
-            , funId, uri, sessionId, timestamp, requestBody.size, url, requestMethod)
+        return String.format("{funId:%d uri:%s sessionId:%s timestamp:%s}"
+            , funId, uri, sessionId, TimeUtil.formatTime(timestamp))
     }
 
 }

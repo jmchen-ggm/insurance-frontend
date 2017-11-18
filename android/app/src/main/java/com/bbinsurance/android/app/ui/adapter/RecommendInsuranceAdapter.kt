@@ -37,21 +37,6 @@ class RecommendInsuranceAdapter : BBBaseAdapter{
     }
 
     private fun refreshRecommendInsuranceList() {
-        var netRequest = NetRequest(ProtocolConstants.FunId.RecommendationInsurance, ProtocolConstants.URI.DataBin)
-        var requestBody = JSONObject()
-        requestBody.put("start", 0)
-        requestBody.put("end", 10)
-        netRequest.requestBody = requestBody.toString().toByteArray()
-        BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
-            override fun onNetDone(netRequest: NetRequest, netResponse: NetResponse) {
-                if (netResponse.respCode == 200) {
-                    var responseBodyStr = String(netResponse.responseBody)
-                    BBLog.i(TAG, "responseBodyStr: %s", responseBodyStr)
-                    var dataResponseEntity = JSON.parseObject(responseBodyStr, DataResponseEntity::class.java)
-                    insuranceList = dataResponseEntity.element
-                    notifyDataSetChanged()
-                }
-            }
-        })
+
     }
 }

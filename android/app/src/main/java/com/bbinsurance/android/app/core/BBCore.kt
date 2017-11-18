@@ -4,6 +4,7 @@ import android.os.Looper
 import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.Application
 import com.bbinsurance.android.app.BuildConfig
+import com.bbinsurance.android.app.account.AccountCore
 import com.bbinsurance.android.app.net.NetCore
 import com.bbinsurance.android.lib.BBHandler
 import com.bbinsurance.android.lib.Constants
@@ -36,11 +37,13 @@ class BBCore {
     }
 
     var netCore: NetCore
+    var accountCore: AccountCore
     var threadCore : ThreadCore
     var uiHandler : BBHandler
 
     constructor() {
         netCore = NetCore()
+        accountCore = AccountCore()
         threadCore = ThreadCore()
         uiHandler = BBHandler(Looper.getMainLooper())
     }
