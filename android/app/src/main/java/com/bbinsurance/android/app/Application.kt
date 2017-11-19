@@ -12,12 +12,12 @@ import com.facebook.drawee.backends.pipeline.Fresco
 class Application : Application() {
     private val TAG = "BB.Application"
     companion object {
-        var ApplicationContext : Context ? = null
+        lateinit var ApplicationContext : Context
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        ApplicationContext = base
+        ApplicationContext = base!!
         BBCore.initCore()
 
         BBLog.i(TAG, "attachBaseContext")

@@ -4,13 +4,13 @@ import android.os.Looper
 import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.Application
 import com.bbinsurance.android.app.BuildConfig
-import com.bbinsurance.android.app.account.AccountCore
+import com.bbinsurance.android.app.plugin.account.AccountCore
 import com.bbinsurance.android.app.net.NetCore
+import com.bbinsurance.android.app.plugin.comment.CommentCore
 import com.bbinsurance.android.lib.BBHandler
 import com.bbinsurance.android.lib.Constants
 import com.bbinsurance.android.lib.log.BBLog
 import com.bbinsurance.android.lib.ueh.BBUncaughtExceptionHandler
-import com.facebook.drawee.backends.pipeline.Fresco
 import java.io.File
 
 /**
@@ -23,7 +23,7 @@ class BBCore {
         var Instance: BBCore = BBCore()
 
         fun initCore() {
-            Constants.init(Application.ApplicationContext!!)
+            Constants.init(Application.ApplicationContext)
             AppConstants.init()
             initLog()
             Thread.setDefaultUncaughtExceptionHandler(BBUncaughtExceptionHandler())
@@ -36,15 +36,15 @@ class BBCore {
         }
     }
 
-    var netCore: NetCore
-    var accountCore: AccountCore
-    var threadCore : ThreadCore
-    var uiHandler : BBHandler
+    var netCore = NetCore()
+    var threadCore = ThreadCore()
+    var dbCore = DBCore()
+    var uiHandler = BBHandler(Looper.getMainLooper(), "Main")
+
+    // subLogicCore
+    var accountCore = AccountCore()
+    var commentCore = CommentCore()
 
     constructor() {
-        netCore = NetCore()
-        accountCore = AccountCore()
-        threadCore = ThreadCore()
-        uiHandler = BBHandler(Looper.getMainLooper())
     }
 }

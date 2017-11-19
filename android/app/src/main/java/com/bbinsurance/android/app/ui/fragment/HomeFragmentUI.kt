@@ -4,8 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.bbinsurance.android.app.R
-import com.bbinsurance.android.app.ui.CommentUI
-import com.bbinsurance.android.app.ui.LauncherUI
+import com.bbinsurance.android.app.plugin.comment.ui.CommentUI
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.adapter.RecommendInsuranceAdapter
@@ -37,18 +36,18 @@ class HomeFragmentUI : BaseListFragment(), ListBaseUIComponent {
         var headerView = LayoutInflater.from(getContext()).inflate(R.layout.launcher_header_view, null)
 
         compareLayout = headerView.findViewById(R.id.compare_layout)
-        compareLayout?.setOnClickListener({
+        compareLayout.setOnClickListener({
         })
         consultLayout = headerView.findViewById(R.id.consult_layout)
-        consultLayout?.setOnClickListener({
+        consultLayout.setOnClickListener({
         })
         evaluateLayout = headerView.findViewById(R.id.evaluate_layout)
-        evaluateLayout?.setOnClickListener({
+        evaluateLayout.setOnClickListener({
             var intent = Intent(context, CommentUI::class.java)
             startActivity(intent)
         })
         learnLayout = headerView.findViewById(R.id.learn_layout)
-        learnLayout?.setOnClickListener({
+        learnLayout.setOnClickListener({
         })
         return headerView
     }

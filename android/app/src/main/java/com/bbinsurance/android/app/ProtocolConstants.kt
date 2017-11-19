@@ -40,6 +40,13 @@ open class ProtocolConstants {
         }
     }
 
+    open class CommentFlag {
+        companion object {
+            val CREATED = 0x1
+            val IMPORTANCE = 0x2
+        }
+    }
+
     open class HttpContentType {
         companion object {
             val JSON = ""

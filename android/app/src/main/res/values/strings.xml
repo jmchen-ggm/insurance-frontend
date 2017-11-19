@@ -19,4 +19,9 @@
     <string name="tab_home">首 页</string>
     <string name="tab_learn">保险课堂</string>
     <string name="tab_my">我</string>
+
+    <string name="add_comment_title">发表评论</string>
+    <string name="comment_total">总体</string>
+    <string name="comment_hint">亲对我们的服务有什么意见？请尽管说~</string>
+    <string name="comment_post">发表</string>
 </resources>

@@ -41,13 +41,16 @@ class LearnArticleAdapter : BBBaseAdapter {
         var netRequest = NetRequest(ProtocolConstants.FunId.FuncListArticle, ProtocolConstants.URI.DataBin)
         netRequest.uri = ProtocolConstants.URI.ConfigBin
         BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
-            override fun onNetDone(netRequest: NetRequest, netResponse: NetResponse) {
+            override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
                 if (netResponse.respCode == 200) {
                     var responseBodyStr = String(netResponse.responseBody)
                     var learnDataResponseEntity = JSON.parseObject(responseBodyStr, LearnDataResponseEntity::class.java)
                     learnArticleList = learnDataResponseEntity.articles
                     notifyDataSetChanged()
                 }
+            }
+
+            override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
             }
         })
     }

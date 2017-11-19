@@ -45,9 +45,10 @@ open class NetTask : Runnable {
         bbReq.Body = JSON.parse(netRequest.body) as JSON
         doRequest(bbReq)
         if (netListener != null) {
+            netListener?.onNetDoneInSubThread(netRequest, netResponse)
             handler.post({
-                run() {
-                    netListener!!.onNetDone(netRequest, netResponse)
+                run {
+                    netListener?.onNetDoneInMainThread(netRequest, netResponse)
                 }
             })
         }

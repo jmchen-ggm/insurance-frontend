@@ -1,9 +1,10 @@
-package com.bbinsurance.android.app.ui
+package com.bbinsurance.android.app.plugin.comment.ui
 
+import android.content.Intent
 import android.view.View
 import com.bbinsurance.android.app.R
+import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
-import com.bbinsurance.android.app.ui.adapter.CommentAdapter
 
 /**
  * Created by jiaminchen on 17/11/17.
@@ -18,18 +19,14 @@ class CommentUI : BaseListActivity() {
         return adapter!!
     }
 
-    override fun getTitleId(): Int {
-        return R.string.comment
-    }
-
-    override fun getBackBtnVisible(): Boolean {
-        return true
-    }
-
-    override fun getBackBtnListener(): View.OnClickListener? {
-        return View.OnClickListener {
-            finish()
-        }
+    override fun initView() {
+        super.initView()
+        setBBTitle(R.string.comment)
+        setBackBtn(true, View.OnClickListener { finish() })
+        setOptionBtn(R.drawable.add_icon, View.OnClickListener {
+            var intent = Intent(this, AddCommentUI::class.java)
+            startActivity(intent)
+        })
     }
 
     override fun getLayoutId(): Int {

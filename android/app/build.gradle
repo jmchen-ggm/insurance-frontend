@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -24,12 +26,20 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':lib')
+    implementation project(':lib')
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+
+    kapt "android.arch.persistence.room:compiler:1.0.0-alpha1"
+    implementation "android.arch.persistence.room:runtime:1.0.0-alpha1"
     implementation "com.android.support:appcompat-v7:${project.ANDROID_SUPPORT_LIBRARY_VERSION}"
     implementation "com.android.support:design:${project.ANDROID_SUPPORT_LIBRARY_VERSION}"
-    compile "com.android.support:support-v4:${project.ANDROID_SUPPORT_LIBRARY_VERSION}"
-    compile 'com.facebook.fresco:fresco:0.12.0+'
-    compile "com.facebook.fresco:imagepipeline-okhttp:0.12.0+"
-    compile 'com.alibaba:fastjson:1.2.10'
-    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'
+    implementation "com.android.support:support-v4:${project.ANDROID_SUPPORT_LIBRARY_VERSION}"
+    implementation 'com.facebook.fresco:fresco:0.12.0+'
+    implementation "com.facebook.fresco:imagepipeline-okhttp:0.12.0+"
+    implementation 'com.alibaba:fastjson:1.2.10'
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

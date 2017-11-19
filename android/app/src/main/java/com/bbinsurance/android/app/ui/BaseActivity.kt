@@ -21,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var actionBarParams : ActionBar.LayoutParams
     lateinit var titleTV : TextView
     lateinit var backBtn : ImageButton
+    lateinit var optionBtn : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,19 +48,13 @@ abstract class BaseActivity : AppCompatActivity() {
         actionBarParams = ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
         titleTV = actionBarView.findViewById(R.id.title_tv)
-
-        if (getTitleId() != 0) {
-            titleTV.setText(getTitleId())
-        }
-
         backBtn = actionBarView.findViewById<ImageButton>(R.id.back_ib)
-        if (getBackBtnVisible()) {
-            backBtn.visibility = View.VISIBLE
-            backBtn.setOnClickListener(getBackBtnListener())
-        } else {
-            backBtn.visibility = View.GONE
-        }
+        optionBtn = actionBarView.findViewById(R.id.option_btn)
 
+        updateActionBar()
+    }
+
+    private fun updateActionBar() {
         supportActionBar?.setCustomView(actionBarView, actionBarParams)
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
     }
@@ -68,16 +63,24 @@ abstract class BaseActivity : AppCompatActivity() {
         return true;
     }
 
-    open fun getTitleId() : Int {
-        return 0;
+    open fun setBBTitle(id : Int) {
+        titleTV.setText(id)
+        updateActionBar()
     }
 
-    open fun getBackBtnVisible() : Boolean {
-        return true
+    open fun setOptionBtn(srcId : Int, listener : View.OnClickListener) {
+        optionBtn.visibility = View.VISIBLE
+        optionBtn.setImageResource(srcId)
+        optionBtn.setOnClickListener(listener)
+        updateActionBar()
     }
 
-    open fun getBackBtnListener() : View.OnClickListener ? {
-        return null
+    open fun setBackBtn(visible: Boolean, listener: View.OnClickListener) {
+        if (visible) {
+            backBtn.visibility = View.VISIBLE
+            backBtn.setOnClickListener(listener)
+            updateActionBar()
+        }
     }
 
     abstract fun getLayoutId() : Int

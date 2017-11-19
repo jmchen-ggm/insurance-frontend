@@ -4,6 +4,7 @@
     <color name="black">#000000</color>
 
     <color name="main_blue_color">#169bd4</color>
+    <color name="main_blue_color_press">#1a769d</color>
 
     <color name="normal_text_color">#353535</color>
     <color name="hint_text_color">#999999</color>

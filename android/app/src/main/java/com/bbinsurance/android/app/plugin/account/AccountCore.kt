@@ -1,4 +1,4 @@
-package com.bbinsurance.android.app.account
+package com.bbinsurance.android.app.plugin.account
 
 /**
  * Created by jiaminchen on 17/11/17.

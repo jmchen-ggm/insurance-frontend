@@ -16,5 +16,9 @@ class Util {
                 return str
             }
         }
+
+        fun checkBit(value : Long, bit : Long) : Boolean {
+            return (value and bit) > 0
+        }
     }
 }
