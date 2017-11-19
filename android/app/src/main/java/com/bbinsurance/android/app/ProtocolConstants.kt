@@ -42,8 +42,8 @@ open class ProtocolConstants {
 
     open class CommentFlag {
         companion object {
-            val CREATED = 0x1
-            val IMPORTANCE = 0x2
+            val CREATED : Long = 0x1
+            val IMPORTANCE : Long = 0x2
         }
     }
 

@@ -30,6 +30,7 @@
         android:id="@+id/option_btn"
         android:layout_width="@dimen/ActionBarHeight"
         android:layout_height="@dimen/ActionBarHeight"
+        android:layout_alignParentRight="true"
         android:background="@color/main_blue_color"
         android:visibility="gone"
         android:contentDescription="TODO"/>

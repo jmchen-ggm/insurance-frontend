@@ -24,7 +24,7 @@ class AddCommentUI : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        setTitle(R.string.add_comment_title)
+        setBBTitle(R.string.add_comment_title)
         setBackBtn(true, View.OnClickListener { finish() })
 
         starsIV = arrayOfNulls<ImageView?>(5)
@@ -36,20 +36,7 @@ class AddCommentUI : BaseActivity() {
 
         for (i in starsIV.indices) {
             starsIV[i]?.tag = i
-            starsIV[i]?.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(view: View?) {
-                    var index = view?.tag as Int
-                    score = 20 * (index + 1)
-                    var j = 0
-                    while (j <= index) {
-                        starsIV[j]?.setImageResource(R.drawable.star_yellow)
-                        j++
-                    }
-                    while (j < starsIV.size) {
-                        starsIV[j]?.setImageResource(R.drawable.star_gray)
-                    }
-                }
-            })
+            starsIV[i]?.setOnClickListener(onImageViewClickListener)
         }
 
         commentET = findViewById(R.id.comment_et)
@@ -72,6 +59,20 @@ class AddCommentUI : BaseActivity() {
                 })
             }
         })
+    }
+
+    var onImageViewClickListener = View.OnClickListener { view ->
+        var index = view?.tag as Int
+        score = 20 * (index + 1)
+        var j = 0
+        while (j <= index) {
+            starsIV[j]?.setImageResource(R.drawable.star_yellow)
+            j++
+        }
+        while (j < starsIV.size) {
+            starsIV[j]?.setImageResource(R.drawable.star_gray)
+            j++
+        }
     }
 
     override fun getLayoutId(): Int {

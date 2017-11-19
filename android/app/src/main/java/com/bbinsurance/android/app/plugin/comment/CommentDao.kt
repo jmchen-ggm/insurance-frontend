@@ -7,7 +7,7 @@ import com.bbinsurance.android.app.protocol.Comment
 /**
  * Created by jiaminchen on 17/11/19.
  */
-interface CommentDao {
+@Dao interface CommentDao {
 
     @Query("SELECT * FROM Comment")
     fun getAllComment(): List<Comment>

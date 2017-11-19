@@ -3,6 +3,7 @@ package com.bbinsurance.android.app.plugin.comment
 import android.os.Looper
 import android.os.Message
 import com.alibaba.fastjson.JSON
+import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.net.NetRequest
@@ -43,6 +44,7 @@ class CommentSyncService {
         private fun startToUploadComment() {
             var uploadCommentList = BBCore.Instance.dbCore.db.commentDao().getAllUnCreatedComment()
             for (comment : Comment in uploadCommentList) {
+                comment.Flags = comment.Flags or ProtocolConstants.CommentFlag.CREATED
                 var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
                 var createCommentRequest = BBCreateCommentRequest()
                 createCommentRequest.Comment = comment

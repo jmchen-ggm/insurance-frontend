@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 /**
  * Created by jiaminchen on 17/11/17.
  */
+@Entity
 open class Comment{
     @ColumnInfo(name = "LocalId")
     @PrimaryKey(autoGenerate = true)

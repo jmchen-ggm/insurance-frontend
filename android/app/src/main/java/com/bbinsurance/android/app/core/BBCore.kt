@@ -20,13 +20,14 @@ class BBCore {
 
     companion object {
 
-        var Instance: BBCore = BBCore()
+        lateinit var Instance: BBCore
 
         fun initCore() {
             Constants.init(Application.ApplicationContext)
             AppConstants.init()
             initLog()
             Thread.setDefaultUncaughtExceptionHandler(BBUncaughtExceptionHandler())
+            Instance = BBCore()
         }
 
         private fun initLog() {
@@ -36,15 +37,22 @@ class BBCore {
         }
     }
 
-    var netCore = NetCore()
-    var threadCore = ThreadCore()
-    var dbCore = DBCore()
-    var uiHandler = BBHandler(Looper.getMainLooper(), "Main")
+    var netCore : NetCore
+    var threadCore : ThreadCore
+    var dbCore : DBCore
+    var uiHandler : BBHandler
 
     // subLogicCore
-    var accountCore = AccountCore()
-    var commentCore = CommentCore()
+    var accountCore : AccountCore
+    var commentCore : CommentCore
 
     constructor() {
+        netCore = NetCore()
+        threadCore = ThreadCore()
+        dbCore = DBCore()
+        uiHandler = BBHandler(Looper.getMainLooper(), "Main")
+
+        accountCore = AccountCore()
+        commentCore = CommentCore()
     }
 }
