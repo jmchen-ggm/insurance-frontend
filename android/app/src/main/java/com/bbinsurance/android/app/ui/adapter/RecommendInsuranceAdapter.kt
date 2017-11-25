@@ -1,17 +1,8 @@
 package com.bbinsurance.android.app.ui.adapter
 
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
-import com.bbinsurance.android.app.ProtocolConstants
-import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.entity.DataResponseEntity
 import com.bbinsurance.android.app.entity.InsuranceEntity
-import com.bbinsurance.android.app.net.NetListener
-import com.bbinsurance.android.app.net.NetRequest
-import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.ui.item.RecommendInsuranceDataItem
-import com.bbinsurance.android.lib.log.BBLog
 
 /**
  * Created by jiaminchen on 2017/10/25.

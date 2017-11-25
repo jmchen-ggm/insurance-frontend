@@ -1,55 +1,47 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
-import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.net.NetListener
-import com.bbinsurance.android.app.net.NetRequest
-import com.bbinsurance.android.app.net.NetResponse
-import com.bbinsurance.android.app.protocol.BBListCommentResponse
-import com.bbinsurance.android.app.protocol.Comment
+import com.bbinsurance.android.app.db.entity.CommentEntity
+import com.bbinsurance.android.app.db.storage.BBStorageEvent
+import com.bbinsurance.android.app.db.storage.BBStorageListener
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.ui.item.CommentDataItem
+import com.bbinsurance.android.lib.log.BBLog
 
 /**
  * Created by jiaminchen on 17/11/17.
  */
-class CommentAdapter : BBBaseAdapter {
+class CommentAdapter : BBBaseAdapter, BBStorageListener {
+
+    override fun onEvent(event: BBStorageEvent) {
+        refreshCommentList()
+    }
+
     val TAG = "BB.CommentAdapter"
 
     constructor(component: ListBaseUIComponent) : super(component) {
-        refreshCommentList();
+        refreshCommentList()
+        BBCore.Instance.commentCore.commentStorage.registerListener(this)
+        BBCore.Instance.commentCore.commentSyncService.startToSyncCommentList()
     }
 
-    private var commentList = ArrayList<Comment>()
+    private var commentList = ArrayList<CommentEntity>()
 
     private fun refreshCommentList() {
-        var netRequest = NetRequest(ProtocolConstants.FunId.FuncListComment, ProtocolConstants.URI.DataBin)
-        var requestBody = JSONObject()
-        requestBody.put("StartIndex", 0)
-        requestBody.put("PageSize", -1)
-        netRequest.body = requestBody.toString()
-        BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
-            lateinit var listCommentResponse : BBListCommentResponse
-            override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
-                if (netResponse.respCode == 200) {
-                    commentList = listCommentResponse.CommentList
-                    notifyDataSetChanged()
-                }
+        BBCore.Instance.threadCore.post(Runnable {
+            var limit = 20
+            var offset = 0
+            if (commentList.size > 0) {
+                offset = commentList.size
             }
-
-            override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
-                if (netResponse.respCode == 200) {
-                    listCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
-                            BBListCommentResponse::class.java)
-                    for (comment : Comment in listCommentResponse.CommentList) {
-                        BBCore.Instance.dbCore.db.commentDao().insertComment(comment)
-                    }
-                }
-            }
+            var limitList = BBCore.Instance.commentCore.commentStorage.getCommentListLimit(limit, offset)
+            commentList.addAll(limitList)
+            BBLog.i(TAG, "commentList Size=%d", commentList.size)
+            BBCore.Instance.uiHandler.post({
+                notifyDataSetChanged()
+            })
         })
     }
 
@@ -61,5 +53,10 @@ class CommentAdapter : BBBaseAdapter {
         var commentDataItem = CommentDataItem(position)
         commentDataItem.comment = commentList.get(position)
         return commentDataItem
+    }
+
+    override fun finish() {
+        super.finish()
+        BBCore.Instance.commentCore.commentStorage.unRegisterListener(this)
     }
 }

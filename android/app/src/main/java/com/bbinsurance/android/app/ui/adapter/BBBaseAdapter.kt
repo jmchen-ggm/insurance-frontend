@@ -79,4 +79,8 @@ abstract class BBBaseAdapter : BaseAdapter {
     open fun handleItemClick(view : View?, dataItem : BaseDataItem, isHandle : Boolean) {
 
     }
+
+    open fun finish() {
+
+    }
 }

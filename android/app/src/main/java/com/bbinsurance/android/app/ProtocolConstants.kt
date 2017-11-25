@@ -49,7 +49,7 @@ open class ProtocolConstants {
 
     open class HttpContentType {
         companion object {
-            val JSON = ""
+            val JSON = "application/json"
         }
     }
 }

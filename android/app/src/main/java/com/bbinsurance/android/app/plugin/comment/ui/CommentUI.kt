@@ -32,4 +32,9 @@ class CommentUI : BaseListActivity() {
     override fun getLayoutId(): Int {
         return R.layout.comment_ui
     }
+
+    override fun onDestroy() {
+        adapter?.finish()
+        super.onDestroy()
+    }
 }

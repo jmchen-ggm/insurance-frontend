@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
-import com.bbinsurance.android.app.protocol.Comment
+import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.lib.util.TimeUtil
 
 /**
@@ -20,7 +20,7 @@ class CommentDataItem : BaseDataItem {
 
     }
 
-    lateinit var comment: Comment
+    lateinit var comment: CommentEntity
 
     override fun inflateView(context: Context, parent: ViewGroup?, itemView: View?): View {
         var view = LayoutInflater.from(context).inflate(R.layout.comment_item_view, parent, false)
@@ -37,7 +37,7 @@ class CommentDataItem : BaseDataItem {
     override fun fillView(context: Context, viewHolder: BaseViewHolder) {
         var commentViewHolder = viewHolder as CommentViewHolder
         commentViewHolder.nickNameTV?.text = String.format("%d", comment.Uin)
-        commentViewHolder.scoreTV?.text = (String.format("%d", comment.Score))
+        commentViewHolder.scoreTV?.text = (String.format("%d", comment.TotalScore))
         commentViewHolder.timeTV?.text = TimeUtil.formatTime(comment.Timestamp * 1000L)
         commentViewHolder.contentTV?.text = comment.Content
     }

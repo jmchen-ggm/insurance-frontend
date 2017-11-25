@@ -7,6 +7,7 @@ import com.bbinsurance.android.app.BuildConfig
 import com.bbinsurance.android.app.plugin.account.AccountCore
 import com.bbinsurance.android.app.net.NetCore
 import com.bbinsurance.android.app.plugin.comment.CommentCore
+import com.bbinsurance.android.app.plugin.config.ConfigCore
 import com.bbinsurance.android.lib.BBHandler
 import com.bbinsurance.android.lib.Constants
 import com.bbinsurance.android.lib.log.BBLog
@@ -44,11 +45,13 @@ class BBCore {
 
     // subLogicCore
     var accountCore : AccountCore
+    var configCore : ConfigCore
     var commentCore : CommentCore
 
     constructor() {
         netCore = NetCore()
         threadCore = ThreadCore()
+        configCore = ConfigCore()
         dbCore = DBCore()
         uiHandler = BBHandler(Looper.getMainLooper(), "Main")
 
