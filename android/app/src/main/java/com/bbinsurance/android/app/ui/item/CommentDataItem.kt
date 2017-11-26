@@ -38,7 +38,7 @@ class CommentDataItem : BaseDataItem {
         var commentViewHolder = viewHolder as CommentViewHolder
         commentViewHolder.nickNameTV?.text = String.format("%d", comment.Uin)
         commentViewHolder.scoreTV?.text = (String.format("%d", comment.TotalScore))
-        commentViewHolder.timeTV?.text = TimeUtil.formatTime(comment.Timestamp * 1000L)
+        commentViewHolder.timeTV?.text = TimeUtil.formatTime(comment.Timestamp)
         commentViewHolder.contentTV?.text = comment.Content
     }
 

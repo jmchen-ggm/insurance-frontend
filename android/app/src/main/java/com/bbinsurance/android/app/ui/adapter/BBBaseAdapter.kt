@@ -83,4 +83,8 @@ abstract class BBBaseAdapter : BaseAdapter {
     open fun finish() {
 
     }
+
+    open fun clearCache() {
+        itemCache.clear()
+    }
 }

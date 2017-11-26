@@ -1,6 +1,5 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
-import android.app.ProgressDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -28,7 +27,6 @@ class AddCommentUI : BaseActivity() {
 
     lateinit var commentET: EditText
     lateinit var postBtn: Button
-    var progressDialog: ProgressDialog? = null
 
     override fun initView() {
         super.initView()
@@ -76,12 +74,11 @@ class AddCommentUI : BaseActivity() {
         postBtn.setOnClickListener({
             var content = commentET.text.toString()
             if (!Util.isNullOrNil(content)) {
-                progressDialog = ProgressDialog.show(this, "", "", true, false)
                 BBCore.Instance.threadCore.post(Runnable {
                     var comment = CommentEntity()
                     comment.Uin = BBCore.Instance.accountCore.getUIN()
                     comment.Content = content
-                    comment.Timestamp = System.currentTimeMillis() / 1000
+                    comment.Timestamp = System.currentTimeMillis()
                     comment.TotalScore = totalStarClickListener.score
                     comment.Score1 = subStar1ClickListner.score
                     comment.Score2 = subStar2ClickListner.score
@@ -89,7 +86,7 @@ class AddCommentUI : BaseActivity() {
                     BBCore.Instance.dbCore.db.commentDao().insertComment(comment)
                     BBCore.Instance.commentCore.commentSyncService.startToUpload()
                     runOnUiThread({
-                        progressDialog?.dismiss()
+                        finish()
                     })
                 })
             }

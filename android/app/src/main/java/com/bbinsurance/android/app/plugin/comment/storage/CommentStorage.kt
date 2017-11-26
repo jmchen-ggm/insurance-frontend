@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.plugin.comment.storage
 
+import android.database.Cursor
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.db.dao.CommentDao
 import com.bbinsurance.android.app.db.entity.CommentEntity
@@ -10,6 +11,9 @@ import com.bbinsurance.android.app.db.storage.BBStorageEvent
  * Created by jiaminchen on 17/11/19.
  */
 class CommentStorage : BBStorage(), CommentDao {
+    override fun getAllComment(): Cursor {
+        return BBCore.Instance.dbCore.db.commentDao().getAllComment()
+    }
 
     override fun deleteComment(comment: CommentEntity) {
         BBCore.Instance.dbCore.db.commentDao().deleteComment(comment)

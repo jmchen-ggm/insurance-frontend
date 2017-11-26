@@ -2,6 +2,7 @@ package com.bbinsurance.android.app.db.dao
 
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import android.database.Cursor
 import com.bbinsurance.android.app.db.entity.CommentEntity
 
 /**
@@ -18,6 +19,9 @@ interface CommentDao {
 
     @Query("SELECT * FROM Comment ORDER BY Timestamp DESC LIMIT 1")
     fun getTopComment() : CommentEntity
+
+    @Query("SELECT * FROM Comment ORDER BY Timestamp DESC")
+    fun getAllComment() : Cursor
 
     @Insert(onConflict = REPLACE)
     fun insertComment(comment: CommentEntity)
