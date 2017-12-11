@@ -20,7 +20,7 @@ import com.bbinsurance.android.lib.util.PermissionUtil
 
 class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
 
-    lateinit internal var bottomNavigationBar: BottomNavigationBar
+    lateinit var bottomNavigationBar: BottomNavigationBar
 
     override fun getLayoutId(): Int {
         return R.layout.launcher_ui

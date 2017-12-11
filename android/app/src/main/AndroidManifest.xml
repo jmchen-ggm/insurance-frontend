@@ -22,5 +22,6 @@
         </activity>
         <activity android:name="com.bbinsurance.android.app.plugin.comment.ui.CommentUI"/>
         <activity android:name="com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI"/>
+        <activity android:name="com.bbinsurance.android.app.plugin.account.ui.LoginUI"/>
     </application>
 </manifest>

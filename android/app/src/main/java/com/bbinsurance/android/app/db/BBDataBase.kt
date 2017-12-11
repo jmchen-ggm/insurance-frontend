@@ -4,8 +4,10 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import com.bbinsurance.android.app.db.dao.ConfigDao
 import com.bbinsurance.android.app.db.dao.CommentDao
+import com.bbinsurance.android.app.db.dao.ContactDao
 import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.app.db.entity.ConfigEntity
+import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.protocol.BBComment
 
 /**
@@ -13,9 +15,11 @@ import com.bbinsurance.android.app.protocol.BBComment
  */
 @Database(entities = arrayOf(
         CommentEntity::class,
-        ConfigEntity::class),
+        ConfigEntity::class,
+        ContactEntity::class),
         version = 1, exportSchema = false)
 abstract class BBDataBase : RoomDatabase() {
     abstract fun configDao() : ConfigDao
     abstract fun commentDao() : CommentDao
+    abstract fun contactDao() : ContactDao
 }

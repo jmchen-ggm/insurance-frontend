@@ -26,4 +26,8 @@ open class NetRequest {
             , funId, uri, sessionId, TimeUtil.formatTime(timestamp))
     }
 
+    var isCancel = false
+    fun cancel() {
+        isCancel = true
+    }
 }

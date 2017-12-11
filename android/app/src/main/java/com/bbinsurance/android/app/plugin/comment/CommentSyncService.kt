@@ -13,7 +13,6 @@ import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.comment.config.CommentRange
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.lib.BBHandler
-import com.bbinsurance.android.lib.Util
 import com.bbinsurance.android.lib.log.BBLog
 import java.util.*
 
@@ -85,6 +84,9 @@ class CommentSyncService {
             listCommentRequest.PageSize = 20
             netRequest.body = JSON.toJSONString(listCommentRequest)
             BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
+                override fun onNetTaskCancel(netRequest: NetRequest) {
+                }
+
                 lateinit var listCommentResponse : BBListCommentResponse
                 override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
                 }

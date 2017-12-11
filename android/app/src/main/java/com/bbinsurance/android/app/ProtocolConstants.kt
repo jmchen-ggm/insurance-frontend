@@ -16,12 +16,19 @@ open class ProtocolConstants {
             val FuncListComment = 4
             val FuncCreateComment = 5
             val FuncViewComment = 6
+
+            val FuncRegisterUser = 101
+            val FuncLogin = 102
+            val FuncGetUser = 103
+            val FuncBatchGetUser = 104
+            val FuncGetAllUser = 105
         }
     }
 
     open class URI {
         companion object {
             val DataBin = "data-bin"
+            val UserBin = "user-bin"
             val ConfigBin = "config-bin"
         }
     }
@@ -30,6 +37,7 @@ open class ProtocolConstants {
         companion object {
             val FileServer = "http://120.78.175.235:8081/"
             val Data = "http://120.78.175.235:8081/data-bin"
+            val User = "http://120.78.175.235:8082/data-bin"
         }
     }
 

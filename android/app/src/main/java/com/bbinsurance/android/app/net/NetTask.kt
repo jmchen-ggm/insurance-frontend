@@ -29,7 +29,7 @@ open class NetTask : Runnable {
         this.handler = BBCore.Instance.uiHandler
     }
 
-    var netListener : NetListener ? = null
+    var netListeners : ArrayList<NetListener> = ArrayList()
 
     override fun run() {
         var before = System.currentTimeMillis()
@@ -44,13 +44,15 @@ open class NetTask : Runnable {
 
         bbReq.Body = JSON.parse(netRequest.body) as JSON
         doRequest(bbReq)
-        if (netListener != null) {
-            netListener?.onNetDoneInSubThread(netRequest, netResponse)
-            handler.post({
-                run {
-                    netListener?.onNetDoneInMainThread(netRequest, netResponse)
-                }
-            })
+        if (!netRequest.isCancel && netListeners.isNotEmpty()) {
+            for (listener : NetListener in netListeners) {
+                listener.onNetDoneInSubThread(netRequest, netResponse)
+                handler.post({
+                    run {
+                        listener.onNetDoneInMainThread(netRequest, netResponse)
+                    }
+                })
+            }
         }
         var after = System.currentTimeMillis()
         BBLog.i(TAG, "execute net task use %d respCode %d", after - before, netResponse.respCode)
@@ -61,6 +63,9 @@ open class NetTask : Runnable {
         var requestMethod = ""
         if (bbReq.Bin.URI.equals(ProtocolConstants.URI.DataBin)) {
             requestUrl = ProtocolConstants.URL.Data
+            requestMethod = ProtocolConstants.RequestType.POST
+        } else if (bbReq.Bin.URI == ProtocolConstants.URI.UserBin) {
+            requestUrl = ProtocolConstants.URL.User
             requestMethod = ProtocolConstants.RequestType.POST
         }
         if (Util.isNullOrNil(requestUrl)) {
@@ -83,8 +88,11 @@ open class NetTask : Runnable {
             urlConnection.connect()
         }
         netResponse.respCode = urlConnection.responseCode
+        if (netRequest.isCancel) {
+            return
+        }
         netResponse.responseBody = FileUtil.readStream(urlConnection.inputStream)
-        if (bbReq.Bin.URI.equals(ProtocolConstants.URI.DataBin)) {
+        if (bbReq.Bin.URI == ProtocolConstants.URI.DataBin) {
             netResponse.bbResp = JSON.parseObject(String(netResponse.responseBody), BBResp::class.java)
         }
     }

@@ -29,6 +29,7 @@ class BBCore {
             initLog()
             Thread.setDefaultUncaughtExceptionHandler(BBUncaughtExceptionHandler())
             Instance = BBCore()
+            Instance.initCore()
         }
 
         private fun initLog() {
@@ -38,20 +39,25 @@ class BBCore {
         }
     }
 
-    var netCore : NetCore
-    var threadCore : ThreadCore
-    var dbCore : DBCore
-    var uiHandler : BBHandler
+    lateinit var netCore: NetCore
+    lateinit var threadCore: ThreadCore
+    lateinit var dbCore: DBCore
+    lateinit var uiHandler: BBHandler
 
     // subLogicCore
-    var accountCore : AccountCore
-    var configCore : ConfigCore
-    var commentCore : CommentCore
+    lateinit var accountCore: AccountCore
+    lateinit var configCore: ConfigCore
+    lateinit var commentCore: CommentCore
 
     constructor() {
+
+    }
+
+    fun initCore() {
+        // config core一定要早一点启动
+        configCore = ConfigCore()
         netCore = NetCore()
         threadCore = ThreadCore()
-        configCore = ConfigCore()
         dbCore = DBCore()
         uiHandler = BBHandler(Looper.getMainLooper(), "Main")
 

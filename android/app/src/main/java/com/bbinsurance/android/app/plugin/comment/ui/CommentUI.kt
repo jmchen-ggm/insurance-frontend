@@ -3,6 +3,8 @@ package com.bbinsurance.android.app.plugin.comment.ui
 import android.content.Intent
 import android.view.View
 import com.bbinsurance.android.app.R
+import com.bbinsurance.android.app.core.BBCore
+import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 
@@ -24,8 +26,13 @@ class CommentUI : BaseListActivity() {
         setBBTitle(R.string.comment)
         setBackBtn(true, View.OnClickListener { finish() })
         setOptionBtn(R.drawable.add_icon, View.OnClickListener {
-            var intent = Intent(this, AddCommentUI::class.java)
-            startActivity(intent)
+            if (BBCore.Instance.accountCore.isLogin()) {
+                var intent = Intent(this, AddCommentUI::class.java)
+                startActivity(intent)
+            } else {
+                var intent = Intent(this, LoginUI::class.java)
+                startActivity(intent)
+            }
         })
     }
 

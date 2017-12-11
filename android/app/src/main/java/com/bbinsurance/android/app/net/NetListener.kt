@@ -6,4 +6,5 @@ package com.bbinsurance.android.app.net
 interface NetListener {
     fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse)
     fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse)
+    fun onNetTaskCancel(netRequest: NetRequest)
 }
