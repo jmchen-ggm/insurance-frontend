@@ -20,8 +20,8 @@ open class NetTask : Runnable {
     private val TAG = "BB.NetworkTask"
 
     var netRequest: NetRequest
-    var netResponse : NetResponse
-    var handler : BBHandler
+    var netResponse: NetResponse
+    var handler: BBHandler
 
     constructor(request: NetRequest) {
         this.netRequest = request;
@@ -29,7 +29,7 @@ open class NetTask : Runnable {
         this.handler = BBCore.Instance.uiHandler
     }
 
-    var netListeners : ArrayList<NetListener> = ArrayList()
+    var netListeners: ArrayList<NetListener> = ArrayList()
 
     override fun run() {
         var before = System.currentTimeMillis()
@@ -45,7 +45,7 @@ open class NetTask : Runnable {
         bbReq.Body = JSON.parse(netRequest.body) as JSON
         doRequest(bbReq)
         if (!netRequest.isCancel && netListeners.isNotEmpty()) {
-            for (listener : NetListener in netListeners) {
+            for (listener: NetListener in netListeners) {
                 listener.onNetDoneInSubThread(netRequest, netResponse)
                 handler.post({
                     run {
@@ -74,7 +74,7 @@ open class NetTask : Runnable {
         }
         var requestBodyBytes = JSON.toJSONString(bbReq).toByteArray()
         var url = URL(requestUrl)
-        var urlConnection  = url.openConnection() as HttpURLConnection
+        var urlConnection = url.openConnection() as HttpURLConnection
         urlConnection.connectTimeout = 60 * 1000
         urlConnection.readTimeout = 120 * 1000
         urlConnection.instanceFollowRedirects = true
@@ -92,8 +92,11 @@ open class NetTask : Runnable {
             return
         }
         netResponse.responseBody = FileUtil.readStream(urlConnection.inputStream)
-        if (bbReq.Bin.URI == ProtocolConstants.URI.DataBin) {
-            netResponse.bbResp = JSON.parseObject(String(netResponse.responseBody), BBResp::class.java)
+        when (bbReq.Bin.URI) {
+            ProtocolConstants.URI.UserBin,
+            ProtocolConstants.URI.DataBin -> {
+                netResponse.bbResp = JSON.parseObject(String(netResponse.responseBody), BBResp::class.java)
+            }
         }
     }
 }

@@ -44,8 +44,10 @@ class AccountCore : NetListener {
 
     override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
         if (netResponse.respCode == 200) {
-            var bbLoginResponse = JSON.parseObject(netResponse.bbResp.Body.toString(), BBLoginResponse::class.java)
-            var contactEntity = bbUserToEntity(bbLoginResponse.User)
+            var respBody = netResponse.bbResp.Body.toString()
+            BBLog.i(TAG, "onNetDoneInSubThread Log In Success %s", respBody)
+            var bbLoginResponse = JSON.parseObject(respBody, BBLoginResponse::class.java)
+            var contactEntity = bbUserToEntity(bbLoginResponse.UserInfo)
             contactStorage.insertContact(contactEntity)
             currentUser.Uin = contactEntity.Id
             currentUser.Username = contactEntity.Username

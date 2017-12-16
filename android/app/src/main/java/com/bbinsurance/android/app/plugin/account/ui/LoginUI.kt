@@ -1,41 +1,30 @@
 package com.bbinsurance.android.app.plugin.account.ui
 
-import android.content.DialogInterface
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
-import com.alibaba.fastjson.JSON
-import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.net.NetListener
-import com.bbinsurance.android.app.net.NetRequest
-import com.bbinsurance.android.app.net.NetResponse
-import com.bbinsurance.android.app.protocol.BBLoginRequest
-import com.bbinsurance.android.app.protocol.BBLoginResponse
+import com.bbinsurance.android.app.plugin.account.IAccountListener
 import com.bbinsurance.android.app.ui.BaseActivity
 import com.bbinsurance.android.app.ui.widget.BBProgressDialog
-import com.bbinsurance.android.lib.Util
-import com.bbinsurance.android.lib.log.BBLog
 
 /**
  * Created by jiaminchen on 17/12/9.
  */
-class LoginUI : BaseActivity(), NetListener {
-    override fun onNetTaskCancel(netRequest: NetRequest) {
+class LoginUI : BaseActivity(), IAccountListener {
+
+    override fun onLoginSuccess() {
+        dialog?.dismiss();
+        finish()
+    }
+
+    override fun onLoginFail() {
         dialog?.dismiss()
     }
 
-    override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
-    }
-
-    override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
-        dialog?.dismiss()
-        if (netResponse.respCode == 200) {
-            var bbLoginResponse = JSON.parseObject(netResponse.bbResp.Body.toString(), BBLoginResponse::class.java)
-
-        }
+    override fun onLoginCancel() {
     }
 
     lateinit var usernameET : EditText
@@ -54,12 +43,25 @@ class LoginUI : BaseActivity(), NetListener {
         passwordET.addTextChangedListener(textWatcher)
 
         loginBtn.setOnClickListener({
-            var username = usernameET.text.toString()
-            var password = passwordET.text.toString()
-            BBCore.Instance.accountCore.login(username, password)
+            login();
         })
 
         setBBTitle(R.string.login)
+
+        BBCore.Instance.accountCore.addListener(this)
+    }
+
+    override fun onDestroy() {
+        BBCore.Instance.accountCore.removeListener(this)
+        super.onDestroy()
+    }
+
+    fun login() {
+        var username = usernameET.text.toString()
+        var password = passwordET.text.toString()
+        BBCore.Instance.accountCore.login(username, password)
+        dialog = BBProgressDialog(this)
+        dialog?.show()
     }
 
     var textWatcher = object : TextWatcher {

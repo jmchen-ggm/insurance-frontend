@@ -6,5 +6,4 @@ package com.bbinsurance.android.app.protocol
 class BBLoginRequest {
     var Username = ""
     var PasswordMD5 = ""
-
 }
