@@ -4,10 +4,10 @@ import android.content.Intent
 import android.view.View
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
+import com.bbinsurance.pulltorefresh.PullToRefreshListView
 
 /**
  * Created by jiaminchen on 17/11/17.
@@ -35,6 +35,13 @@ class CommentUI : BaseListActivity() {
                 startActivity(intent)
             }
         })
+
+        var pullRefreshLV = getListView() as PullToRefreshListView
+        pullRefreshLV.setOnRefreshListener({
+            BBCore.Instance.commentCore.syncService.startToSyncCommentList()
+        })
+        pullRefreshLV.setLockScrollWhileRefreshing(true)
+        pullRefreshLV.setRefreshing()
     }
 
     override fun getLayoutId(): Int {

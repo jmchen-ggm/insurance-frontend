@@ -6,16 +6,24 @@ import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.app.db.storage.BBStorageEvent
 import com.bbinsurance.android.app.db.storage.BBStorageListener
 import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
+import com.bbinsurance.android.app.plugin.comment.ICommentSyncListener
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.ui.item.EmptyDataItem
 import com.bbinsurance.android.lib.log.BBLog
+import com.bbinsurance.pulltorefresh.PullToRefreshListView
 
 /**
  * Created by jiaminchen on 17/11/17.
  */
-class CommentAdapter : BBBaseAdapter, BBStorageListener, IAccountSyncListener {
+class CommentAdapter : BBBaseAdapter, BBStorageListener, IAccountSyncListener, ICommentSyncListener {
+
+    override fun onSyncEnd() {
+        BBCore.Instance.threadCore.post(Runnable {  resetCursor() })
+        var pullToRefreshLV = uiComponent.getListView() as PullToRefreshListView
+        pullToRefreshLV.onRefreshComplete()
+    }
 
     override fun onAccountSyncSuccess() {
         notifyDataSetChanged()
@@ -33,9 +41,9 @@ class CommentAdapter : BBBaseAdapter, BBStorageListener, IAccountSyncListener {
 
     constructor(component: ListBaseUIComponent) : super(component) {
         BBCore.Instance.accountCore.syncService.addListener(this)
+        BBCore.Instance.commentCore.syncService.addListener(this)
         BBCore.Instance.commentCore.commentStorage.registerListener(this)
-        BBCore.Instance.commentCore.commentSyncService.startToSyncCommentList()
-        BBCore.Instance.threadCore.post(Runnable {  resetCursor() })
+        BBCore.Instance.commentCore.syncService.startToSyncCommentList()
     }
 
     private var dataCursor: Cursor? = null
@@ -52,7 +60,6 @@ class CommentAdapter : BBBaseAdapter, BBStorageListener, IAccountSyncListener {
     override fun getCount(): Int {
         if (dataCursor != null) {
             var count = dataCursor!!.count
-            BBLog.d(TAG, "getCount %d", count)
             return count
         } else {
             return 0
@@ -83,6 +90,7 @@ class CommentAdapter : BBBaseAdapter, BBStorageListener, IAccountSyncListener {
 
     override fun finish() {
         super.finish()
+        BBCore.Instance.commentCore.syncService.removeListener(this)
         BBCore.Instance.accountCore.syncService.removeListener(this)
         BBCore.Instance.commentCore.commentStorage.unRegisterListener(this)
     }

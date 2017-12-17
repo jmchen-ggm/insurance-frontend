@@ -84,7 +84,7 @@ class AddCommentUI : BaseActivity() {
                     comment.Score2 = subStar2ClickListner.score
                     comment.Score3 = subStar3ClickListner.score
                     BBCore.Instance.dbCore.db.commentDao().insertComment(comment)
-                    BBCore.Instance.commentCore.commentSyncService.startToUpload()
+                    BBCore.Instance.commentCore.syncService.startToUpload()
                     runOnUiThread({
                         finish()
                     })

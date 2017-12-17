@@ -10,16 +10,17 @@ import com.bbinsurance.android.app.db.storage.BBStorageEvent
 /**
  * Created by jiaminchen on 17/11/19.
  */
-class CommentStorage : BBStorage(), CommentDao {
-    override fun getCommentByLocalId(localId: Long): CommentEntity {
+class CommentStorage : BBStorage() {
+
+    fun getCommentByLocalId(localId: Long): CommentEntity {
         return BBCore.Instance.dbCore.db.commentDao().getCommentByLocalId(localId)
     }
 
-    override fun getCommentByServerId(serverId: Long): CommentEntity {
+    fun getCommentByServerId(serverId: Long): CommentEntity {
         return BBCore.Instance.dbCore.db.commentDao().getCommentByServerId(serverId)
     }
 
-    fun insertOrUpdateCommentByLocalId(entity : CommentEntity) {
+    fun insertOrUpdateCommentByLocalId(entity : CommentEntity, needNotify: Boolean) {
         var dbEntity = getCommentByServerId(entity.LocalId)
         if (dbEntity != null) {
             var stat = BBCore.Instance.dbCore.db.compileStatement(
@@ -47,12 +48,15 @@ class CommentStorage : BBStorage(), CommentDao {
             stat.bindLong(10, entity.Flags)
             stat.bindLong(11, entity.LocalId)
             stat.executeUpdateDelete()
+            if (needNotify) {
+                notifyMainThread(BBStorageEvent(BBStorageEvent.UPDATE, entity))
+            }
         } else {
-            insertComment(entity)
+            insertComment(entity, needNotify)
         }
     }
 
-    private fun insertOrUpdateCommentByServerId(entity : CommentEntity) {
+    private fun insertOrUpdateCommentByServerId(entity : CommentEntity, needNotify: Boolean) {
         var dbEntity = getCommentByServerId(entity.ServerId)
         if (dbEntity != null) {
             var stat = BBCore.Instance.dbCore.db.compileStatement(
@@ -78,35 +82,42 @@ class CommentStorage : BBStorage(), CommentDao {
             stat.bindLong(9, entity.Flags)
             stat.bindLong(10, entity.ServerId)
             stat.executeUpdateDelete()
+            if (needNotify) {
+                notifyMainThread(BBStorageEvent(BBStorageEvent.UPDATE, entity))
+            }
         } else {
-            insertComment(entity)
+            insertComment(entity, needNotify)
         }
     }
 
-    override fun getAllComment(): Cursor {
+    fun getAllComment(): Cursor {
         return BBCore.Instance.dbCore.db.commentDao().getAllComment()
     }
 
-    override fun getTopComment(): CommentEntity {
+    fun getTopComment(): CommentEntity {
         return BBCore.Instance.dbCore.db.commentDao().getTopComment()
     }
 
-    override fun insertComment(comment: CommentEntity) {
+    fun insertComment(comment: CommentEntity, needNotify : Boolean) {
         BBCore.Instance.dbCore.db.commentDao().insertComment(comment)
-        notifyMainThread(BBStorageEvent(BBStorageEvent.INSERT))
+        if (needNotify) {
+            notifyMainThread(BBStorageEvent(BBStorageEvent.INSERT, comment))
+        }
     }
 
-    override fun getAllUnCreatedComment(): List<CommentEntity> {
+    fun getAllUnCreatedComment(): List<CommentEntity> {
         return BBCore.Instance.dbCore.db.commentDao().getAllUnCreatedComment()
     }
 
-    fun updateCommentListByServerId(commentList: List<CommentEntity>) {
+    fun insertOrUpdateCommentListByServerId(commentList: List<CommentEntity>, needNotify: Boolean) {
         BBCore.Instance.dbCore.db.beginTransaction()
         for (comment: CommentEntity in commentList) {
-            insertOrUpdateCommentByServerId(comment)
+            insertOrUpdateCommentByServerId(comment, false)
         }
         BBCore.Instance.dbCore.db.setTransactionSuccessful()
         BBCore.Instance.dbCore.db.endTransaction()
-        notifyMainThread(BBStorageEvent(BBStorageEvent.UPDATE))
+        if (needNotify) {
+            notifyMainThread(BBStorageEvent(BBStorageEvent.UPDATE))
+        }
     }
 }

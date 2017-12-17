@@ -7,9 +7,7 @@ import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.app.db.entity.ConfigEntity
-import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
-import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.comment.config.CommentRange
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.lib.BBHandler
@@ -30,11 +28,21 @@ class CommentSyncService {
         private val SyncComment = 2;
     }
 
+    var commentSyncListenerList = ArrayList<ICommentSyncListener>()
+
+    fun addListener(listener: ICommentSyncListener) {
+        commentSyncListenerList.add(listener)
+    }
+
+    fun removeListener(listener: ICommentSyncListener) {
+        commentSyncListenerList.remove(listener)
+    }
+
     constructor() {
         syncHandler = CommentSyncHandler(Looper.getMainLooper())
     }
 
-    class CommentSyncHandler : BBHandler {
+    inner class CommentSyncHandler : BBHandler {
         constructor(looper : Looper) : super(looper, ThreadName) {
         }
 
@@ -50,7 +58,7 @@ class CommentSyncService {
         }
 
         private fun startToUploadComment() {
-            var uploadCommentList = BBCore.Instance.dbCore.db.commentDao().getAllUnCreatedComment()
+            var uploadCommentList = BBCore.Instance.commentCore.commentStorage.getAllUnCreatedComment()
             BBLog.i(TAG, "uploadCommentList: %d", uploadCommentList.size)
             for (comment : CommentEntity in uploadCommentList) {
                 var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
@@ -71,7 +79,7 @@ class CommentSyncService {
                     var createCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(), BBCreateCommentResponse::class.java)
                     var entity = toCommentEntity(createCommentResponse.Comment)
                     entity.LocalId = comment.LocalId
-                    BBCore.Instance.commentCore.commentStorage.insertOrUpdateCommentByLocalId(entity)
+                    BBCore.Instance.commentCore.commentStorage.insertOrUpdateCommentByLocalId(entity, true)
                 }
             }
         }
@@ -98,45 +106,41 @@ class CommentSyncService {
             listCommentRequest.StartIndex = 0
             listCommentRequest.PageSize = 20
             netRequest.body = JSON.toJSONString(listCommentRequest)
-            BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
-                override fun onNetTaskCancel(netRequest: NetRequest) {
-                }
 
-                lateinit var listCommentResponse : BBListCommentResponse
-                override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
+            var netResponse = BBCore.Instance.netCore.startRequestSync(netRequest)
+            if (netResponse.respCode == 200) {
+                var listCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
+                        BBListCommentResponse::class.java)
+                var commentEntityList = ArrayList<CommentEntity>()
+                for (comment: BBComment in listCommentResponse.CommentList) {
+                    var commentEntity = CommentEntity()
+                    commentEntity.ServerId = comment.ServerId
+                    commentEntity.Content = comment.Content
+                    commentEntity.TotalScore = comment.TotalScore
+                    commentEntity.Score1 = comment.Score1
+                    commentEntity.Score2 = comment.Score2
+                    commentEntity.Score3 = comment.Score3
+                    commentEntity.Uin = comment.Uin
+                    commentEntity.Timestamp = comment.Timestamp
+                    commentEntity.Flags = comment.Flags
+                    commentEntity.ViewCount = comment.ViewCount
+                    commentEntityList.add(commentEntity)
                 }
-
-                override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
-                    if (netResponse.respCode == 200) {
-                        listCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
-                                BBListCommentResponse::class.java)
-                        var commentEntityList = ArrayList<CommentEntity>()
-                        for (comment : BBComment in listCommentResponse.CommentList) {
-                            var commentEntity = CommentEntity()
-                            commentEntity.ServerId = comment.ServerId
-                            commentEntity.Content = comment.Content
-                            commentEntity.TotalScore = comment.TotalScore
-                            commentEntity.Score1 = comment.Score1
-                            commentEntity.Score2 = comment.Score2
-                            commentEntity.Score3 = comment.Score3
-                            commentEntity.Uin = comment.Uin
-                            commentEntity.Timestamp = comment.Timestamp
-                            commentEntity.Flags = comment.Flags
-                            commentEntity.ViewCount = comment.ViewCount
-                            commentEntityList.add(commentEntity)
-                        }
-                        if (commentEntityList.isEmpty()) {
-                            BBLog.i(TAG,"commentEntityList is Empty")
-                            return
-                        }
-                        updateSequenceRange(commentEntityList)
-                        BBCore.Instance.commentCore.commentStorage.updateCommentListByServerId(commentEntityList)
-                    }
+                if (commentEntityList.isEmpty()) {
+                    BBLog.i(TAG, "commentEntityList is Empty")
+                    return
+                }
+                updateSequenceRange(commentEntityList)
+                BBCore.Instance.commentCore.commentStorage.insertOrUpdateCommentListByServerId(commentEntityList, false)
+            }
+            BBCore.Instance.uiHandler.post({
+                for (listener: ICommentSyncListener in commentSyncListenerList) {
+                    listener.onSyncEnd()
                 }
             })
         }
 
-        fun updateSequenceRange(commentEntityList : List<CommentEntity>) {
+        private fun updateSequenceRange(commentEntityList : List<CommentEntity>) {
             var range = CommentRange()
             range.Top = commentEntityList.first().ServerId
             range.Bottom = commentEntityList.last().ServerId
