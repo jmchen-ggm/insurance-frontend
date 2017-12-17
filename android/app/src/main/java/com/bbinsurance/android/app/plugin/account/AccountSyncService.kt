@@ -16,7 +16,24 @@ import com.bbinsurance.android.app.protocol.BBUser
  */
 class AccountSyncService : NetListener {
 
+    private var accountListenerList = ArrayList<IAccountSyncListener>()
+
+    fun addListener(listener: IAccountSyncListener) {
+        accountListenerList.add(listener)
+    }
+
+    fun removeListener(listener: IAccountSyncListener) {
+        accountListenerList.remove(listener)
+    }
+
     override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
+        for (listener : IAccountSyncListener in accountListenerList) {
+            if (netResponse.respCode == 200) {
+                listener.onAccountSyncSuccess()
+            } else {
+                listener.onAccountSyncFail()
+            }
+        }
     }
 
     override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {

@@ -13,7 +13,7 @@
         android:padding="5dp"
         android:layout_width="match_parent" android:layout_height="wrap_content">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_margin="10dp"
             android:id="@+id/thumb_iv"
             android:layout_width="48dp"
@@ -21,6 +21,7 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

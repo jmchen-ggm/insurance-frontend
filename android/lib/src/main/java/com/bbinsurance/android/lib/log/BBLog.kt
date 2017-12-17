@@ -14,7 +14,7 @@ open class BBLog {
         }
 
         fun v(tag : String, format : String, vararg args : Any) {
-            var log = String.format(format, args)
+            var log = String.format(format, *args)
             logImpl.v(tag, log)
             if (debugMode) {
                 android.util.Log.v(TAG, String.format("[%s] %s", tag, log))
@@ -22,7 +22,7 @@ open class BBLog {
         }
 
         fun d(tag : String, format : String, vararg args : Any) {
-            var log = String.format(format, args)
+            var log = String.format(format, *args)
             logImpl.d(tag, log)
             if (debugMode) {
                 android.util.Log.d(TAG, String.format("[%s] %s", tag, log))
@@ -30,7 +30,7 @@ open class BBLog {
         }
 
         fun i(tag : String, format : String, vararg args : Any ?) {
-            var log : String = String.format(format, *args)
+            var log = String.format(format, *args)
             logImpl.i(tag, log)
             if (debugMode) {
                 android.util.Log.i(TAG, String.format("[%s] %s", tag, log))

@@ -5,17 +5,25 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.app.db.storage.BBStorageEvent
 import com.bbinsurance.android.app.db.storage.BBStorageListener
+import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
-import com.bbinsurance.android.app.ui.item.CommentDataItem
 import com.bbinsurance.android.app.ui.item.EmptyDataItem
 import com.bbinsurance.android.lib.log.BBLog
 
 /**
  * Created by jiaminchen on 17/11/17.
  */
-class CommentAdapter : BBBaseAdapter, BBStorageListener {
+class CommentAdapter : BBBaseAdapter, BBStorageListener, IAccountSyncListener {
+
+    override fun onAccountSyncSuccess() {
+        notifyDataSetChanged()
+    }
+
+    override fun onAccountSyncFail() {
+        notifyDataSetChanged()
+    }
 
     override fun onEvent(event: BBStorageEvent) {
         BBCore.Instance.threadCore.post(Runnable {  resetCursor() })
@@ -24,6 +32,7 @@ class CommentAdapter : BBBaseAdapter, BBStorageListener {
     val TAG = "BB.CommentAdapter"
 
     constructor(component: ListBaseUIComponent) : super(component) {
+        BBCore.Instance.accountCore.syncService.addListener(this)
         BBCore.Instance.commentCore.commentStorage.registerListener(this)
         BBCore.Instance.commentCore.commentSyncService.startToSyncCommentList()
         BBCore.Instance.threadCore.post(Runnable {  resetCursor() })
@@ -42,7 +51,9 @@ class CommentAdapter : BBBaseAdapter, BBStorageListener {
 
     override fun getCount(): Int {
         if (dataCursor != null) {
-            return dataCursor!!.count
+            var count = dataCursor!!.count
+            BBLog.d(TAG, "getCount %d", count)
+            return count
         } else {
             return 0
         }
@@ -72,6 +83,7 @@ class CommentAdapter : BBBaseAdapter, BBStorageListener {
 
     override fun finish() {
         super.finish()
+        BBCore.Instance.accountCore.syncService.removeListener(this)
         BBCore.Instance.commentCore.commentStorage.unRegisterListener(this)
     }
 }

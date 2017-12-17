@@ -8,7 +8,7 @@ import java.util.*
  */
 class TimeUtil {
     companion object {
-        var formatter = SimpleDateFormat("yyyy-MM-dd hh:MM:ss")
+        var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         fun formatTime(timestamp : Long) : String {
             return formatter.format(Date(timestamp))
         }

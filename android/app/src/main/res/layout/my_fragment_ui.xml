@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="@string/tab_my"
-        android:textColor="@color/main_blue_color"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content"/>
-</RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/main_blue_color">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/main_blue_color"
+        android:gravity="center_vertical"
+        android:paddingLeft="32dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            style="@style/WrapAvatarThumbStyle"
+            android:background="@drawable/avatar_bg_shape">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/avatar_iv"
+                android:layout_centerInParent="true"
+                style="@style/AvatarThumbStyle"/>
+        </RelativeLayout>
+
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:paddingLeft="10dp"
+                      android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="{nickname}"
+                android:textSize="@dimen/TitleTextSize"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/nickname_tv"/>
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/DescTextSize"
+                android:text="{nickname}"
+                android:textColor="@color/grey_color_1"
+                android:layout_height="wrap_content"
+                android:id="@+id/username_tv"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        android:textSize="@dimen/TitleTextSize"
+        android:background="@drawable/button_selector"/>
+
+</LinearLayout>

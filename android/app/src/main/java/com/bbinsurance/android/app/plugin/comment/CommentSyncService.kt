@@ -69,11 +69,26 @@ class CommentSyncService {
                 var netResponse = BBCore.Instance.netCore.startRequestSync(netRequest)
                 if (netResponse.respCode == 200) {
                     var createCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(), BBCreateCommentResponse::class.java)
-                    comment.ServerId = createCommentResponse.ServerId
-                    comment.Flags = comment.Flags or ProtocolConstants.CommentFlag.CREATED
-                    BBCore.Instance.commentCore.commentStorage.updateComment(comment)
+                    var entity = toCommentEntity(createCommentResponse.Comment)
+                    entity.LocalId = comment.LocalId
+                    BBCore.Instance.commentCore.commentStorage.insertOrUpdateCommentByLocalId(entity)
                 }
             }
+        }
+
+        private fun toCommentEntity(comment : BBComment) : CommentEntity {
+            var entity = CommentEntity()
+            entity.Uin = comment.Uin
+            entity.Content = comment.Content
+            entity.ServerId = comment.ServerId
+            entity.Timestamp = comment.Timestamp
+            entity.Score1 = comment.Score1
+            entity.Score2 = comment.Score2
+            entity.Score3 = comment.Score3
+            entity.TotalScore = comment.TotalScore
+            entity.Flags = comment.Flags
+            entity.ViewCount = comment.ViewCount
+            return entity
         }
 
         private fun startToSyncCommentList() {
@@ -114,9 +129,7 @@ class CommentSyncService {
                             BBLog.i(TAG,"commentEntityList is Empty")
                             return
                         }
-
                         updateSequenceRange(commentEntityList)
-
                         BBCore.Instance.commentCore.commentStorage.updateCommentListByServerId(commentEntityList)
                     }
                 }

@@ -76,7 +76,7 @@ class AddCommentUI : BaseActivity() {
             if (!Util.isNullOrNil(content)) {
                 BBCore.Instance.threadCore.post(Runnable {
                     var comment = CommentEntity()
-                    comment.Uin = BBCore.Instance.accountCore.getUIN()
+                    comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
                     comment.Content = content
                     comment.Timestamp = System.currentTimeMillis()
                     comment.TotalScore = totalStarClickListener.score

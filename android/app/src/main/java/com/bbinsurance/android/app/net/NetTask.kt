@@ -40,7 +40,7 @@ open class NetTask : Runnable {
         bbReq.Bin.SessionId = netRequest.sessionId
         bbReq.Bin.Timestamp = netRequest.timestamp
 
-        bbReq.Header.Uin = BBCore.Instance.accountCore.getUIN()
+        bbReq.Header.Uin = BBCore.Instance.accountCore.loginService.getUIN()
 
         bbReq.Body = JSON.parse(netRequest.body) as JSON
         doRequest(bbReq)
