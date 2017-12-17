@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
@@ -35,6 +36,11 @@ class CommentDataItem : BaseDataItem {
         viewHolder.timeTV = view?.findViewById(R.id.time_tv)
         viewHolder.scoreTV = view?.findViewById(R.id.score_tv)
         viewHolder.contentTV = view?.findViewById(R.id.content_tv)
+        viewHolder.starsIV[0] = view?.findViewById(R.id.star_1_iv)
+        viewHolder.starsIV[1] = view?.findViewById(R.id.star_2_iv)
+        viewHolder.starsIV[2] = view?.findViewById(R.id.star_3_iv)
+        viewHolder.starsIV[3] = view?.findViewById(R.id.star_4_iv)
+        viewHolder.starsIV[4] = view?.findViewById(R.id.star_5_iv)
         view.tag = (viewHolder)
         return view
     }
@@ -52,9 +58,17 @@ class CommentDataItem : BaseDataItem {
             commentViewHolder.nickNameTV?.text = contactEntity?.Nickname
             commentViewHolder.thumbIV?.setImageURI(BBCore.Instance.accountCore.getContactThumbUrl(contactEntity))
         }
-        commentViewHolder.scoreTV?.text = (String.format("%d", comment.TotalScore))
-        commentViewHolder.timeTV?.text = TimeUtil.formatTime(comment.Timestamp)
-        commentViewHolder.contentTV?.text = comment.Content
+        var scoreIndex = comment.TotalScore / 20
+        for (index : Int in viewHolder.starsIV.indices) {
+            if (index < scoreIndex) {
+                viewHolder.starsIV[index]?.setImageResource(R.drawable.star_yellow)
+            } else {
+                viewHolder.starsIV[index]?.setImageResource(R.drawable.star_gray)
+            }
+        }
+        commentViewHolder.scoreTV?.text = (String.format("%d星", scoreIndex))
+        commentViewHolder.timeTV?.text = TimeUtil.formatTimeInList(context, comment.Timestamp)
+        commentViewHolder.contentTV?.text = comment.Content.trim()
     }
 
     class CommentViewHolder : BaseViewHolder() {
@@ -62,6 +76,7 @@ class CommentDataItem : BaseDataItem {
         var nickNameTV: TextView? = null
         var timeTV: TextView? = null
         var scoreTV: TextView? = null
+        var starsIV = arrayOfNulls<ImageView?>(5)
         var contentTV: TextView? = null
     }
 }

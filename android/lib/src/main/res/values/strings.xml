@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">lib</string>
+
+    <string name="fmt_date">M月d日</string>
+    <string name="fmt_longdate">yyyy年M月d日</string>
+    <string name="fmt_normal_time_24">kk:mm</string>
+    <string name="fmt_pre_yesterday">昨天</string>
+
+    <string name="time_jan">1月</string>
+    <string name="time_feb">2月</string>
+    <string name="time_mar">3月</string>
+    <string name="time_apr">4月</string>
+    <string name="time_may">5月</string>
+    <string name="time_jun">6月</string>
+    <string name="time_jul">7月</string>
+    <string name="time_aug">8月</string>
+    <string name="time_sept">9月</string>
+    <string name="time_oct">10月</string>
+    <string name="time_nov">11月</string>
+    <string name="time_dec">12月</string>
 </resources>

@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:padding="5dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:layout_margin="10dp"
@@ -21,9 +22,12 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,16 +45,53 @@
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/score_tv"
-                android:text="{score}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/star_1_iv"
+                    style="@style/CommentListStarStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
+
+                <ImageView
+                    android:id="@+id/star_2_iv"
+                    style="@style/CommentListStarStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
+
+                <ImageView
+                    android:id="@+id/star_3_iv"
+                    style="@style/CommentListStarStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
+
+                <ImageView
+                    android:id="@+id/star_4_iv"
+                    style="@style/CommentListStarStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
+
+                <ImageView
+                    android:id="@+id/star_5_iv"
+                    style="@style/CommentListStarStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
+
+                <TextView
+                    android:id="@+id/score_tv"
+                    android:text="{score}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/content_tv"
                 android:text="{content}"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>

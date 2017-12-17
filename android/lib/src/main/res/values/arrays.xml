@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_month">
+        <item>@string/time_jan</item>
+        <item>@string/time_feb</item>
+        <item>@string/time_mar</item>
+        <item>@string/time_apr</item>
+        <item>@string/time_may</item>
+        <item>@string/time_jun</item>
+        <item>@string/time_jul</item>
+        <item>@string/time_aug</item>
+        <item>@string/time_sept</item>
+        <item>@string/time_oct</item>
+        <item>@string/time_nov</item>
+        <item>@string/time_dec</item>
+    </string-array>
+</resources>
