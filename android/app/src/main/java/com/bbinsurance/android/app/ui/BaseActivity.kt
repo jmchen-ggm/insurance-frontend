@@ -68,6 +68,11 @@ abstract class BaseActivity : AppCompatActivity() {
         updateActionBar()
     }
 
+    open fun setBBTitle(title : String) {
+        titleTV.text = title
+        updateActionBar()
+    }
+
     open fun setOptionBtn(srcId : Int, listener : View.OnClickListener) {
         optionBtn.visibility = View.VISIBLE
         optionBtn.setImageResource(srcId)

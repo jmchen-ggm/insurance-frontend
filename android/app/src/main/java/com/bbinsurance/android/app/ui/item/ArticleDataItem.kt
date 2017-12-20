@@ -5,24 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
-import com.bbinsurance.android.app.entity.LearnArticleEntity
+import com.bbinsurance.android.app.protocol.BBArticle
+import com.bbinsurance.android.app.ui.adapter.ArticleAdapter
 import com.facebook.drawee.view.SimpleDraweeView
+
 
 /**
  * Created by jiaminchen on 2017/10/27.
  */
-class LearnArticleDataItem : BaseDataItem {
+class ArticleDataItem : BaseDataItem {
 
-    lateinit var entity : LearnArticleEntity
+    lateinit var entity : BBArticle
 
     constructor(position : Int) : super(UIConstants.ListViewType.LearnArticle, position) {
 
     }
 
     override fun inflateView(context: Context, parent: ViewGroup?, itemView: View?): View {
-        var view = LayoutInflater.from(context).inflate(R.layout.learn_article_item_view, parent, false)
+        var view = LayoutInflater.from(context).inflate(R.layout.article_item_view, parent, false)
         var viewHolder = LearnArticleViewHolder()
         viewHolder.titleTV = view.findViewById(R.id.title_tv)
         viewHolder.descTV = view.findViewById(R.id.desc_tv)
@@ -34,10 +37,12 @@ class LearnArticleDataItem : BaseDataItem {
 
     override fun fillView(context: Context, viewHolder: BaseViewHolder) {
         var holder = viewHolder as LearnArticleViewHolder
-        holder.titleTV.text = entity.title
-        holder.descTV.text = entity.desc
-        holder.thumbIV.setImageURI(String.format("http://120.78.175.235:8081/img/articles/%d.png", entity.id))
-        holder.timeTV.text = entity.time
+        holder.titleTV.text = entity.Title
+        holder.descTV.text = entity.Desc
+        holder.thumbIV.hierarchy = ArticleAdapter.getCornerRoundHierarchy()
+        holder.thumbIV.setImageURI(ProtocolConstants.URL.FileServer + entity.ThumbUrl)
+
+        holder.timeTV.text = entity.Date
     }
 
     class LearnArticleViewHolder : BaseViewHolder() {

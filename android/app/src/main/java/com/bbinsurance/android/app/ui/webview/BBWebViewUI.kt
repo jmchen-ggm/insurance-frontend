@@ -1,6 +1,7 @@
 package com.bbinsurance.android.app.ui.webview
 
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
@@ -17,10 +18,6 @@ class BBWebViewUI : BaseActivity() {
     lateinit var title : String
     lateinit var url : String
     lateinit var webView: WebView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun initData() {
         super.initData()
@@ -45,6 +42,9 @@ class BBWebViewUI : BaseActivity() {
         webView.webViewClient = webViewClient
 
         webView.loadUrl(url)
+
+        setBBTitle(title)
+        setBackBtn(true, View.OnClickListener { finish() })
     }
 
     var webViewClient : WebViewClient = object : WebViewClient() {
