@@ -1,4 +1,4 @@
-package com.bbinsurance.android.app.ui.adapter
+package com.bbinsurance.android.app.plugin.learn.ui.adapter
 
 import android.content.Intent
 import android.view.View
@@ -14,8 +14,10 @@ import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.protocol.BBArticle
 import com.bbinsurance.android.app.protocol.BBListArticleRequest
 import com.bbinsurance.android.app.protocol.BBListArticleResponse
+import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
+import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
-import com.bbinsurance.android.app.ui.item.ArticleDataItem
+import com.bbinsurance.android.app.plugin.learn.ui.item.ArticleDataItem
 import com.bbinsurance.android.app.ui.webview.BBWebViewUI
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder

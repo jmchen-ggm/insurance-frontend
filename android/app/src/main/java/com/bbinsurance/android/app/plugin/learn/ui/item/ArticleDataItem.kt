@@ -1,4 +1,4 @@
-package com.bbinsurance.android.app.ui.item
+package com.bbinsurance.android.app.plugin.learn.ui.item
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,8 @@ import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.protocol.BBArticle
-import com.bbinsurance.android.app.ui.adapter.ArticleAdapter
+import com.bbinsurance.android.app.plugin.learn.ui.adapter.ArticleAdapter
+import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.facebook.drawee.view.SimpleDraweeView
 
 

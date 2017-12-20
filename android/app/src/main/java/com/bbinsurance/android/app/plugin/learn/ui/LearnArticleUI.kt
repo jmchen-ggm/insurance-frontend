@@ -3,7 +3,7 @@ package com.bbinsurance.android.app.plugin.learn.ui
 import android.view.View
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.ui.BaseListActivity
-import com.bbinsurance.android.app.ui.adapter.ArticleAdapter
+import com.bbinsurance.android.app.plugin.learn.ui.adapter.ArticleAdapter
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 
 /**
