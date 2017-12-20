@@ -5,48 +5,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
-import com.bbinsurance.android.app.entity.InsuranceEntity
+import com.bbinsurance.android.app.protocol.BBInsurance
+import com.bbinsurance.android.app.ui.adapter.InsuranceAdapter
 import com.bbinsurance.android.lib.Util
+import com.facebook.drawee.view.SimpleDraweeView
 
 /**
  * Created by jiaminchen on 2017/10/25.
  */
-class RecommendInsuranceDataItem : BaseDataItem {
+class InsuranceDataItem : BaseDataItem {
 
     constructor(position : Int) : super(UIConstants.ListViewType.RecommendInsurance, position) {
 
     }
 
     override fun inflateView(context: Context, parent: ViewGroup?, itemView: View?): View {
-        var view = LayoutInflater.from(context).inflate(R.layout.recommned_insurance_item_view, parent, false)
+        var view = LayoutInflater.from(context).inflate(R.layout.insurance_item_view, parent, false)
         var viewHolder = RecommendInsuranceViewHolder()
         viewHolder.titleTV = view.findViewById(R.id.title_tv)
-        viewHolder.dividerView = view.findViewById(R.id.divider_view)
-        viewHolder.additionTV = view.findViewById(R.id.addition_tv)
-        viewHolder.scoreTV = view.findViewById(R.id.score_tv)
+        viewHolder.descTV = view.findViewById(R.id.desc_tv)
+        viewHolder.thumbIV = view.findViewById(R.id.thumb_iv)
         view.tag = (viewHolder)
         return view
     }
 
     override fun fillView(context: Context, viewHolder: BaseViewHolder) {
         var holder = viewHolder as RecommendInsuranceViewHolder
-        holder.titleTV.text = insuranceEntity.name
-        holder.additionTV.text = Util.nullAs(insuranceEntity.addition, "")
-        holder.scoreTV.text = context.getString(R.string.score_formatter, insuranceEntity.score)
-        holder.dividerView.visibility = View.VISIBLE
+        holder.titleTV.text = entity.NameZHCN
+        holder.descTV.text = Util.nullAs(entity.Desc, "")
+        holder.thumbIV.hierarchy = InsuranceAdapter.getCornerRoundHierarchy()
+        holder.thumbIV.setImageURI(ProtocolConstants.URL.FileServer + entity.ThumbUrl)
     }
 
     override fun fillData(context: Context, viewHolder: BaseViewHolder) {
+
     }
 
-    lateinit var insuranceEntity : InsuranceEntity
+    lateinit var entity: BBInsurance
 
     class RecommendInsuranceViewHolder : BaseViewHolder() {
-        lateinit var dividerView : View
+        lateinit var thumbIV: SimpleDraweeView
         lateinit var titleTV : TextView
-        lateinit var additionTV : TextView
-        lateinit var scoreTV : TextView
+        lateinit var descTV: TextView
     }
 }

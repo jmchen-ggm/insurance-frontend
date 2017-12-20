@@ -7,7 +7,7 @@ import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.plugin.comment.ui.CommentUI
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
-import com.bbinsurance.android.app.ui.adapter.RecommendInsuranceAdapter
+import com.bbinsurance.android.app.ui.adapter.InsuranceAdapter
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 
 /**
@@ -19,12 +19,12 @@ class HomeFragmentUI : BaseListFragment(), ListBaseUIComponent {
         return R.layout.home_fragment_ui
     }
 
-    private var recommendInsuranceAdapter: RecommendInsuranceAdapter? = null
+    private var insuranceAdapter: InsuranceAdapter? = null
     override fun getAdapter(): BBBaseAdapter {
-        if (recommendInsuranceAdapter == null) {
-            recommendInsuranceAdapter = RecommendInsuranceAdapter(this)
+        if (insuranceAdapter == null) {
+            insuranceAdapter = InsuranceAdapter(this)
         }
-        return recommendInsuranceAdapter!!
+        return insuranceAdapter!!
     }
 
     private lateinit var compareLayout: View

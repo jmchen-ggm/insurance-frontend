@@ -7,4 +7,5 @@
     <dimen name="DescTextSize">12dp</dimen>
 
     <dimen name="ArticleItemCornerRoundSize">5dp</dimen>
+    <dimen name="InsuranceItemCornerRoundSize">5dp</dimen>
 </resources>

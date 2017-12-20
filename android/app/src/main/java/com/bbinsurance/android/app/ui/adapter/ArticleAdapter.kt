@@ -25,7 +25,7 @@ import com.facebook.drawee.generic.RoundingParams
  * Created by jiaminchen on 2017/10/27.
  */
 class ArticleAdapter : BBBaseAdapter {
-    private val TAG = "BB.LearnArticleAdapter"
+    private val TAG = "BB.ArticleAdapter"
 
     constructor(uiComponent: ListBaseUIComponent) : super(uiComponent) {
         refreshLearnArticleList()

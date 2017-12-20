@@ -15,6 +15,8 @@
     <color name="grey_color_2">#969696</color>
     <color name="grey_color_3">#636363</color>
 
+    <color name="mask_color">#33000000</color>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
