@@ -28,6 +28,7 @@ class InsuranceDataItem : BaseDataItem {
         viewHolder.titleTV = view.findViewById(R.id.title_tv)
         viewHolder.descTV = view.findViewById(R.id.desc_tv)
         viewHolder.thumbIV = view.findViewById(R.id.thumb_iv)
+        viewHolder.companyTV = view.findViewById(R.id.company_tv)
         view.tag = (viewHolder)
         return view
     }
@@ -36,6 +37,7 @@ class InsuranceDataItem : BaseDataItem {
         var holder = viewHolder as RecommendInsuranceViewHolder
         holder.titleTV.text = entity.NameZHCN
         holder.descTV.text = Util.nullAs(entity.Desc, "")
+        holder.companyTV.text = Util.nullAs(entity.Company, "")
         holder.thumbIV.hierarchy = InsuranceAdapter.getCornerRoundHierarchy()
         holder.thumbIV.setImageURI(ProtocolConstants.URL.FileServer + entity.ThumbUrl)
     }
@@ -50,5 +52,6 @@ class InsuranceDataItem : BaseDataItem {
         lateinit var thumbIV: SimpleDraweeView
         lateinit var titleTV : TextView
         lateinit var descTV: TextView
+        lateinit var companyTV : TextView
     }
 }

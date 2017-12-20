@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.lib.log.BBLog
+import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 
 /**
@@ -26,5 +27,6 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         Fresco.initialize(this)
+        FLog.setMinimumLoggingLevel(FLog.DEBUG)
     }
 }
