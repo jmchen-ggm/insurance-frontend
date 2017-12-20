@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.plugin.comment.ui.CommentUI
+import com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.adapter.InsuranceAdapter
@@ -48,6 +49,8 @@ class HomeFragmentUI : BaseListFragment(), ListBaseUIComponent {
         })
         learnLayout = headerView.findViewById(R.id.learn_layout)
         learnLayout.setOnClickListener({
+            var intent = Intent(context, LearnArticleUI::class.java)
+            startActivity(intent)
         })
         return headerView
     }
