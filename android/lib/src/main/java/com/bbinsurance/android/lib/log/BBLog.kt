@@ -46,7 +46,7 @@ open class BBLog {
         }
 
         fun e(tag : String, format : String, vararg args : Any) {
-            var log = String.format(format, args)
+            var log = String.format(format, *args)
             println(log)
             logImpl.e(tag, log)
             if (debugMode) {
