@@ -11,7 +11,7 @@ android {
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "com.bbinsurance.android"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode Integer.parseInt(APP_VERSION_CODE)
         versionName project.APP_VERSION_NAME
