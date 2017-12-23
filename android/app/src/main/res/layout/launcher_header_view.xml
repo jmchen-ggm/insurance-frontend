@@ -8,39 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/main_blue_color">
-
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:background="@drawable/search_bg_shape"
-            android:focusableInTouchMode="true"
-            android:layout_height="32dp">
-
-            <ImageView
-                android:id="@+id/search_icon_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/search_icon"/>
-
-            <EditText
-                android:layout_toRightOf="@id/search_icon_iv"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/search_et"
-                android:maxLines="1"
-                android:inputType="none"
-                android:imeOptions="actionSearch"
-                android:hint="@string/search_hint"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/HintTextSize"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"/>
-        </RelativeLayout>
-
     </RelativeLayout>
 
     <LinearLayout
@@ -48,14 +15,16 @@
         android:layout_below="@id/launcher_header"
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:layout_height="wrap_content">
 
-        <RelativeLayout android:layout_width="0dp"
-                        android:id="@+id/compare_layout"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:id="@+id/compare_layout"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
             <ImageView
                 android:id="@+id/compare_icon_iv"
                 android:layout_centerHorizontal="true"
@@ -150,7 +119,10 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:background="@color/white"
+                  android:layout_height="wrap_content">
 
         <View
             android:background="@color/grey_color_1"

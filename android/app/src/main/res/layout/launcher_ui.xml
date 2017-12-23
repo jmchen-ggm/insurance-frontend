@@ -6,6 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".ui.LauncherUI">
 
+    <LinearLayout
+        android:id="@+id/launcher_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:background="@drawable/search_bg_shape"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/search_icon_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/search_icon"/>
+
+            <EditText
+                android:layout_toRightOf="@id/search_icon_iv"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/search_et"
+                android:maxLines="1"
+                android:inputType="none"
+                android:imeOptions="actionSearch"
+                android:hint="@string/search_hint"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/HintTextSize"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@null"/>
+
+            <View android:layout_width="1dp"
+                  android:layout_margin="5dp"
+                  android:layout_height="match_parent"
+                  android:background="@color/grey_color_2"/>
+
+            <LinearLayout
+                android:layout_width="84dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/edit_icon"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:textSize="@dimen/TitleTextSize"
+                          android:textColor="@color/grey_color_2"
+                          android:gravity="center"
+                          android:text="@string/comment"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
@@ -13,6 +81,7 @@
         android:layout_alignParentBottom="true"/>
 
     <FrameLayout
+        android:layout_below="@id/launcher_header"
         android:id="@+id/home_activity_frag_container"
         android:layout_above="@id/bottom_navigation_bar"
         android:layout_width="match_parent"
