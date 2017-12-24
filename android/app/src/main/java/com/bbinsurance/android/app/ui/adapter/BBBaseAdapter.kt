@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.bbinsurance.android.app.UIConstants
+import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.ui.item.EmptyDataItem
 import com.bbinsurance.android.lib.log.BBLog

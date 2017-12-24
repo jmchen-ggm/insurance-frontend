@@ -33,4 +33,11 @@ class ConfigStorage : BBStorage(), ConfigDao {
         BBCore.Instance.dbCore.db.configDao().insertConfig(entity)
         notifyMainThread(BBStorageEvent(BBStorageEvent.INSERT, entity))
     }
+
+    fun insertConfig(key : String, value : String) {
+        var entity = ConfigEntity()
+        entity.Key = key
+        entity.Value = value
+        insertConfig(entity)
+    }
 }

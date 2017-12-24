@@ -15,7 +15,7 @@ import com.bbinsurance.android.app.protocol.BBArticle
 import com.bbinsurance.android.app.protocol.BBListArticleRequest
 import com.bbinsurance.android.app.protocol.BBListArticleResponse
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
-import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
+import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.plugin.learn.ui.item.ArticleDataItem
 import com.bbinsurance.android.app.ui.webview.BBWebViewUI

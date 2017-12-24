@@ -8,7 +8,7 @@ import com.bbinsurance.android.app.db.storage.BBStorageListener
 import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.plugin.comment.ICommentSyncListener
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
-import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
+import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.ui.item.EmptyDataItem
 import com.bbinsurance.android.lib.log.BBLog

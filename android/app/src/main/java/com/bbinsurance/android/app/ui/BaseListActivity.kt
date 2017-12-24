@@ -7,7 +7,7 @@ import android.widget.AdapterView
 import android.widget.ListView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
-import com.bbinsurance.android.app.ui.adapter.ListBaseUIComponent
+import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 
 /**

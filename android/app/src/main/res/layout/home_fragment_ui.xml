@@ -3,14 +3,139 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listview"
+    <ScrollView
         android:layout_width="match_parent"
-        android:background="@null"
-        android:scrollbars="none"
-        android:focusable="false"
-        android:fadingEdge="none"
-        android:divider="@null"
-        android:listSelector="@color/transparent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/launcher_header"
+                android:layout_width="match_parent"
+                android:layout_height="152dp">
+
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/convenientBanner"
+                    android:layout_width="match_parent"
+                    app:canLoop="true"
+                    android:layout_height="match_parent">
+
+                </com.bigkoo.convenientbanner.ConvenientBanner>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_layout"
+                android:layout_below="@id/launcher_header"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/compare_layout"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/compare_icon_iv"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="48dp"
+                        android:background="@drawable/menu_item_bg_shape"
+                        android:layout_height="48dp"
+                        android:padding="5dp"
+                        android:src="@drawable/compare_icon"/>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/compare_icon_iv"
+                        android:id="@+id/compare_tv"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/grey_color_2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/menu_compare_text"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout android:layout_width="0dp"
+                                android:id="@+id/evaluate_layout"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/evaluate_icon_iv"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="48dp"
+                        android:background="@drawable/menu_item_bg_shape"
+                        android:layout_height="48dp"
+                        android:padding="5dp"
+                        android:src="@drawable/evaluate_icon"/>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/evaluate_icon_iv"
+                        android:id="@+id/evaluate_tv"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/grey_color_2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/menu_evaluate_text"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+                <RelativeLayout android:layout_width="0dp"
+                                android:id="@+id/consult_layout"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/consult_icon_iv"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="48dp"
+                        android:background="@drawable/menu_item_bg_shape"
+                        android:layout_height="48dp"
+                        android:padding="10dp"
+                        android:src="@drawable/consult_icon"/>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/consult_icon_iv"
+                        android:id="@+id/consult_tv"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/grey_color_2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/menu_consult_text"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+                <RelativeLayout android:layout_width="0dp"
+                                android:id="@+id/learn_layout"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/learn_icon_iv"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="48dp"
+                        android:background="@drawable/menu_item_bg_shape"
+                        android:layout_height="48dp"
+                        android:padding="5dp"
+                        android:src="@drawable/learn_icon"/>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/learn_icon_iv"
+                        android:id="@+id/learn_tv"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/grey_color_2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/menu_learn_text"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
