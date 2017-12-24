@@ -28,9 +28,11 @@ class LogDelegate : LoggingDelegate {
     }
 
     override fun v(tag: String?, msg: String?) {
+        BBLog.v(tag!!, msg!!)
     }
 
     override fun v(tag: String?, msg: String?, tr: Throwable?) {
+        BBLog.v(tag!!, msg!!)
     }
 
     override fun log(priority: Int, tag: String?, msg: String?) {

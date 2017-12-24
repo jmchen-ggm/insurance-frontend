@@ -6,10 +6,7 @@ import android.os.Message
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.lib.BBHandler
 import com.bbinsurance.android.lib.log.BBLog
-import com.squareup.okhttp.OkHttpClient
-import java.util.concurrent.BlockingDeque
 import java.util.concurrent.PriorityBlockingQueue
-import java.util.logging.Handler
 
 
 /**

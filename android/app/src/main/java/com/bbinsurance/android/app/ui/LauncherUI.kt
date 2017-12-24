@@ -3,7 +3,9 @@ package com.bbinsurance.android.app.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.bbinsurance.android.app.AppConstants
@@ -27,6 +29,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         return R.layout.launcher_ui
     }
 
+    private lateinit var searchET : EditText
     private lateinit var commentView : View
     private var homeFragment : Fragment ? = null
     private var discoverFragment: Fragment ? = null
@@ -35,6 +38,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
     override fun initView() {
         super.initView()
         commentView = findViewById(R.id.comment_layout)
+        searchET = findViewById(R.id.search_et)
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar)
         bottomNavigationBar
                 .addItem(BottomNavigationItem(R.drawable.tab_home_icon, R.string.tab_home).setActiveColorResource(R.color.main_blue_color))
