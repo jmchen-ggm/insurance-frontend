@@ -1,11 +1,16 @@
 package com.bbinsurance.android.app.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.View
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.R
+import com.bbinsurance.android.app.core.BBCore
+import com.bbinsurance.android.app.plugin.account.ui.LoginUI
+import com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI
 import com.bbinsurance.android.app.ui.fragment.HomeFragmentUI
 import com.bbinsurance.android.app.ui.fragment.DiscoverFragmentUI
 import com.bbinsurance.android.app.ui.fragment.MyFragmentUI
@@ -22,12 +27,14 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         return R.layout.launcher_ui
     }
 
+    private lateinit var commentView : View
     private var homeFragment : Fragment ? = null
     private var discoverFragment: Fragment ? = null
     private var myFragment : Fragment ? = null
 
     override fun initView() {
         super.initView()
+        commentView = findViewById(R.id.comment_layout)
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar)
         bottomNavigationBar
                 .addItem(BottomNavigationItem(R.drawable.tab_home_icon, R.string.tab_home).setActiveColorResource(R.color.main_blue_color))
@@ -37,6 +44,15 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         bottomNavigationBar.setTabSelectedListener(this)
 
         replaceFragments(0)
+        commentView.setOnClickListener({
+            if (BBCore.Instance.accountCore.loginService.isLogin()) {
+                var intent = Intent(this, AddCommentUI::class.java)
+                startActivity(intent)
+            } else {
+                var intent = Intent(this, LoginUI::class.java)
+                startActivity(intent)
+            }
+        })
     }
 
     private val REQUEST_PERMISSION_CODE = 1;

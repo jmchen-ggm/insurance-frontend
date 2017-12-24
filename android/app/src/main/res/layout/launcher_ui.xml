@@ -52,6 +52,7 @@
                   android:background="@color/grey_color_2"/>
 
             <LinearLayout
+                android:id="@+id/comment_layout"
                 android:layout_width="84dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
