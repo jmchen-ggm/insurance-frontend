@@ -16,10 +16,16 @@
 
     <string name="comment">评论</string>
     <string name="hot_comment_block">热门评论</string>
+    <string name="insurance_type_block">保险种类</string>
+    <string name="medical_insurance">医疗保险</string>
+    <string name="personal_accident_insurance">个人意外</string>
+    <string name="financing_insurance">理财保险</string>
 
     <string name="tab_home">首 页</string>
     <string name="tab_discover">发 现</string>
+    <string name="tab_add">评论</string>
     <string name="tab_my">我</string>
+    <string name="tab_message">消息</string>
 
     <string name="add_comment_title">发表评论</string>
     <string name="comment_total">总体</string>

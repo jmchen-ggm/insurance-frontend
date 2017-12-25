@@ -14,9 +14,7 @@ import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI
-import com.bbinsurance.android.app.ui.fragment.HomeFragmentUI
-import com.bbinsurance.android.app.ui.fragment.DiscoverFragmentUI
-import com.bbinsurance.android.app.ui.fragment.MyFragmentUI
+import com.bbinsurance.android.app.ui.fragment.*
 import com.bbinsurance.android.lib.util.PermissionUtil
 import com.facebook.drawee.view.SimpleDraweeView
 
@@ -31,11 +29,13 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         return R.layout.launcher_ui
     }
 
-    private lateinit var searchET : EditText
-    private lateinit var commentView : View
-    private var homeFragment : Fragment ? = null
-    private var discoverFragment: Fragment ? = null
-    private var myFragment : Fragment ? = null
+    private lateinit var searchET: EditText
+    private lateinit var commentView: View
+    private var homeFragment: Fragment? = null
+    private var discoverFragment: Fragment? = null
+    private var myFragment: Fragment? = null
+    private var addFragment: Fragment? = null
+    private var messageFragment: Fragment? = null
 
     override fun initView() {
         super.initView()
@@ -45,8 +45,12 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         bottomNavigationBar
                 .addItem(BottomNavigationItem(R.drawable.tab_home_icon, R.string.tab_home).setActiveColorResource(R.color.main_blue_color))
                 .addItem(BottomNavigationItem(R.drawable.tab_discover_icon, R.string.tab_discover).setActiveColorResource(R.color.main_blue_color))
+                .addItem(BottomNavigationItem(R.drawable.tab_add_icon, R.string.tab_add).setActiveColorResource(R.color.main_blue_color))
+                .addItem(BottomNavigationItem(R.drawable.tab_message_icon, R.string.tab_message).setActiveColorResource(R.color.main_blue_color))
                 .addItem(BottomNavigationItem(R.drawable.tab_my_icon, R.string.tab_my).setActiveColorResource(R.color.main_blue_color))
-                .initialise();
+        bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED_NO_TITLE)
+        bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+        bottomNavigationBar.initialise()
         bottomNavigationBar.setTabSelectedListener(this)
 
         replaceFragments(0)
@@ -97,6 +101,18 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
                     replace(R.id.home_activity_frag_container, discoverFragment)
                 }
                 2 -> {
+                    if (addFragment == null) {
+                        addFragment = AddFragmentUI()
+                    }
+                    replace(R.id.home_activity_frag_container, addFragment)
+                }
+                3 -> {
+                    if (messageFragment == null) {
+                        messageFragment = MessageFragmentUI()
+                    }
+                    replace(R.id.home_activity_frag_container, messageFragment)
+                }
+                4 -> {
                     if (myFragment == null) {
                         myFragment = MyFragmentUI()
                     }
