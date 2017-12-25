@@ -3,9 +3,10 @@ package com.bbinsurance.android.app.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.bbinsurance.android.app.AppConstants
@@ -17,6 +18,7 @@ import com.bbinsurance.android.app.ui.fragment.HomeFragmentUI
 import com.bbinsurance.android.app.ui.fragment.DiscoverFragmentUI
 import com.bbinsurance.android.app.ui.fragment.MyFragmentUI
 import com.bbinsurance.android.lib.util.PermissionUtil
+import com.facebook.drawee.view.SimpleDraweeView
 
 /**
  * Created by jiaminchen on 2017/10/23.

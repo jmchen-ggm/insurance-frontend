@@ -122,4 +122,8 @@ class AccountLoginService : NetListener {
     fun isLogin() : Boolean {
         return !Util.isNullOrNil(currentUser.Username)
     }
+
+    fun getCurrentContactEntity() : ContactEntity {
+        return BBCore.Instance.accountCore.contactStorage.getContact(currentUser.Username)
+    }
 }
