@@ -69,15 +69,14 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         hotCommentAvatarIV = convertView.findViewById(R.id.hot_comment_avatar_iv)
         hotCommentNickNameTV = convertView.findViewById(R.id.hot_comment_nickname_tv)
         hotCommentContentTV = convertView.findViewById(R.id.hot_comment_content_tv)
-        hotCommentLikeCountTV = convertView.findViewById(R.id.hot_comment_like_count_tv)
+        hotCommentInfoTV = convertView.findViewById(R.id.hot_comment_info_tv)
 
         if (BBCore.Instance.accountCore.loginService.isLogin()) {
             hotCommentLayout.visibility = View.VISIBLE
             var contactEntity = BBCore.Instance.accountCore.loginService.getCurrentContactEntity()
             hotCommentAvatarIV.setImageURI(BBCore.Instance.accountCore.getContactThumbUrl(contactEntity))
-            hotCommentNickNameTV.setText(contactEntity.Nickname)
-            var likeCount = 377
-            hotCommentLikeCountTV.text = likeCount.toString()
+            hotCommentNickNameTV.text = contactEntity.Nickname
+            hotCommentInfoTV.text = "浏览7739 赞377"
             hotCommentContentTV.text = "这个应用真心非常的不错，好用，很棒很棒"
             hotCommentHeaderLayout.setOnClickListener({
                 var intent = Intent(context, CommentUI::class.java)
@@ -104,5 +103,5 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     private lateinit var hotCommentAvatarIV: SimpleDraweeView
     private lateinit var hotCommentNickNameTV : TextView
     private lateinit var hotCommentContentTV : TextView
-    private lateinit var hotCommentLikeCountTV: TextView
+    private lateinit var hotCommentInfoTV: TextView
 }

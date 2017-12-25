@@ -5,6 +5,7 @@
     <dimen name="TitleTextSize">16dp</dimen>
     <dimen name="HintTextSize">15dp</dimen>
     <dimen name="DescTextSize">12dp</dimen>
+    <dimen name="InfoTextSize">10dp</dimen>
 
     <dimen name="ArticleItemCornerRoundSize">5dp</dimen>
     <dimen name="InsuranceItemCornerRoundSize">5dp</dimen>

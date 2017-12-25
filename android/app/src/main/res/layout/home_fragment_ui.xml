@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_height="152dp">
+                android:layout_height="170dp">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -191,6 +191,8 @@
                         <TextView
                             android:layout_gravity="center_vertical"
                             android:text="{nickname}"
+                            android:textColor="@color/main_blue_color"
+                            android:textSize="@dimen/TitleTextSize"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/hot_comment_nickname_tv"/>
@@ -198,34 +200,22 @@
 
                     <TextView
                         android:padding="5dp"
+                        android:textSize="@dimen/HintTextSize"
                         android:id="@+id/hot_comment_content_tv"
                         android:layout_width="match_parent"
                         android:text="{content}"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
-                <LinearLayout
+                <TextView
                     android:layout_margin="10dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/hot_comment_info_tv"
+                    android:textSize="@dimen/InfoTextSize"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/like_icon"/>
-
-                    <TextView
-                        android:layout_marginLeft="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/hot_comment_like_count_tv"
-                        android:textSize="@dimen/DescTextSize"
-                        android:text="235"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
