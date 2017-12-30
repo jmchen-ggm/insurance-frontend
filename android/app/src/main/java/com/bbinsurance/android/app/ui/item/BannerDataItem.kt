@@ -17,9 +17,9 @@ import com.facebook.drawee.view.SimpleDraweeView
  */
 class BannerDataItem : Holder<BBInsurance> {
     override fun updateUI(context: Context?, position: Int, entity: BBInsurance) {
-        titleTV.text = entity.NameZHCN
+        titleTV.text = entity.Name
         descTV.text = Util.nullAs(entity.Desc, "")
-        companyTV.text = Util.nullAs(entity.Company, "")
+        companyTV.text = Util.nullAs(entity.CompanyName, "")
         thumbIV.hierarchy = InsuranceAdapter.getCornerRoundHierarchy()
         thumbIV.setImageURI(ProtocolConstants.URL.FileServer + entity.ThumbUrl)
     }

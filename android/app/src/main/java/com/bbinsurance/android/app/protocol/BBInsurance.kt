@@ -5,11 +5,13 @@ package com.bbinsurance.android.app.protocol
  */
 class BBInsurance {
     var Id = 0L
-    var NameZHCN = ""
-    var NameEN = ""
+    var Name= ""
     var Desc = ""
-    var Type = ""
-    var Company = ""
+    var InsuranceTypeId = 0L
+    var InsuranceTypeName = ""
+    var CompanyId = 0L
+    var CompanyName = ""
     var Timestamp = 0L
     var ThumbUrl = ""
+    var DetailData = ""
 }
