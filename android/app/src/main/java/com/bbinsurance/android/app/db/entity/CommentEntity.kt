@@ -13,10 +13,10 @@ import android.arch.persistence.room.util.TableInfo
         indices = arrayOf(Index(value = "Timestamp"), Index(value = "ServerId")))
 open class CommentEntity {
     @ColumnInfo()
-    @PrimaryKey(autoGenerate = true)
-    var LocalId = 0L
+    @PrimaryKey()
+    var Id = 0L
     @ColumnInfo()
-    var ServerId = 0L
+    var LocalId = 0L
     @ColumnInfo()
     var Uin: Long = 0L
     @ColumnInfo()
