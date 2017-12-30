@@ -76,6 +76,7 @@ class AddCommentUI : BaseActivity() {
             if (!Util.isNullOrNil(content)) {
                 BBCore.Instance.threadCore.post(Runnable {
                     var comment = CommentEntity()
+                    comment.LocalId = System.currentTimeMillis()
                     comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
                     comment.Content = content
                     comment.Timestamp = System.currentTimeMillis()

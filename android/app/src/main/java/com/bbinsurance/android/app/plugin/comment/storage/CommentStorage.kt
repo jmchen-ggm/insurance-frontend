@@ -2,7 +2,6 @@ package com.bbinsurance.android.app.plugin.comment.storage
 
 import android.database.Cursor
 import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.db.dao.CommentDao
 import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.app.db.storage.BBStorage
 import com.bbinsurance.android.app.db.storage.BBStorageEvent
@@ -16,16 +15,16 @@ class CommentStorage : BBStorage() {
         return BBCore.Instance.dbCore.db.commentDao().getCommentByLocalId(localId)
     }
 
-    fun getCommentByServerId(serverId: Long): CommentEntity {
-        return BBCore.Instance.dbCore.db.commentDao().getCommentByServerId(serverId)
+    fun getCommentById(serverId: Long): CommentEntity {
+        return BBCore.Instance.dbCore.db.commentDao().getCommentById(serverId)
     }
 
     fun insertOrUpdateCommentByLocalId(entity : CommentEntity, needNotify: Boolean) {
-        var dbEntity = getCommentByServerId(entity.LocalId)
+        var dbEntity = getCommentById(entity.LocalId)
         if (dbEntity != null) {
             var stat = BBCore.Instance.dbCore.db.compileStatement(
                     "UPDATE `Comment` SET " +
-                            "`ServerId` = ?," +
+                            "`Id` = ?," +
                             "`Uin` = ?," +
                             "`Content` = ?," +
                             "`TotalScore` = ?," +
@@ -36,7 +35,7 @@ class CommentStorage : BBStorage() {
                             "`ViewCount` = ?," +
                             "`Flags` = ? " +
                             "WHERE `LocalId` = ?")
-            stat.bindLong(1, entity.ServerId)
+            stat.bindLong(1, entity.Id)
             stat.bindLong(2, entity.Uin)
             stat.bindString(3, entity.Content)
             stat.bindLong(4, entity.TotalScore.toLong())
@@ -56,8 +55,8 @@ class CommentStorage : BBStorage() {
         }
     }
 
-    private fun insertOrUpdateCommentByServerId(entity : CommentEntity, needNotify: Boolean) {
-        var dbEntity = getCommentByServerId(entity.ServerId)
+    private fun insertOrUpdateCommentById(entity : CommentEntity, needNotify: Boolean) {
+        var dbEntity = getCommentById(entity.Id)
         if (dbEntity != null) {
             var stat = BBCore.Instance.dbCore.db.compileStatement(
                     "UPDATE `Comment` SET " +
@@ -70,7 +69,7 @@ class CommentStorage : BBStorage() {
                             "`Timestamp` = ?," +
                             "`ViewCount` = ?," +
                             "`Flags` = ? " +
-                            "WHERE `ServerId` = ?")
+                            "WHERE `Id` = ?")
             stat.bindLong(1, entity.Uin)
             stat.bindString(2, entity.Content)
             stat.bindLong(3, entity.TotalScore.toLong())
@@ -80,7 +79,7 @@ class CommentStorage : BBStorage() {
             stat.bindLong(7, entity.Timestamp)
             stat.bindLong(8, entity.ViewCount.toLong())
             stat.bindLong(9, entity.Flags)
-            stat.bindLong(10, entity.ServerId)
+            stat.bindLong(10, entity.Id)
             stat.executeUpdateDelete()
             if (needNotify) {
                 notifyMainThread(BBStorageEvent(BBStorageEvent.UPDATE, entity))
@@ -109,10 +108,10 @@ class CommentStorage : BBStorage() {
         return BBCore.Instance.dbCore.db.commentDao().getAllUnCreatedComment()
     }
 
-    fun insertOrUpdateCommentListByServerId(commentList: List<CommentEntity>, needNotify: Boolean) {
+    fun insertOrUpdateCommentListById(commentList: List<CommentEntity>, needNotify: Boolean) {
         BBCore.Instance.dbCore.db.beginTransaction()
         for (comment: CommentEntity in commentList) {
-            insertOrUpdateCommentByServerId(comment, false)
+            insertOrUpdateCommentById(comment, false)
         }
         BBCore.Instance.dbCore.db.setTransactionSuccessful()
         BBCore.Instance.dbCore.db.endTransaction()

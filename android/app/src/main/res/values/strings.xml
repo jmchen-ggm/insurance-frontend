@@ -28,6 +28,7 @@
     <string name="tab_message">消息</string>
 
     <string name="add_comment_title">发表评论</string>
+    <string name="comment_info" formatted="false">浏览%d&#160;赞%d</string>
     <string name="comment_total">总体</string>
     <string name="comment_sub_1">态度</string>
     <string name="comment_sub_2">效率</string>

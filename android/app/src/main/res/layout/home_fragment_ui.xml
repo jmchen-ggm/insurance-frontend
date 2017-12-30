@@ -3,8 +3,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/loading_view"
+        android:orientation="vertical"
         android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading"/>
+        <ProgressBar
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/refresh_bar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="5dp"
+            style="@android:style/Widget.ProgressBar.Small"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/content_scrollview"
+        android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
 
         <LinearLayout

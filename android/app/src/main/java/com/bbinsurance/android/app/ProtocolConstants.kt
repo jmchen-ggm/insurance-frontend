@@ -16,6 +16,9 @@ open class ProtocolConstants {
             val FuncListComment = 4
             val FuncCreateComment = 5
             val FuncViewComment = 6
+            val FuncListInsuranceType = 7
+            val FuncGetHomeData = 8
+            val FuncUpComment = 9
 
             val FuncRegisterUser = 101
             val FuncLogin = 102

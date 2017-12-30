@@ -86,9 +86,9 @@ class CommentSyncService {
 
         private fun toCommentEntity(comment : BBComment) : CommentEntity {
             var entity = CommentEntity()
+            entity.Id = comment.Id
             entity.Uin = comment.Uin
             entity.Content = comment.Content
-            entity.ServerId = comment.ServerId
             entity.Timestamp = comment.Timestamp
             entity.Score1 = comment.Score1
             entity.Score2 = comment.Score2
@@ -114,7 +114,7 @@ class CommentSyncService {
                 var commentEntityList = ArrayList<CommentEntity>()
                 for (comment: BBComment in listCommentResponse.CommentList) {
                     var commentEntity = CommentEntity()
-                    commentEntity.ServerId = comment.ServerId
+                    commentEntity.Id = comment.Id
                     commentEntity.Content = comment.Content
                     commentEntity.TotalScore = comment.TotalScore
                     commentEntity.Score1 = comment.Score1
@@ -131,7 +131,7 @@ class CommentSyncService {
                     return
                 }
                 updateSequenceRange(commentEntityList)
-                BBCore.Instance.commentCore.commentStorage.insertOrUpdateCommentListByServerId(commentEntityList, false)
+                BBCore.Instance.commentCore.commentStorage.insertOrUpdateCommentListById(commentEntityList, false)
             }
             BBCore.Instance.uiHandler.post({
                 for (listener: ICommentSyncListener in commentSyncListenerList) {
@@ -142,8 +142,8 @@ class CommentSyncService {
 
         private fun updateSequenceRange(commentEntityList : List<CommentEntity>) {
             var range = CommentRange()
-            range.Top = commentEntityList.first().ServerId
-            range.Bottom = commentEntityList.last().ServerId
+            range.Top = commentEntityList.first().Id
+            range.Bottom = commentEntityList.last().Id
 
             var commentRangeListStr = BBCore.Instance.configCore.storage.getConfigValue(CommentConstants.CommentRankListObjKey, "[]")
             var commentRangeList = JSON.parseArray(commentRangeListStr, CommentRange::class.java)

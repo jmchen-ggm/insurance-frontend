@@ -12,8 +12,8 @@ import org.w3c.dom.Comment
 @Dao
 interface CommentDao {
 
-    @Query("SELECT * FROM Comment WHERE ServerId=:serverId")
-    fun getCommentByServerId(serverId : Long) : CommentEntity
+    @Query("SELECT * FROM Comment WHERE Id=:Id")
+    fun getCommentById(Id : Long) : CommentEntity
 
     @Query("SELECT * FROM Comment WHERE LocalId=:localId")
     fun getCommentByLocalId(localId : Long) : CommentEntity
