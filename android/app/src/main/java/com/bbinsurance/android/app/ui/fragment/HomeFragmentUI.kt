@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.alibaba.fastjson.JSON
@@ -72,6 +73,17 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         hotCommentContentTV = convertView.findViewById(R.id.hot_comment_content_tv)
         hotCommentInfoTV = convertView.findViewById(R.id.hot_comment_info_tv)
 
+        insuranceTypeLayout = convertView.findViewById(R.id.insurance_type_layout)
+        insuranceType1IV = convertView.findViewById(R.id.insurance_type_1_iv)
+        insuranceType2IV = convertView.findViewById(R.id.insurance_type_2_iv)
+        insuranceType3IV = convertView.findViewById(R.id.insurance_type_3_iv)
+        insuranceTypeName1TV = convertView.findViewById(R.id.insurance_type_name_1_tv)
+        insuranceTypeName2TV = convertView.findViewById(R.id.insurance_type_name_2_tv)
+        insuranceTypeName3TV = convertView.findViewById(R.id.insurance_type_name_3_tv)
+
+        companyLayout = convertView.findViewById(R.id.company_layout)
+        companyItemContainer = convertView.findViewById(R.id.company_item_container)
+        companyHeaderLayout = convertView.findViewById(R.id.company_header_layout)
 
         evaluateLayout.setOnClickListener({
             var intent = Intent(context, CommentUI::class.java)
@@ -89,8 +101,47 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
             contentScrollView.visibility = View.VISIBLE
             updateBannerView()
             updateCommentView()
+            updateInsuranceTypeView()
+            updateCompanyView()
         } else {
             loadingView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun updateInsuranceTypeView() {
+        if (getHomeDataResponse!!.TopInsuranceTypeList!!.size > 2) {
+            insuranceTypeLayout.visibility = View.VISIBLE
+            var insuranceType1 = getHomeDataResponse!!.TopInsuranceTypeList[0]
+            var insuranceType2 = getHomeDataResponse!!.TopInsuranceTypeList[1]
+            var insuranceType3 = getHomeDataResponse!!.TopInsuranceTypeList[2]
+            insuranceType1IV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType1.ThumbUrl)
+            insuranceType2IV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType2.ThumbUrl)
+            insuranceType3IV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType3.ThumbUrl)
+            insuranceTypeName1TV.text = insuranceType1.Name
+            insuranceTypeName2TV.text = insuranceType2.Name
+            insuranceTypeName3TV.text = insuranceType3.Name
+        } else {
+            insuranceTypeLayout.visibility = View.GONE
+        }
+    }
+
+    private fun updateCompanyView() {
+        if (getHomeDataResponse!!.TopCompanyList!!.size > 0) {
+            companyLayout.visibility = View.VISIBLE
+            companyItemContainer.removeAllViews()
+            for (company : BBCompany in getHomeDataResponse!!.TopCompanyList) {
+                var itemView = layoutInflater.inflate(R.layout.home_company_item_view, null)
+                var companyThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.company_iv)
+                var companyNameTV = itemView.findViewById<TextView>(R.id.company_name_tv)
+                companyNameTV.text = company.Name
+                companyThumbIV.setImageURI(ProtocolConstants.URL.FileServer + company.ThumbUrl)
+                companyItemContainer.addView(itemView)
+                if (companyItemContainer.childCount > 4) {
+                    break
+                }
+            }
+        } else {
+            companyLayout.visibility = View.GONE
         }
     }
 
@@ -138,12 +189,24 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     private lateinit var learnLayout: View
     private lateinit var convenientBanner: ConvenientBanner<BBInsurance>
 
-    private lateinit var hotCommentLayout : RelativeLayout
+    private lateinit var hotCommentLayout : View
     private lateinit var hotCommentHeaderLayout : RelativeLayout
     private lateinit var hotCommentAvatarIV: SimpleDraweeView
     private lateinit var hotCommentNickNameTV : TextView
     private lateinit var hotCommentContentTV : TextView
     private lateinit var hotCommentInfoTV: TextView
+
+    private lateinit var insuranceTypeLayout : View
+    private lateinit var insuranceType1IV : SimpleDraweeView
+    private lateinit var insuranceTypeName1TV : TextView
+    private lateinit var insuranceType2IV : SimpleDraweeView
+    private lateinit var insuranceTypeName2TV : TextView
+    private lateinit var insuranceType3IV : SimpleDraweeView
+    private lateinit var insuranceTypeName3TV : TextView
+
+    private lateinit var companyLayout : View
+    private lateinit var companyHeaderLayout : View
+    private lateinit var companyItemContainer : LinearLayout
 
     private var bannerAdapter : BannerAdapter ?= null
     private var getHomeDataResponse : BBGetHomeDataResponse ? = null

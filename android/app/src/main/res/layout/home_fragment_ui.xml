@@ -135,10 +135,12 @@
                         android:layout_height="wrap_content"/>
                 </RelativeLayout>
 
-                <RelativeLayout android:layout_width="0dp"
-                                android:id="@+id/learn_layout"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/learn_layout"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
                     <ImageView
                         android:id="@+id/learn_icon_iv"
                         android:layout_centerHorizontal="true"
@@ -196,10 +198,11 @@
                     </RelativeLayout>
 
 
-                    <View android:layout_width="match_parent"
-                          android:layout_margin="5dp"
-                          android:layout_height="1dp"
-                          android:background="@color/grey_color_1"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="1dp"
+                        android:background="@color/grey_color_1"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -248,31 +251,19 @@
                 android:layout_height="170dp">
 
                 <LinearLayout
+                    android:id="@+id/insurance_type_layout"
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:background="@drawable/insurance_item_selector"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <RelativeLayout
-                        android:id="@+id/insurance_type_header_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/TitleTextSize"
-                            android:text="@string/insurance_type_block"/>
-
-                        <ImageView
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/forward_icon"/>
-                    </RelativeLayout>
+                    <TextView
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/TitleTextSize"
+                        android:text="@string/insurance_type_block"/>
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -290,13 +281,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <ImageView
+                                <com.facebook.drawee.view.SimpleDraweeView
+                                    android:id="@+id/insurance_type_1_iv"
                                     android:scaleType="centerCrop"
                                     android:layout_width="96dp"
-                                    android:layout_height="64dp"
-                                    android:src="@drawable/medical_insurance_icon"/>
+                                    android:layout_height="64dp"/>
 
                                 <TextView
+                                    android:id="@+id/insurance_type_name_1_tv"
                                     android:layout_marginTop="10dp"
                                     android:textColor="@color/grey_color_2"
                                     android:textSize="@dimen/TitleTextSize"
@@ -319,13 +311,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <ImageView
+                                <com.facebook.drawee.view.SimpleDraweeView
+                                    android:id="@+id/insurance_type_2_iv"
                                     android:scaleType="centerCrop"
                                     android:layout_width="96dp"
-                                    android:layout_height="64dp"
-                                    android:src="@drawable/personal_accident_icon"/>
+                                    android:layout_height="64dp"/>
 
                                 <TextView
+                                    android:id="@+id/insurance_type_name_2_tv"
                                     android:layout_marginTop="10dp"
                                     android:textColor="@color/grey_color_2"
                                     android:textSize="@dimen/TitleTextSize"
@@ -347,13 +340,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
-                                <ImageView
+                                <com.facebook.drawee.view.SimpleDraweeView
+                                    android:id="@+id/insurance_type_3_iv"
                                     android:scaleType="centerCrop"
                                     android:layout_width="96dp"
-                                    android:layout_height="64dp"
-                                    android:src="@drawable/financing_icon"/>
+                                    android:layout_height="64dp"/>
 
                                 <TextView
+                                    android:id="@+id/insurance_type_name_3_tv"
                                     android:layout_marginTop="10dp"
                                     android:textColor="@color/grey_color_2"
                                     android:textSize="@dimen/TitleTextSize"
@@ -368,18 +362,52 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/company_layout"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_height="170dp">
+                android:layout_height="160dp">
 
                 <LinearLayout
+                    android:id="@+id/company_layout"
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:background="@drawable/insurance_item_selector"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/company_header_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_margin="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/TitleTextSize"
+                            android:text="@string/insurance_company_block"/>
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/forward_icon"/>
+                    </RelativeLayout>
+
+                    <HorizontalScrollView
+                        android:scrollbars="none"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:id="@+id/company_item_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
 
                 </LinearLayout>
             </RelativeLayout>

@@ -17,6 +17,7 @@
     <string name="comment">评论</string>
     <string name="hot_comment_block">热门评论</string>
     <string name="insurance_type_block">保险种类</string>
+    <string name="insurance_company_block">保险公司</string>
     <string name="medical_insurance">医疗保险</string>
     <string name="personal_accident_insurance">个人意外</string>
     <string name="financing_insurance">理财保险</string>
