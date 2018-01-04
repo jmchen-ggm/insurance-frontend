@@ -18,7 +18,7 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
-import com.bbinsurance.android.app.plugin.comment.ui.CommentUI
+import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
 import com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BannerAdapter
@@ -87,7 +87,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         companyHeaderLayout = convertView.findViewById(R.id.company_header_layout)
 
         evaluateLayout.setOnClickListener({
-            var intent = Intent(context, CommentUI::class.java)
+            var intent = Intent(context, CommentListUI::class.java)
             startActivity(intent)
         })
         learnLayout.setOnClickListener({
@@ -155,7 +155,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     }
 
     private fun updateCommentView() {
-        if (getHomeDataResponse!!.TopCommentList!!.size > 0) {
+        if (getHomeDataResponse!!.TopCommentList.size > 0) {
             var topComment = getHomeDataResponse!!.TopCommentList[0]
             hotCommentLayout.visibility = View.VISIBLE
             var contactEntity = BBCore.Instance.accountCore.syncService.getContact(topComment.Uin)
@@ -169,7 +169,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
             hotCommentContentTV.text = topComment.Content
             hotCommentInfoTV.text = getString(R.string.comment_info, topComment.ViewCount, topComment.UpCount)
             hotCommentHeaderLayout.setOnClickListener({
-                var intent = Intent(context, CommentUI::class.java)
+                var intent = Intent(context, CommentListUI::class.java)
                 startActivity(intent)
             })
         } else {

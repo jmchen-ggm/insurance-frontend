@@ -20,8 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.bbinsurance.android.app.plugin.comment.ui.CommentUI"/>
-        <activity android:name="com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI"/>
+        <activity android:name="com.bbinsurance.android.app.plugin.comment.ui.CommentListUI"/>
+        <activity android:name="com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI"
+                  android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name="com.bbinsurance.android.app.plugin.account.ui.LoginUI"/>
         <activity android:name="com.bbinsurance.android.app.ui.webview.BBWebViewUI"/>
         <activity android:name="com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI"/>

@@ -29,6 +29,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         return R.layout.launcher_ui
     }
 
+    private lateinit var launcherHeader : View
     private lateinit var searchET: EditText
     private lateinit var commentView: View
     private var homeFragment: Fragment? = null
@@ -39,6 +40,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
 
     override fun initView() {
         super.initView()
+        launcherHeader = findViewById(R.id.launcher_header)
         commentView = findViewById(R.id.comment_layout)
         searchET = findViewById(R.id.search_et)
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar)
@@ -92,30 +94,35 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
                     if (homeFragment == null) {
                         homeFragment = HomeFragmentUI()
                     }
+                    launcherHeader.visibility = View.VISIBLE
                     replace(R.id.home_activity_frag_container, homeFragment)
                 }
                 1 -> {
                     if (discoverFragment == null) {
                         discoverFragment = DiscoverFragmentUI()
                     }
+                    launcherHeader.visibility = View.VISIBLE
                     replace(R.id.home_activity_frag_container, discoverFragment)
                 }
                 2 -> {
                     if (addFragment == null) {
                         addFragment = AddFragmentUI()
                     }
+                    launcherHeader.visibility = View.GONE
                     replace(R.id.home_activity_frag_container, addFragment)
                 }
                 3 -> {
                     if (messageFragment == null) {
                         messageFragment = MessageFragmentUI()
                     }
+                    launcherHeader.visibility = View.GONE
                     replace(R.id.home_activity_frag_container, messageFragment)
                 }
                 4 -> {
                     if (myFragment == null) {
                         myFragment = MyFragmentUI()
                     }
+                    launcherHeader.visibility = View.GONE
                     replace(R.id.home_activity_frag_container, myFragment)
                 }
             }

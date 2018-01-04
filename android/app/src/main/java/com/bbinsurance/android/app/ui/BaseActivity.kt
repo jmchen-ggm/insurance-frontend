@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun initActionBar() {
         actionBarView = LayoutInflater.from(this).inflate(R.layout.bb_action_bar, null)
-        actionBarParams = ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
+        actionBarParams = ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
 
         titleTV = actionBarView.findViewById(R.id.title_tv)
         backBtn = actionBarView.findViewById<ImageButton>(R.id.back_ib)

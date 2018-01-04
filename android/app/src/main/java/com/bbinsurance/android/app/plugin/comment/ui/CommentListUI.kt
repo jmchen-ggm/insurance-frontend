@@ -12,7 +12,7 @@ import com.bbinsurance.pulltorefresh.PullToRefreshListView
 /**
  * Created by jiaminchen on 17/11/17.
  */
-class CommentUI : BaseListActivity() {
+class CommentListUI : BaseListActivity() {
 
     var adapter: CommentAdapter? = null
     override fun getAdapter(): BBBaseAdapter {
