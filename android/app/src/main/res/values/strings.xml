@@ -31,9 +31,10 @@
     <string name="add_comment_title">发表评论</string>
     <string name="comment_info" formatted="false">浏览%d&#160;赞%d</string>
     <string name="comment_total">总体</string>
-    <string name="comment_sub_1">态度</string>
-    <string name="comment_sub_2">效率</string>
-    <string name="comment_sub_3">专业</string>
+    <string name="comment_sub_1">公司信誉</string>
+    <string name="comment_sub_2">代理人服务</string>
+    <string name="comment_sub_3">理赔速度</string>
+    <string name="comment_sub_4">收益回报</string>
     <string name="comment_hint">亲对我们的服务有什么意见？请尽管说~</string>
     <string name="comment_post">发表</string>
 

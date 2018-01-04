@@ -4,297 +4,316 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:padding="10dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comment_total"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/star_1_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/star_gray"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/star_2_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/star_gray"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/star_3_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/star_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp">
 
-        <ImageView
-            android:id="@+id/star_4_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/star_gray"/>
+                <TextView
+                    android:padding="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment_total"/>
 
-        <ImageView
-            android:id="@+id/star_5_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/star_gray"/>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/star_1_iv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
 
-    <View android:layout_width="match_parent"
-          android:layout_height="1px"
-          android:background="@color/grey_color_1"/>
+                <ImageView
+                    android:id="@+id/star_2_iv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
+                <ImageView
+                    android:id="@+id/star_3_iv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
 
-        <TextView
-            android:padding="10dp"
-            android:textSize="13dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comment_sub_1"/>
+                <ImageView
+                    android:id="@+id/star_4_iv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_1_1_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_5_iv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/star_gray"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/star_sub_1_2_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/grey_color_1"/>
 
-        <ImageView
-            android:id="@+id/star_sub_1_3_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
 
-        <ImageView
-            android:id="@+id/star_sub_1_4_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <TextView
+                    android:padding="10dp"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment_sub_1"/>
 
-        <ImageView
-            android:id="@+id/star_sub_1_5_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/star_sub_1_1_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
+                <ImageView
+                    android:id="@+id/star_sub_1_2_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <TextView
-            android:padding="10dp"
-            android:textSize="13dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comment_sub_2"/>
+                <ImageView
+                    android:id="@+id/star_sub_1_3_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_2_1_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_sub_1_4_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_2_2_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_sub_1_5_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/star_sub_2_3_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
 
-        <ImageView
-            android:id="@+id/star_sub_2_4_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <TextView
+                    android:padding="10dp"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment_sub_2"/>
 
-        <ImageView
-            android:id="@+id/star_sub_2_5_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/star_sub_2_1_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
+                <ImageView
+                    android:id="@+id/star_sub_2_2_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <TextView
-            android:padding="10dp"
-            android:textSize="13dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comment_sub_3"/>
+                <ImageView
+                    android:id="@+id/star_sub_2_3_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_3_1_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_sub_2_4_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_3_2_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_sub_2_5_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/star_sub_3_3_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
 
-        <ImageView
-            android:id="@+id/star_sub_3_4_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <TextView
+                    android:padding="10dp"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment_sub_3"/>
 
-        <ImageView
-            android:id="@+id/star_sub_3_5_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/star_sub_3_1_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
+                <ImageView
+                    android:id="@+id/star_sub_3_2_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <TextView
-            android:padding="10dp"
-            android:textSize="13dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comment_sub_3"/>
+                <ImageView
+                    android:id="@+id/star_sub_3_3_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_4_1_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_sub_3_4_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-        <ImageView
-            android:id="@+id/star_sub_4_2_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <ImageView
+                    android:id="@+id/star_sub_3_5_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/star_sub_4_3_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
 
-        <ImageView
-            android:id="@+id/star_sub_4_4_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
+                <TextView
+                    android:padding="10dp"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment_sub_3"/>
 
-        <ImageView
-            android:id="@+id/star_sub_4_5_iv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/sub_star_gray"/>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/star_sub_4_1_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <View android:layout_width="match_parent"
-          android:layout_height="1px"
-          android:background="@color/grey_color_1"/>
+                <ImageView
+                    android:id="@+id/star_sub_4_2_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <EditText
-        android:id="@+id/comment_et"
-        android:layout_width="match_parent" android:layout_height="150dp"
-        android:hint="@string/comment_hint"
-        android:padding="8dp"
-        android:background="@color/white"
-        android:textSize="@dimen/DescTextSize"
-        android:gravity="left|top"/>
+                <ImageView
+                    android:id="@+id/star_sub_4_3_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <View android:layout_width="match_parent"
-          android:layout_height="1px"
-          android:background="@color/grey_color_1"/>
+                <ImageView
+                    android:id="@+id/star_sub_4_4_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
 
-    <Button
-        android:id="@+id/post_btn"
-        android:layout_width="144dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/comment_post"
-        android:background="@drawable/button_selector"
-        android:layout_height="48dp"/>
+                <ImageView
+                    android:id="@+id/star_sub_4_5_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/sub_star_gray"/>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/grey_color_1"/>
+
+            <EditText
+                android:id="@+id/comment_et"
+                android:layout_width="match_parent" android:layout_height="150dp"
+                android:hint="@string/comment_hint"
+                android:padding="8dp"
+                android:background="@color/white"
+                android:textSize="@dimen/DescTextSize"
+                android:gravity="left|top"/>
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/grey_color_1"/>
+
+            <Button
+                android:id="@+id/post_btn"
+                android:layout_width="144dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/comment_post"
+                android:background="@drawable/button_selector"
+                android:layout_height="48dp"/>
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

@@ -95,7 +95,7 @@ class AddCommentUI : BaseActivity() {
                 var createCommentRequest = BBCreateCommentRequest()
                 createCommentRequest.Comment = BBComment()
                 createCommentRequest.Comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
-                createCommentRequest.Comment.Content = content
+                createCommentRequest.Comment.Content = content.trim()
                 createCommentRequest.Comment.TotalScore =  totalStarClickListener.score
                 createCommentRequest.Comment.Score1 = subStar1ClickListner.score
                 createCommentRequest.Comment.Score2 = subStar2ClickListner.score
