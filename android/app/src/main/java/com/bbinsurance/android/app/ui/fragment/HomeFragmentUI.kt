@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.alibaba.fastjson.JSON
+import com.bbinsurance.android.app.Application
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
@@ -109,7 +110,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     }
 
     private fun updateInsuranceTypeView() {
-        if (getHomeDataResponse!!.TopInsuranceTypeList!!.size > 2) {
+        if (getHomeDataResponse!!.TopInsuranceTypeList.size > 2) {
             insuranceTypeLayout.visibility = View.VISIBLE
             var insuranceType1 = getHomeDataResponse!!.TopInsuranceTypeList[0]
             var insuranceType2 = getHomeDataResponse!!.TopInsuranceTypeList[1]
@@ -126,11 +127,11 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     }
 
     private fun updateCompanyView() {
-        if (getHomeDataResponse!!.TopCompanyList!!.size > 0) {
+        if (getHomeDataResponse!!.TopCompanyList.size > 0) {
             companyLayout.visibility = View.VISIBLE
             companyItemContainer.removeAllViews()
             for (company : BBCompany in getHomeDataResponse!!.TopCompanyList) {
-                var itemView = layoutInflater.inflate(R.layout.home_company_item_view, null)
+                var itemView = LayoutInflater.from(Application.ApplicationContext).inflate(R.layout.home_company_item_view, null)
                 var companyThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.company_iv)
                 var companyNameTV = itemView.findViewById<TextView>(R.id.company_name_tv)
                 companyNameTV.text = company.Name

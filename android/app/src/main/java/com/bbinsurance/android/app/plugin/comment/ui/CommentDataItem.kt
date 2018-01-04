@@ -1,7 +1,6 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,10 @@ import android.widget.TextView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.db.entity.CommentEntity
 import com.bbinsurance.android.app.db.entity.ContactEntity
+import com.bbinsurance.android.app.protocol.BBComment
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.lib.util.TimeUtil
-import com.facebook.drawee.interfaces.DraweeController
 import com.facebook.drawee.view.SimpleDraweeView
 
 /**
@@ -26,7 +24,7 @@ class CommentDataItem : BaseDataItem {
 
     }
 
-    lateinit var comment: CommentEntity
+    lateinit var comment: BBComment
 
     override fun inflateView(context: Context, parent: ViewGroup?, itemView: View?): View {
         var view = LayoutInflater.from(context).inflate(R.layout.comment_item_view, parent, false)

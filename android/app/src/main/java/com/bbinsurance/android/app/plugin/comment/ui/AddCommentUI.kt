@@ -4,9 +4,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.alibaba.fastjson.JSON
+import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
-import com.bbinsurance.android.app.db.entity.CommentEntity
+import com.bbinsurance.android.app.net.NetListener
+import com.bbinsurance.android.app.net.NetRequest
+import com.bbinsurance.android.app.net.NetResponse
+import com.bbinsurance.android.app.protocol.BBComment
+import com.bbinsurance.android.app.protocol.BBCreateCommentRequest
 import com.bbinsurance.android.app.ui.BaseActivity
 import com.bbinsurance.android.lib.Util
 
@@ -19,11 +25,13 @@ class AddCommentUI : BaseActivity() {
     lateinit var subStars1TV: Array<ImageView?>
     lateinit var subStars2TV: Array<ImageView?>
     lateinit var subStars3TV: Array<ImageView?>
+    lateinit var subStars4TV: Array<ImageView?>
 
     lateinit var totalStarClickListener : StarIVClickListener
     lateinit var subStar1ClickListner : StarIVClickListener
     lateinit var subStar2ClickListner : StarIVClickListener
     lateinit var subStar3ClickListner : StarIVClickListener
+    lateinit var subStar4ClickListner : StarIVClickListener
 
     lateinit var commentET: EditText
     lateinit var postBtn: Button
@@ -69,26 +77,42 @@ class AddCommentUI : BaseActivity() {
         subStar3ClickListner = StarIVClickListener(subStars3TV, R.drawable.sub_star_gray, R.drawable.sub_star_orange)
         initIVArrays(subStars3TV, subStar3ClickListner)
 
+        subStars4TV = arrayOfNulls<ImageView?>(5)
+        subStars4TV[0] = findViewById(R.id.star_sub_4_1_iv)
+        subStars4TV[1] = findViewById(R.id.star_sub_4_2_iv)
+        subStars4TV[2] = findViewById(R.id.star_sub_4_3_iv)
+        subStars4TV[3] = findViewById(R.id.star_sub_4_4_iv)
+        subStars4TV[4] = findViewById(R.id.star_sub_4_5_iv)
+        subStar4ClickListner = StarIVClickListener(subStars4TV, R.drawable.sub_star_gray, R.drawable.sub_star_orange)
+        initIVArrays(subStars4TV, subStar4ClickListner)
+
         commentET = findViewById(R.id.comment_et)
         postBtn = findViewById(R.id.post_btn)
         postBtn.setOnClickListener({
             var content = commentET.text.toString()
             if (!Util.isNullOrNil(content)) {
-                BBCore.Instance.threadCore.post(Runnable {
-                    var comment = CommentEntity()
-                    comment.LocalId = System.currentTimeMillis()
-                    comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
-                    comment.Content = content
-                    comment.Timestamp = System.currentTimeMillis()
-                    comment.TotalScore = totalStarClickListener.score
-                    comment.Score1 = subStar1ClickListner.score
-                    comment.Score2 = subStar2ClickListner.score
-                    comment.Score3 = subStar3ClickListner.score
-                    BBCore.Instance.dbCore.db.commentDao().insertComment(comment)
-                    BBCore.Instance.commentCore.syncService.startToUpload()
-                    runOnUiThread({
+                var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
+                var createCommentRequest = BBCreateCommentRequest()
+                createCommentRequest.Comment = BBComment()
+                createCommentRequest.Comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
+                createCommentRequest.Comment.Content = content
+                createCommentRequest.Comment.TotalScore =  totalStarClickListener.score
+                createCommentRequest.Comment.Score1 = subStar1ClickListner.score
+                createCommentRequest.Comment.Score2 = subStar2ClickListner.score
+                createCommentRequest.Comment.Score3 = subStar3ClickListner.score
+                createCommentRequest.Comment.Score4 = subStar4ClickListner.score
+                createCommentRequest.Comment.Timestamp = System.currentTimeMillis()
+                netRequest.body = JSON.toJSONString(createCommentRequest)
+                BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
+                    override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
                         finish()
-                    })
+                    }
+
+                    override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
+                    }
+
+                    override fun onNetTaskCancel(netRequest: NetRequest) {
+                    }
                 })
             }
         })

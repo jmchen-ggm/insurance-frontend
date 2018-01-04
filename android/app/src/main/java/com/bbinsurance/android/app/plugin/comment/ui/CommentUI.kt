@@ -36,12 +36,7 @@ class CommentUI : BaseListActivity() {
             }
         })
 
-        var pullRefreshLV = getListView() as PullToRefreshListView
-        pullRefreshLV.setOnRefreshListener({
-            BBCore.Instance.commentCore.syncService.startToSyncCommentList()
-        })
-        pullRefreshLV.setLockScrollWhileRefreshing(true)
-        pullRefreshLV.setRefreshing()
+        adapter?.getCommentList()
     }
 
     override fun getLayoutId(): Int {

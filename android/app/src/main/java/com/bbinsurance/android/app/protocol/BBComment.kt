@@ -15,6 +15,7 @@ open class BBComment {
     var Score1 : Int = 0
     var Score2 : Int = 0
     var Score3 : Int = 0
+    var Score4 : Int = 0
     var Timestamp : Long = 0L
     var UpCount : Int = 0
     var ViewCount : Int = 0
