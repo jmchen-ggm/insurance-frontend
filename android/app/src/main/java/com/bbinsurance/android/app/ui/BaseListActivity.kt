@@ -84,8 +84,12 @@ abstract class BaseListActivity : BaseActivity(), ListBaseUIComponent {
         }
     }
 
-    open fun onLoadMore() {
+    override fun onLoadMoreFinish() {
+        loading = false
+        refreshView.visibility = View.GONE
+    }
 
+    open fun onLoadMore() {
     }
 
     fun setLoadFinish() {

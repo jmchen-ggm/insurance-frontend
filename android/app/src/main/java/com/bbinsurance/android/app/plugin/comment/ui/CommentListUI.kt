@@ -7,7 +7,6 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
-import com.bbinsurance.pulltorefresh.PullToRefreshListView
 
 /**
  * Created by jiaminchen on 17/11/17.
@@ -36,7 +35,11 @@ class CommentListUI : BaseListActivity() {
             }
         })
 
-        adapter?.getCommentList()
+        adapter?.refreshCommentList()
+    }
+
+    override fun onLoadMore() {
+        adapter?.refreshCommentList()
     }
 
     override fun getLayoutId(): Int {

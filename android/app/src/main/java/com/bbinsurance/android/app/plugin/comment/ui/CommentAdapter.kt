@@ -28,7 +28,7 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
     }
 
     private var commentList = ArrayList<BBComment>()
-    fun getCommentList() {
+    fun refreshCommentList() {
         var netRequest = NetRequest(ProtocolConstants.FunId.FuncListComment, ProtocolConstants.URI.DataBin)
         var listCommentRequest = BBListCommentRequest()
         listCommentRequest.StartIndex = commentList.size
@@ -40,6 +40,7 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
                     var listCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
                             BBListCommentResponse::class.java)
                     commentList.addAll(listCommentResponse.CommentList)
+                    uiComponent.onLoadMoreFinish()
                     notifyDataSetChanged()
                 }
             }

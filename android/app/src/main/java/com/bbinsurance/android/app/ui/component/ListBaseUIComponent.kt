@@ -12,4 +12,6 @@ interface ListBaseUIComponent : BaseUIComponent {
     fun onItemClick(view : View, dataItem : BaseDataItem, isHandled : Boolean)
 
     fun getListView() : ListView
+
+    fun onLoadMoreFinish()
 }

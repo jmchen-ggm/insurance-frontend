@@ -62,4 +62,7 @@ abstract class BaseListFragment : Fragment(), ListBaseUIComponent {
             getAdapter().handleItemClick(view!!, dataItem, false)
         }
     }
+
+    override fun onLoadMoreFinish() {
+    }
 }
