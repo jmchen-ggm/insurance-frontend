@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.plugin.company.ui
 
+import android.view.View
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
@@ -24,8 +25,10 @@ class CompanyListUI : BaseListActivity() {
 
     override fun initView() {
         super.initView()
-
         setBBTitle(R.string.company_list_title)
+        setBackBtn(true, View.OnClickListener {
+            finish()
+        })
         adapter?.refreshCompanyList()
     }
 }
