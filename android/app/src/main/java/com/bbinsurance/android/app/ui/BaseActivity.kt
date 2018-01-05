@@ -22,6 +22,7 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var titleTV : TextView
     lateinit var backBtn : ImageButton
     lateinit var optionBtn : ImageButton
+    lateinit var optionTV : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,7 @@ abstract class BaseActivity : AppCompatActivity() {
         titleTV = actionBarView.findViewById(R.id.title_tv)
         backBtn = actionBarView.findViewById<ImageButton>(R.id.back_ib)
         optionBtn = actionBarView.findViewById(R.id.option_btn)
+        optionTV = actionBarView.findViewById(R.id.option_tv)
 
         updateActionBar()
     }
@@ -77,6 +79,13 @@ abstract class BaseActivity : AppCompatActivity() {
         optionBtn.visibility = View.VISIBLE
         optionBtn.setImageResource(srcId)
         optionBtn.setOnClickListener(listener)
+        updateActionBar()
+    }
+
+    open fun setOptionTV(srcId : Int, listener : View.OnClickListener) {
+        optionTV.visibility = View.VISIBLE
+        optionTV.setText(srcId)
+        optionTV.setOnClickListener(listener)
         updateActionBar()
     }
 

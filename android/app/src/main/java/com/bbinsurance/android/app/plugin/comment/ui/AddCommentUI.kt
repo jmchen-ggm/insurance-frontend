@@ -34,12 +34,39 @@ class AddCommentUI : BaseActivity() {
     lateinit var subStar4ClickListner : StarIVClickListener
 
     lateinit var commentET: EditText
-    lateinit var postBtn: Button
 
     override fun initView() {
         super.initView()
         setBBTitle(R.string.add_comment_title)
         setBackBtn(true, View.OnClickListener { finish() })
+        setOptionTV(R.string.confirm, View.OnClickListener {
+            var content = commentET.text.toString()
+            if (!Util.isNullOrNil(content)) {
+                var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
+                var createCommentRequest = BBCreateCommentRequest()
+                createCommentRequest.Comment = BBComment()
+                createCommentRequest.Comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
+                createCommentRequest.Comment.Content = content.trim()
+                createCommentRequest.Comment.TotalScore =  totalStarClickListener.score
+                createCommentRequest.Comment.Score1 = subStar1ClickListner.score
+                createCommentRequest.Comment.Score2 = subStar2ClickListner.score
+                createCommentRequest.Comment.Score3 = subStar3ClickListner.score
+                createCommentRequest.Comment.Score4 = subStar4ClickListner.score
+                createCommentRequest.Comment.Timestamp = System.currentTimeMillis()
+                netRequest.body = JSON.toJSONString(createCommentRequest)
+                BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
+                    override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
+                        finish()
+                    }
+
+                    override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
+                    }
+
+                    override fun onNetTaskCancel(netRequest: NetRequest) {
+                    }
+                })
+            }
+        })
 
         totalStarsIV = arrayOfNulls<ImageView?>(5)
         totalStarsIV[0] = findViewById(R.id.star_1_iv)
@@ -87,35 +114,6 @@ class AddCommentUI : BaseActivity() {
         initIVArrays(subStars4TV, subStar4ClickListner)
 
         commentET = findViewById(R.id.comment_et)
-        postBtn = findViewById(R.id.post_btn)
-        postBtn.setOnClickListener({
-            var content = commentET.text.toString()
-            if (!Util.isNullOrNil(content)) {
-                var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
-                var createCommentRequest = BBCreateCommentRequest()
-                createCommentRequest.Comment = BBComment()
-                createCommentRequest.Comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
-                createCommentRequest.Comment.Content = content.trim()
-                createCommentRequest.Comment.TotalScore =  totalStarClickListener.score
-                createCommentRequest.Comment.Score1 = subStar1ClickListner.score
-                createCommentRequest.Comment.Score2 = subStar2ClickListner.score
-                createCommentRequest.Comment.Score3 = subStar3ClickListner.score
-                createCommentRequest.Comment.Score4 = subStar4ClickListner.score
-                createCommentRequest.Comment.Timestamp = System.currentTimeMillis()
-                netRequest.body = JSON.toJSONString(createCommentRequest)
-                BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
-                    override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
-                        finish()
-                    }
-
-                    override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
-                    }
-
-                    override fun onNetTaskCancel(netRequest: NetRequest) {
-                    }
-                })
-            }
-        })
     }
 
     fun initIVArrays(ivs : Array<ImageView?>, listener : View.OnClickListener) {

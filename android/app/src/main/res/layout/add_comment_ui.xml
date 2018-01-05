@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -25,7 +27,7 @@
                 android:layout_height="64dp">
 
                 <TextView
-                    android:padding="10dp"
+                    android:paddingRight="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,14 +79,14 @@
                   android:background="@color/grey_color_1"/>
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="48dp">
+                android:layout_height="32dp">
 
                 <TextView
-                    android:padding="10dp"
-                    android:textSize="13dp"
+                    android:layout_width="80dp"
+                    android:textSize="@dimen/SmallHintTextSize"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment_sub_1"/>
 
@@ -131,13 +133,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp">
+                android:layout_height="32dp">
 
                 <TextView
-                    android:padding="10dp"
-                    android:textSize="13dp"
+                    android:layout_width="80dp"
+                    android:textSize="@dimen/SmallHintTextSize"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment_sub_2"/>
 
@@ -184,13 +185,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp">
+                android:layout_height="32dp">
 
                 <TextView
-                    android:padding="10dp"
-                    android:textSize="13dp"
+                    android:layout_width="80dp"
+                    android:textSize="@dimen/SmallHintTextSize"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment_sub_3"/>
 
@@ -237,13 +237,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp">
+                android:layout_height="32dp">
 
                 <TextView
-                    android:padding="10dp"
-                    android:textSize="13dp"
+                    android:layout_width="80dp"
+                    android:textSize="@dimen/SmallHintTextSize"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment_sub_3"/>
 
@@ -288,9 +287,11 @@
                     android:src="@drawable/sub_star_gray"/>
             </LinearLayout>
 
-            <View android:layout_width="match_parent"
-                  android:layout_height="1px"
-                  android:background="@color/grey_color_1"/>
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/grey_color_1"/>
 
             <EditText
                 android:id="@+id/comment_et"
@@ -298,21 +299,12 @@
                 android:hint="@string/comment_hint"
                 android:padding="8dp"
                 android:background="@color/white"
-                android:textSize="@dimen/DescTextSize"
+                android:textSize="@dimen/SmallHintTextSize"
                 android:gravity="left|top"/>
 
             <View android:layout_width="match_parent"
                   android:layout_height="1px"
                   android:background="@color/grey_color_1"/>
-
-            <Button
-                android:id="@+id/post_btn"
-                android:layout_width="144dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/comment_post"
-                android:background="@drawable/button_selector"
-                android:layout_height="48dp"/>
         </LinearLayout>
 
     </ScrollView>
