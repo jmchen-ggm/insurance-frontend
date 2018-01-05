@@ -51,4 +51,6 @@
 
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+
+    <string name="company_list_title">公司列表</string>
 </resources>

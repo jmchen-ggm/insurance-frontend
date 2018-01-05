@@ -26,5 +26,6 @@
         <activity android:name="com.bbinsurance.android.app.plugin.account.ui.LoginUI"/>
         <activity android:name="com.bbinsurance.android.app.ui.webview.BBWebViewUI"/>
         <activity android:name="com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI"/>
+        <activity android:name="com.bbinsurance.android.app.plugin.company.ui.CompanyListUI"/>
     </application>
 </manifest>

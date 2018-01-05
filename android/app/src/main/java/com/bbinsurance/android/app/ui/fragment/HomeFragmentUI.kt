@@ -19,6 +19,7 @@ import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
+import com.bbinsurance.android.app.plugin.company.ui.CompanyListUI
 import com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BannerAdapter
@@ -141,6 +142,10 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                     break
                 }
             }
+            companyHeaderLayout.setOnClickListener({
+                var intent = Intent(context, CompanyListUI::class.java)
+                startActivity(intent)
+            })
         } else {
             companyLayout.visibility = View.GONE
         }
