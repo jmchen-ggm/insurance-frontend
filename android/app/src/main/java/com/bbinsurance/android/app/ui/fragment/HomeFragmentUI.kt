@@ -20,6 +20,7 @@ import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
 import com.bbinsurance.android.app.plugin.company.ui.CompanyListUI
+import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeListUI
 import com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BannerAdapter
@@ -76,12 +77,8 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         hotCommentInfoTV = convertView.findViewById(R.id.hot_comment_info_tv)
 
         insuranceTypeLayout = convertView.findViewById(R.id.insurance_type_layout)
-        insuranceType1IV = convertView.findViewById(R.id.insurance_type_1_iv)
-        insuranceType2IV = convertView.findViewById(R.id.insurance_type_2_iv)
-        insuranceType3IV = convertView.findViewById(R.id.insurance_type_3_iv)
-        insuranceTypeName1TV = convertView.findViewById(R.id.insurance_type_name_1_tv)
-        insuranceTypeName2TV = convertView.findViewById(R.id.insurance_type_name_2_tv)
-        insuranceTypeName3TV = convertView.findViewById(R.id.insurance_type_name_3_tv)
+        insuranceTypeItemContainer = convertView.findViewById(R.id.insurance_type_item_container)
+        insuranceTypeHeaderLayout = convertView.findViewById(R.id.insurance_type_header_layout)
 
         companyLayout = convertView.findViewById(R.id.company_layout)
         companyItemContainer = convertView.findViewById(R.id.company_item_container)
@@ -111,17 +108,24 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     }
 
     private fun updateInsuranceTypeView() {
-        if (getHomeDataResponse!!.TopInsuranceTypeList.size > 2) {
+        if (getHomeDataResponse!!.TopInsuranceTypeList.size > 0) {
             insuranceTypeLayout.visibility = View.VISIBLE
-            var insuranceType1 = getHomeDataResponse!!.TopInsuranceTypeList[0]
-            var insuranceType2 = getHomeDataResponse!!.TopInsuranceTypeList[1]
-            var insuranceType3 = getHomeDataResponse!!.TopInsuranceTypeList[2]
-            insuranceType1IV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType1.ThumbUrl)
-            insuranceType2IV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType2.ThumbUrl)
-            insuranceType3IV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType3.ThumbUrl)
-            insuranceTypeName1TV.text = insuranceType1.Name
-            insuranceTypeName2TV.text = insuranceType2.Name
-            insuranceTypeName3TV.text = insuranceType3.Name
+            insuranceTypeItemContainer.removeAllViews()
+            for (insuranceType : BBInsuranceType in getHomeDataResponse!!.TopInsuranceTypeList) {
+                var itemView = LayoutInflater.from(Application.ApplicationContext).inflate(R.layout.home_insurance_type_item_view, null)
+                var insuranceTypeThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.insurance_type_iv)
+                var insuranceTypeNameTV = itemView.findViewById<TextView>(R.id.insurance_type_name_tv)
+                insuranceTypeNameTV.text = insuranceType.Name
+                insuranceTypeThumbIV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType.ThumbUrl)
+                insuranceTypeItemContainer.addView(itemView)
+                if (insuranceTypeItemContainer.childCount > 2) {
+                    break
+                }
+            }
+            insuranceTypeHeaderLayout.setOnClickListener({
+                var intent = Intent(context, InsuranceTypeListUI::class.java)
+                startActivity(intent)
+            })
         } else {
             insuranceTypeLayout.visibility = View.GONE
         }
@@ -203,12 +207,8 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     private lateinit var hotCommentInfoTV: TextView
 
     private lateinit var insuranceTypeLayout : View
-    private lateinit var insuranceType1IV : SimpleDraweeView
-    private lateinit var insuranceTypeName1TV : TextView
-    private lateinit var insuranceType2IV : SimpleDraweeView
-    private lateinit var insuranceTypeName2TV : TextView
-    private lateinit var insuranceType3IV : SimpleDraweeView
-    private lateinit var insuranceTypeName3TV : TextView
+    private lateinit var insuranceTypeHeaderLayout : View
+    private lateinit var insuranceTypeItemContainer : LinearLayout
 
     private lateinit var companyLayout : View
     private lateinit var companyHeaderLayout : View

@@ -10,19 +10,19 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/company_iv"
+        android:id="@+id/insurance_type_iv"
         android:scaleType="centerCrop"
-        android:layout_width="48dp"
-        android:layout_height="48dp"/>
+        android:layout_width="96dp"
+        android:layout_height="64dp"/>
 
     <TextView
         android:layout_marginTop="5dp"
         android:padding="5dp"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/company_name_tv"
+        android:id="@+id/insurance_type_name_tv"
         android:textSize="@dimen/TitleTextSize"
         android:textColor="@color/grey_color_2"
         android:layout_width="wrap_content"
-        android:text="{company_name}"
+        android:text="{insurance_type_name}"
         android:layout_height="wrap_content"/>
 </LinearLayout>

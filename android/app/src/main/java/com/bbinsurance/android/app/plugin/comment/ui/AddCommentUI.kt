@@ -1,25 +1,36 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.alibaba.fastjson.JSON
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
+import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
+import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeSelectListUI
 import com.bbinsurance.android.app.protocol.BBComment
+import com.bbinsurance.android.app.protocol.BBCompany
 import com.bbinsurance.android.app.protocol.BBCreateCommentRequest
+import com.bbinsurance.android.app.protocol.BBInsuranceType
 import com.bbinsurance.android.app.ui.BaseActivity
 import com.bbinsurance.android.lib.Util
+import com.facebook.drawee.view.SimpleDraweeView
 
 /**
  * Created by jiaminchen on 17/11/19.
  */
 class AddCommentUI : BaseActivity() {
+
+    companion object {
+        val CompanySelectRequestCode = 0
+    }
 
     lateinit var totalStarsIV: Array<ImageView?>
     lateinit var subStars1TV: Array<ImageView?>
@@ -34,11 +45,27 @@ class AddCommentUI : BaseActivity() {
     lateinit var subStar4ClickListner : StarIVClickListener
 
     lateinit var commentET: EditText
+    lateinit var companyThumbIv : SimpleDraweeView
+    lateinit var companyNameTV : TextView
+    lateinit var insuranceTypeThumbIv : SimpleDraweeView
+    lateinit var insuranceTypeNameTV: TextView
+    lateinit var selectCompanyTV : TextView
 
     override fun initView() {
         super.initView()
         setBBTitle(R.string.add_comment_title)
         setBackBtn(true, View.OnClickListener { finish() })
+
+        companyThumbIv = findViewById(R.id.company_thumb_iv)
+        companyNameTV = findViewById(R.id.company_name_tv)
+        insuranceTypeThumbIv = findViewById(R.id.insurance_type_thumb_iv)
+        insuranceTypeNameTV = findViewById(R.id.insurance_type_name_tv)
+        selectCompanyTV = findViewById(R.id.select_company_tv)
+        selectCompanyTV.setOnClickListener({
+            var intent = Intent(this, InsuranceTypeSelectListUI::class.java)
+            startActivityForResult(intent, CompanySelectRequestCode)
+        })
+
         setOptionTV(R.string.confirm, View.OnClickListener {
             var content = commentET.text.toString()
             if (!Util.isNullOrNil(content)) {
@@ -154,5 +181,24 @@ class AddCommentUI : BaseActivity() {
 
     override fun getLayoutId(): Int {
         return R.layout.add_comment_ui
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CompanySelectRequestCode && resultCode == Activity.RESULT_OK) {
+            var selectCompany = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectCompany), BBCompany::class.java)
+            var selectInsuranceType = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectInsuranceType), BBInsuranceType::class.java)
+            companyNameTV.tag = selectCompany
+            companyNameTV.text = selectCompany.Name
+            companyThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectCompany.ThumbUrl)
+            insuranceTypeNameTV.tag = selectInsuranceType
+            insuranceTypeNameTV.text = selectInsuranceType.Name
+            insuranceTypeThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectInsuranceType.ThumbUrl)
+            companyNameTV.visibility = View.VISIBLE
+            companyThumbIv.visibility = View.VISIBLE
+            insuranceTypeNameTV.visibility = View.VISIBLE
+            insuranceTypeThumbIv.visibility = View.VISIBLE
+            selectCompanyTV.visibility = View.GONE
+        }
     }
 }

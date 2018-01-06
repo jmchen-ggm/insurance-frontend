@@ -53,4 +53,8 @@
     <string name="cancel">取消</string>
 
     <string name="company_list_title">公司列表</string>
+    <string name="company_select">选择保险公司</string>
+
+    <string name="insurance_type_list_title">保险种类列表</string>
+    <string name="insurance_type_select">选择保险种类</string>
 </resources>

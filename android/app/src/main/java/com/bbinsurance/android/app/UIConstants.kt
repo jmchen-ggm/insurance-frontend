@@ -23,4 +23,11 @@ class UIConstants {
             val KeyUrl = "key_url"
         }
     }
+
+    class CompanySelectListUI {
+        companion object {
+            val KeySelectCompany = "key_select_company"
+            val KeySelectInsuranceType = "key_select_insurance_type"
+        }
+    }
 }

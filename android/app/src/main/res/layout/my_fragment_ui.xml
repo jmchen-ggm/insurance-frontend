@@ -64,6 +64,6 @@
         android:text="@string/logout"
         android:textColor="@color/white"
         android:textSize="@dimen/TitleTextSize"
-        android:background="@drawable/button_selector"/>
+        android:background="@drawable/default_button_selector"/>
 
 </LinearLayout>
