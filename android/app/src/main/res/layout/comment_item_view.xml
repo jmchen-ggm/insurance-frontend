@@ -1,99 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:padding="10dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <View android:layout_width="match_parent"
-          android:layout_height="1px"
-          android:background="@color/grey_color_1"/>
-
     <LinearLayout
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_margin="10dp"
-            android:id="@+id/thumb_iv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"/>
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/insurance_item_bg_shape">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/nickname_tv"
-                    android:text="{nickname}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/time_tv"
-                    android:text="{time}"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/star_1_iv"
-                    style="@style/CommentListStarStyle"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/star_gray"/>
-
-                <ImageView
-                    android:id="@+id/star_2_iv"
-                    style="@style/CommentListStarStyle"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/star_gray"/>
-
-                <ImageView
-                    android:id="@+id/star_3_iv"
-                    style="@style/CommentListStarStyle"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/star_gray"/>
-
-                <ImageView
-                    android:id="@+id/star_4_iv"
-                    style="@style/CommentListStarStyle"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/star_gray"/>
-
-                <ImageView
-                    android:id="@+id/star_5_iv"
-                    style="@style/CommentListStarStyle"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/star_gray"/>
-
-                <TextView
-                    android:id="@+id/score_tv"
-                    android:text="{score}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/thumb_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
 
             <TextView
-                android:id="@+id/content_tv"
-                android:text="{content}"
-                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/nickname_tv"
+                android:text="{nickname}"
+                android:textSize="@dimen/TitleTextSize"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:text="{time}"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/score"
+                android:textSize="@dimen/HintTextSize"
+                android:textColor="@color/main_blue_color"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/star_1_iv"
+                style="@style/CommentListStarStyle"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/star_gray"/>
+
+            <ImageView
+                android:id="@+id/star_2_iv"
+                style="@style/CommentListStarStyle"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/star_gray"/>
+
+            <ImageView
+                android:id="@+id/star_3_iv"
+                style="@style/CommentListStarStyle"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/star_gray"/>
+
+            <ImageView
+                android:id="@+id/star_4_iv"
+                style="@style/CommentListStarStyle"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/star_gray"/>
+
+            <ImageView
+                android:id="@+id/star_5_iv"
+                style="@style/CommentListStarStyle"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/star_gray"/>
+
+            <TextView
+                android:id="@+id/score_tv"
+                android:layout_marginLeft="10dp"
+                android:text="{score}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/content_tv"
+            android:text="{content}"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:lineSpacingExtra="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/view_tv"
+                android:text="{view}"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/DescTextSize"
+                android:textColor="@color/grey_color_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/up_tv"
+                android:layout_marginLeft="10dp"
+                android:text="{up}"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/view_tv"
+                android:textSize="@dimen/DescTextSize"
+                android:textColor="@color/grey_color_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/reply_tv"
+                android:layout_marginLeft="10dp"
+                android:text="{reply}"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/up_tv"
+                android:textSize="@dimen/DescTextSize"
+                android:textColor="@color/grey_color_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/comment_layout"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/comment_like_bg"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/edit_icon"/>
+
+                <TextView
+                    android:textSize="@dimen/SmallHintTextSize"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_toLeftOf="@id/comment_layout"
+                android:orientation="horizontal"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/comment_like_bg"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/like_iv"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/like_icon"/>
+
+                <TextView
+                    android:id="@+id/like_tv"
+                    android:textSize="@dimen/SmallHintTextSize"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/like"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
     </LinearLayout>
 
-</LinearLayout>
+
+</FrameLayout>

@@ -8,6 +8,5 @@
     <dimen name="DescTextSize">12dp</dimen>
     <dimen name="InfoTextSize">10dp</dimen>
 
-    <dimen name="ArticleItemCornerRoundSize">5dp</dimen>
-    <dimen name="InsuranceItemCornerRoundSize">5dp</dimen>
+    <dimen name="CornerRoundSize5DP">5dp</dimen>
 </resources>

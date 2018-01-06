@@ -12,7 +12,10 @@
 
     <string name="recommend_insurance_title">今日推荐</string>
 
+    <string name="score">评分</string>
     <string name="score_formatter" formatted="false">评分：%s分</string>
+
+    <string name="like">赞</string>
 
     <string name="comment">评论</string>
     <string name="hot_comment_block">热门评论</string>
@@ -35,6 +38,10 @@
     <string name="comment_sub_2">代理人服务</string>
     <string name="comment_sub_3">理赔速度</string>
     <string name="comment_sub_4">收益回报</string>
+    <string name="comment_view_info">浏览%d</string>
+    <string name="comment_up_info">赞%d</string>
+    <string name="comment_reply_info">评论%d</string>
+    <string name="comment_star_info">%d星</string>
     <string name="comment_hint">亲对我们的服务有什么意见？请尽管说~</string>
     <string name="comment_post">发表</string>
 

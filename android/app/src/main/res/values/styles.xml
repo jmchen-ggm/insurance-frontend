@@ -46,8 +46,8 @@
     </style>
 
     <style name="CommentListStarStyle">
-        <item name="android:layout_width">16dp</item>
-        <item name="android:layout_height">16dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_marginRight">1dp</item>
     </style>
 </resources>

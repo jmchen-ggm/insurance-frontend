@@ -225,19 +225,17 @@ class AddCommentUI : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CompanySelectRequestCode && resultCode == Activity.RESULT_OK) {
-            var selectCompany = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectCompany), BBCompany::class.java)
-            companyNameTV.tag = selectCompany
-            companyNameTV.text = selectCompany.Name
-            companyThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectCompany.ThumbUrl)
+            selectCompany = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectCompany), BBCompany::class.java)
+            companyNameTV.text = selectCompany?.Name
+            companyThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectCompany?.ThumbUrl)
             companyNameTV.visibility = View.VISIBLE
             companyThumbIv.visibility = View.VISIBLE
             selectCompanyTV.visibility = View.GONE
         }
         if (requestCode == InsuranceTypeSelectRequestCode && resultCode == Activity.RESULT_OK) {
-            var selectInsuranceType = JSON.parseObject(data?.getStringExtra(UIConstants.InsuranceSelectListUI.KeySelectInsuranceType), BBInsuranceType::class.java)
-            insuranceTypeNameTV.tag = selectInsuranceType
-            insuranceTypeNameTV.text = selectInsuranceType.Name
-            insuranceTypeThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectInsuranceType.ThumbUrl)
+            selectInsuranceType = JSON.parseObject(data?.getStringExtra(UIConstants.InsuranceSelectListUI.KeySelectInsuranceType), BBInsuranceType::class.java)
+            insuranceTypeNameTV.text = selectInsuranceType?.Name
+            insuranceTypeThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectInsuranceType?.ThumbUrl)
             insuranceTypeNameTV.visibility = View.VISIBLE
             insuranceTypeThumbIv.visibility = View.VISIBLE
             selectInsuranceTypeTV.visibility = View.GONE

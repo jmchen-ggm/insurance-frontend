@@ -67,7 +67,7 @@ class InsuranceAdapter : BBBaseAdapter{
 
     companion object {
         fun getCornerRoundHierarchy() : GenericDraweeHierarchy {
-            var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.InsuranceItemCornerRoundSize).toFloat()
+            var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.CornerRoundSize5DP).toFloat()
             val cornerRoundParams = RoundingParams()
             cornerRoundParams.setCornersRadii(cornerSize, cornerSize, cornerSize, cornerSize)
             val articleHierarchy = GenericDraweeHierarchyBuilder.newInstance(BBApplication.ApplicationContext.resources)

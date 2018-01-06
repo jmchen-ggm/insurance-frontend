@@ -6,8 +6,8 @@
 
     <!-- 圆角 -->
     <corners
-        android:bottomLeftRadius="@dimen/InsuranceItemCornerRoundSize"
-        android:bottomRightRadius="@dimen/InsuranceItemCornerRoundSize"
-        android:topLeftRadius="@dimen/InsuranceItemCornerRoundSize"
-        android:topRightRadius="@dimen/InsuranceItemCornerRoundSize"/> <!-- 设置四个角的半径 -->
+        android:bottomLeftRadius="@dimen/CornerRoundSize5DP"
+        android:bottomRightRadius="@dimen/CornerRoundSize5DP"
+        android:topLeftRadius="@dimen/CornerRoundSize5DP"
+        android:topRightRadius="@dimen/CornerRoundSize5DP"/> <!-- 设置四个角的半径 -->
 </shape>

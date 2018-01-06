@@ -81,7 +81,7 @@ class ArticleAdapter : BBBaseAdapter {
 
     companion object {
         fun getCornerRoundHierarchy() : GenericDraweeHierarchy {
-            var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.ArticleItemCornerRoundSize).toFloat()
+            var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.CornerRoundSize5DP).toFloat()
             val cornerRoundParams = RoundingParams()
             cornerRoundParams.setCornersRadii(cornerSize, cornerSize, 0f, 0f)
             val articleHierarchy = GenericDraweeHierarchyBuilder.newInstance(BBApplication.ApplicationContext.resources)
