@@ -17,7 +17,7 @@ class MMapFileStorage {
 
     constructor(targetFilePath : String) {
         targetFile = File(targetFilePath);
-        tempFile = File(targetFile.parentFile, "temp-" + targetFile.name);
+        tempFile = File(targetFile.parentFile, "temp-log.txt");
         init();
     }
 

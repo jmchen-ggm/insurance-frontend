@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient
 /**
  * Created by jiaminchen on 2017/10/23.
  */
-class Application : Application() {
+class BBApplication : Application() {
     private val TAG = "BB.Application"
 
     companion object {

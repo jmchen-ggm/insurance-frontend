@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.alibaba.fastjson.JSON
-import com.bbinsurance.android.app.Application
+import com.bbinsurance.android.app.BBApplication
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
@@ -27,6 +27,7 @@ import com.bbinsurance.android.app.ui.adapter.BannerAdapter
 import com.bbinsurance.android.app.ui.component.BannerBaseUIComponent
 import com.bbinsurance.android.lib.Util
 import com.bbinsurance.android.lib.log.BBLog
+import com.bbinsurance.android.lib.util.TimeUtil
 import com.bigkoo.convenientbanner.ConvenientBanner
 import com.facebook.drawee.view.SimpleDraweeView
 
@@ -38,8 +39,36 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
 
     val TAG = "BB.HomeFragmentUI"
 
+    private lateinit var loadingView : View
+    private lateinit var contentScrollView : View
+
+    private lateinit var compareLayout: View
+    private lateinit var consultLayout: View
+    private lateinit var evaluateLayout: View
+    private lateinit var learnLayout: View
+    private lateinit var convenientBanner: ConvenientBanner<BBInsurance>
+
+    private lateinit var hotCommentLayout : View
+    private lateinit var hotCommentHeaderLayout : RelativeLayout
+    private lateinit var hotCommentAvatarIV: SimpleDraweeView
+    private lateinit var hotCommentNickNameTV : TextView
+    private lateinit var hotCommentContentTV : TextView
+    private lateinit var hotCommentInfoTV: TextView
+
+    private lateinit var insuranceTypeLayout : View
+    private lateinit var insuranceTypeHeaderLayout : View
+    private lateinit var insuranceTypeItemContainer : LinearLayout
+
+    private lateinit var companyLayout : View
+    private lateinit var companyHeaderLayout : View
+    private lateinit var companyItemContainer : LinearLayout
+
+    private var bannerAdapter : BannerAdapter ?= null
+    private var getHomeDataResponse : BBGetHomeDataResponse ? = null
+
     companion object {
         val ConfigHomeDataKey = "ConfigHomeDataKey"
+        val ConfigHoneDataLastUpdateTimeKey = "ConfigHoneDataLastUpdateTimeKey"
     }
 
     override fun getConvenientBanner(): ConvenientBanner<BBInsurance> {
@@ -53,7 +82,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var convertView = inflater?.inflate(getLayoutId(), container, false)!!
         initView(convertView)
-        updateBannerList()
+        updateHomeData()
         updateView()
         return convertView
     }
@@ -112,7 +141,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
             insuranceTypeLayout.visibility = View.VISIBLE
             insuranceTypeItemContainer.removeAllViews()
             for (insuranceType : BBInsuranceType in getHomeDataResponse!!.TopInsuranceTypeList) {
-                var itemView = LayoutInflater.from(Application.ApplicationContext).inflate(R.layout.home_insurance_type_item_view, null)
+                var itemView = LayoutInflater.from(BBApplication.ApplicationContext).inflate(R.layout.home_insurance_type_item_view, null)
                 var insuranceTypeThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.insurance_type_iv)
                 var insuranceTypeNameTV = itemView.findViewById<TextView>(R.id.insurance_type_name_tv)
                 insuranceTypeNameTV.text = insuranceType.Name
@@ -136,7 +165,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
             companyLayout.visibility = View.VISIBLE
             companyItemContainer.removeAllViews()
             for (company : BBCompany in getHomeDataResponse!!.TopCompanyList) {
-                var itemView = LayoutInflater.from(Application.ApplicationContext).inflate(R.layout.home_company_item_view, null)
+                var itemView = LayoutInflater.from(BBApplication.ApplicationContext).inflate(R.layout.home_company_item_view, null)
                 var companyThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.company_iv)
                 var companyNameTV = itemView.findViewById<TextView>(R.id.company_name_tv)
                 companyNameTV.text = company.Name
@@ -190,43 +219,26 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         return R.layout.home_fragment_ui
     }
 
-    private lateinit var loadingView : View
-    private lateinit var contentScrollView : View
-
-    private lateinit var compareLayout: View
-    private lateinit var consultLayout: View
-    private lateinit var evaluateLayout: View
-    private lateinit var learnLayout: View
-    private lateinit var convenientBanner: ConvenientBanner<BBInsurance>
-
-    private lateinit var hotCommentLayout : View
-    private lateinit var hotCommentHeaderLayout : RelativeLayout
-    private lateinit var hotCommentAvatarIV: SimpleDraweeView
-    private lateinit var hotCommentNickNameTV : TextView
-    private lateinit var hotCommentContentTV : TextView
-    private lateinit var hotCommentInfoTV: TextView
-
-    private lateinit var insuranceTypeLayout : View
-    private lateinit var insuranceTypeHeaderLayout : View
-    private lateinit var insuranceTypeItemContainer : LinearLayout
-
-    private lateinit var companyLayout : View
-    private lateinit var companyHeaderLayout : View
-    private lateinit var companyItemContainer : LinearLayout
-
-    private var bannerAdapter : BannerAdapter ?= null
-    private var getHomeDataResponse : BBGetHomeDataResponse ? = null
-
-    private fun updateBannerList() {
-        var bannerStr = BBCore.Instance.configCore.storage.getConfigValue(ConfigHomeDataKey, "")
-        BBLog.i(TAG, "updateBannerList: %s", bannerStr)
-        if (!Util.isNullOrNil(bannerStr)) {
-            getHomeDataResponse = JSON.parseObject(bannerStr, BBGetHomeDataResponse::class.java)
+    private var hasCacheData = false
+    private fun updateHomeData() {
+        var homeDataStr = BBCore.Instance.configCore.storage.getConfigValue(ConfigHomeDataKey, "")
+        var lastUpdateHomeDataTime = BBCore.Instance.configCore.storage.getConfigValue(ConfigHoneDataLastUpdateTimeKey, "0").toLong()
+        BBLog.i(TAG, "updateHomeData: %s %s", TimeUtil.formatTime(lastUpdateHomeDataTime), homeDataStr)
+        if (!Util.isNullOrNil(homeDataStr)) {
+            getHomeDataResponse = JSON.parseObject(homeDataStr, BBGetHomeDataResponse::class.java)
+            hasCacheData = true
+            if (TimeUtil.compareDate(lastUpdateHomeDataTime, System.currentTimeMillis()) != 0) {
+                refreshHomeDataList()
+            }
+        } else {
+            hasCacheData = false
+            refreshHomeDataList()
         }
-        refreshHomeDataList()
     }
 
     private fun refreshHomeDataList() {
+        BBLog.i(TAG, "refreshHomeDataList")
+        BBCore.Instance.configCore.storage.insertConfig(ConfigHoneDataLastUpdateTimeKey, System.currentTimeMillis().toString())
         var netRequest = NetRequest(ProtocolConstants.FunId.FuncGetHomeData, ProtocolConstants.URI.DataBin)
         var getHomeDataRequest = BBGetHomeDataRequest()
         netRequest.body = JSON.toJSONString(getHomeDataRequest)
@@ -236,7 +248,10 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
 
             override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
                 if (netResponse.respCode == 200) {
-                    updateView()
+                    if (!hasCacheData) {
+                        BBLog.i(TAG, "refreshHomeDataList updateView")
+                        updateView()
+                    }
                 }
             }
 

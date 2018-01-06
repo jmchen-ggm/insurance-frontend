@@ -11,7 +11,8 @@ import java.util.*
  */
 class TimeUtil {
     companion object {
-        var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val formatterDate = SimpleDateFormat("yyyy-MM-dd")
         fun formatTime(timestamp : Long) : String {
             return formatter.format(Date(timestamp))
         }
@@ -81,6 +82,33 @@ class TimeUtil {
             return if (index >= list.size) {
                 ""
             } else list[index]
+        }
+
+        fun compareDate(time1 : Long, time2 : Long) : Int {
+            var calender = Calendar.getInstance()
+            calender.timeInMillis = time1
+            calender.set(Calendar.HOUR, 0)
+            calender.set(Calendar.MINUTE, 0)
+            calender.set(Calendar.SECOND, 0)
+            calender.set(Calendar.MILLISECOND, 0)
+            var date1 = calender.timeInMillis
+            calender.timeInMillis = time2
+            calender.set(Calendar.HOUR, 0)
+            calender.set(Calendar.MINUTE, 0)
+            calender.set(Calendar.SECOND, 0)
+            calender.set(Calendar.MILLISECOND, 0)
+            var date2 = calender.timeInMillis
+            if (date1 > date2) {
+                return 1
+            } else if (date1 < date2) {
+                return -1
+            } else {
+                return 0
+            }
+        }
+
+        fun getDateString(time : Long) : String {
+            return formatterDate.format(Date(time))
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.bbinsurance.android.app.ui.adapter
 
 import com.alibaba.fastjson.JSON
-import com.bbinsurance.android.app.Application
+import com.bbinsurance.android.app.BBApplication
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
@@ -67,10 +67,10 @@ class InsuranceAdapter : BBBaseAdapter{
 
     companion object {
         fun getCornerRoundHierarchy() : GenericDraweeHierarchy {
-            var cornerSize = Application.ApplicationContext.resources.getDimensionPixelSize(R.dimen.InsuranceItemCornerRoundSize).toFloat()
+            var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.InsuranceItemCornerRoundSize).toFloat()
             val cornerRoundParams = RoundingParams()
             cornerRoundParams.setCornersRadii(cornerSize, cornerSize, cornerSize, cornerSize)
-            val articleHierarchy = GenericDraweeHierarchyBuilder.newInstance(Application.ApplicationContext.resources)
+            val articleHierarchy = GenericDraweeHierarchyBuilder.newInstance(BBApplication.ApplicationContext.resources)
                     .setRoundingParams(cornerRoundParams)
                     //构建
                     .build()

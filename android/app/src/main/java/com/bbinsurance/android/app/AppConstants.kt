@@ -7,6 +7,20 @@ import java.io.File
  * Created by jiaminchen on 2017/10/24.
  */
 class AppConstants {
+
+    class AppVersion {
+        companion object {
+            val ClientVersion : Long = 0x21010110
+
+            fun getVersionName() : String {
+                var version1 = ClientVersion.and (0x0F000000).ushr(4 * 6).toString()
+                var version2 = ClientVersion.and (0x00FF0000).ushr(4 * 4).toString()
+                var version3 = ClientVersion.and (0x0000FF00).ushr(4 * 2).toString()
+                return "$version1.$version2.$version3"
+            }
+        }
+    }
+
     companion object {
         val LOG_PATH = "log";
         val REQUST_PERMISSION = arrayOf(

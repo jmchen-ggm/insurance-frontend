@@ -3,7 +3,7 @@ package com.bbinsurance.android.app.plugin.learn.ui.adapter
 import android.content.Intent
 import android.view.View
 import com.alibaba.fastjson.JSON
-import com.bbinsurance.android.app.Application
+import com.bbinsurance.android.app.BBApplication
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
@@ -81,10 +81,10 @@ class ArticleAdapter : BBBaseAdapter {
 
     companion object {
         fun getCornerRoundHierarchy() : GenericDraweeHierarchy {
-            var cornerSize = Application.ApplicationContext.resources.getDimensionPixelSize(R.dimen.ArticleItemCornerRoundSize).toFloat()
+            var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.ArticleItemCornerRoundSize).toFloat()
             val cornerRoundParams = RoundingParams()
             cornerRoundParams.setCornersRadii(cornerSize, cornerSize, 0f, 0f)
-            val articleHierarchy = GenericDraweeHierarchyBuilder.newInstance(Application.ApplicationContext.resources)
+            val articleHierarchy = GenericDraweeHierarchyBuilder.newInstance(BBApplication.ApplicationContext.resources)
                     .setRoundingParams(cornerRoundParams)
                     //构建
                     .build()
