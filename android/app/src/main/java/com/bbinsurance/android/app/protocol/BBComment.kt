@@ -12,6 +12,8 @@ open class BBComment {
     var Uin: Long = 0L
     var Content : String = ""
     var TotalScore : Int = 0
+    var CompanyId : Long = 0
+    var InsuranceTypeId : Long = 0
     var Score1 : Int = 0
     var Score2 : Int = 0
     var Score3 : Int = 0

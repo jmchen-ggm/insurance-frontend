@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +10,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.lib.log.BBLog
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
 
 
 /**
@@ -131,5 +134,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    fun hideVKB() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager;
+        imm.hideSoftInputFromWindow(actionBarView.windowToken, 0)
     }
 }

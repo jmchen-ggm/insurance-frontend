@@ -27,7 +27,7 @@ abstract class BaseListActivity : BaseActivity(), ListBaseUIComponent {
         }
         var footerView = layoutInflater.inflate(R.layout.list_refresh_footer, null)
         refreshView = footerView.findViewById(R.id.refresh_footer)
-        setLoadFinish()
+        onLoadMoreFinish()
         lv.addFooterView(footerView)
 
         lv.adapter = getAdapter()
@@ -55,12 +55,12 @@ abstract class BaseListActivity : BaseActivity(), ListBaseUIComponent {
 
     private var onItemClickListener : AdapterView.OnItemClickListener = object : AdapterView.OnItemClickListener {
 
-        override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
             var dataItem = getAdapter().getItem(position)
-            getAdapter().handleItemClick(view!!, dataItem, false)
+            var handleResult = handleItemClick(view, dataItem, false)
+            getAdapter().handleItemClick(view, dataItem, handleResult)
         }
     }
-
 
     private var lastVisibleItem = -1
     private var totalItemCount = 0
@@ -69,12 +69,14 @@ abstract class BaseListActivity : BaseActivity(), ListBaseUIComponent {
     private var onScrollListener = object : AbsListView.OnScrollListener {
 
         override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
-            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastVisibleItem == totalItemCount && !loading) {
-                refreshView.visibility = View.VISIBLE
-                loading = true
-                onLoadMore()
-            } else {
-                refreshView.visibility = View.GONE
+            if (supportLoadMore()) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastVisibleItem == totalItemCount && !loading) {
+                    refreshView.visibility = View.VISIBLE
+                    loading = true
+                    onLoadMore()
+                } else {
+                    refreshView.visibility = View.GONE
+                }
             }
         }
 
@@ -92,8 +94,11 @@ abstract class BaseListActivity : BaseActivity(), ListBaseUIComponent {
     open fun onLoadMore() {
     }
 
-    fun setLoadFinish() {
-        loading = false
-        refreshView.visibility = View.GONE
+    open fun supportLoadMore() : Boolean {
+        return false;
+    }
+
+    open fun handleItemClick(view : View, dataItem : BaseDataItem, isHandle : Boolean) : Boolean {
+        return false
     }
 }

@@ -27,6 +27,10 @@ class UIConstants {
     class CompanySelectListUI {
         companion object {
             val KeySelectCompany = "key_select_company"
+        }
+    }
+    class InsuranceSelectListUI {
+        companion object {
             val KeySelectInsuranceType = "key_select_insurance_type"
         }
     }

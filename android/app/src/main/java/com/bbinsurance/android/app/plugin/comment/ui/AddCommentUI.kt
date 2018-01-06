@@ -2,6 +2,7 @@ package com.bbinsurance.android.app.plugin.comment.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
+import com.bbinsurance.android.app.plugin.company.ui.CompanySelectListUI
 import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeSelectListUI
 import com.bbinsurance.android.app.protocol.BBComment
 import com.bbinsurance.android.app.protocol.BBCompany
@@ -29,7 +31,8 @@ import com.facebook.drawee.view.SimpleDraweeView
 class AddCommentUI : BaseActivity() {
 
     companion object {
-        val CompanySelectRequestCode = 0
+        val CompanySelectRequestCode = 1
+        val InsuranceTypeSelectRequestCode = 2
     }
 
     lateinit var totalStarsIV: Array<ImageView?>
@@ -38,18 +41,25 @@ class AddCommentUI : BaseActivity() {
     lateinit var subStars3TV: Array<ImageView?>
     lateinit var subStars4TV: Array<ImageView?>
 
-    lateinit var totalStarClickListener : StarIVClickListener
-    lateinit var subStar1ClickListner : StarIVClickListener
-    lateinit var subStar2ClickListner : StarIVClickListener
-    lateinit var subStar3ClickListner : StarIVClickListener
-    lateinit var subStar4ClickListner : StarIVClickListener
+    lateinit var totalStarClickListener: StarIVClickListener
+    lateinit var subStar1ClickListner: StarIVClickListener
+    lateinit var subStar2ClickListner: StarIVClickListener
+    lateinit var subStar3ClickListner: StarIVClickListener
+    lateinit var subStar4ClickListner: StarIVClickListener
 
     lateinit var commentET: EditText
-    lateinit var companyThumbIv : SimpleDraweeView
-    lateinit var companyNameTV : TextView
-    lateinit var insuranceTypeThumbIv : SimpleDraweeView
+    lateinit var companyThumbIv: SimpleDraweeView
+    lateinit var companyNameTV: TextView
+    lateinit var insuranceTypeThumbIv: SimpleDraweeView
     lateinit var insuranceTypeNameTV: TextView
-    lateinit var selectCompanyTV : TextView
+    lateinit var selectCompanyTV: TextView
+    lateinit var selectInsuranceTypeTV: TextView
+
+    lateinit var errorMsgLayout : View
+    lateinit var errorMsgTV : TextView
+
+    var selectCompany: BBCompany? = null
+    var selectInsuranceType: BBInsuranceType? = null
 
     override fun initView() {
         super.initView()
@@ -61,25 +71,40 @@ class AddCommentUI : BaseActivity() {
         insuranceTypeThumbIv = findViewById(R.id.insurance_type_thumb_iv)
         insuranceTypeNameTV = findViewById(R.id.insurance_type_name_tv)
         selectCompanyTV = findViewById(R.id.select_company_tv)
+        selectInsuranceTypeTV = findViewById(R.id.select_insurance_type_tv)
+
+        errorMsgLayout = findViewById(R.id.error_msg_layout)
+        errorMsgTV = findViewById(R.id.error_msg_tv)
+
         selectCompanyTV.setOnClickListener({
-            var intent = Intent(this, InsuranceTypeSelectListUI::class.java)
+            var intent = Intent(this, CompanySelectListUI::class.java)
             startActivityForResult(intent, CompanySelectRequestCode)
+        })
+        selectInsuranceTypeTV.setOnClickListener({
+            var intent = Intent(this, InsuranceTypeSelectListUI::class.java)
+            startActivityForResult(intent, InsuranceTypeSelectRequestCode)
         })
 
         setOptionTV(R.string.confirm, View.OnClickListener {
             var content = commentET.text.toString()
-            if (!Util.isNullOrNil(content)) {
-                var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
-                var createCommentRequest = BBCreateCommentRequest()
-                createCommentRequest.Comment = BBComment()
-                createCommentRequest.Comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
-                createCommentRequest.Comment.Content = content.trim()
-                createCommentRequest.Comment.TotalScore =  totalStarClickListener.score
-                createCommentRequest.Comment.Score1 = subStar1ClickListner.score
-                createCommentRequest.Comment.Score2 = subStar2ClickListner.score
-                createCommentRequest.Comment.Score3 = subStar3ClickListner.score
-                createCommentRequest.Comment.Score4 = subStar4ClickListner.score
-                createCommentRequest.Comment.Timestamp = System.currentTimeMillis()
+            var netRequest = NetRequest(ProtocolConstants.FunId.FuncCreateComment, ProtocolConstants.URI.DataBin)
+            var createCommentRequest = BBCreateCommentRequest()
+            createCommentRequest.Comment = BBComment()
+            createCommentRequest.Comment.Uin = BBCore.Instance.accountCore.loginService.getUIN()
+            createCommentRequest.Comment.Content = content.trim()
+            createCommentRequest.Comment.TotalScore = totalStarClickListener.score
+            if (selectCompany != null) {
+                createCommentRequest.Comment.CompanyId = selectCompany!!.Id
+            }
+            if (selectInsuranceType != null) {
+                createCommentRequest.Comment.InsuranceTypeId = selectInsuranceType!!.Id
+            }
+            createCommentRequest.Comment.Score1 = subStar1ClickListner.score
+            createCommentRequest.Comment.Score2 = subStar2ClickListner.score
+            createCommentRequest.Comment.Score3 = subStar3ClickListner.score
+            createCommentRequest.Comment.Score4 = subStar4ClickListner.score
+            createCommentRequest.Comment.Timestamp = System.currentTimeMillis()
+            if (checkCommentValid(createCommentRequest.Comment)) {
                 netRequest.body = JSON.toJSONString(createCommentRequest)
                 BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
                     override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
@@ -92,6 +117,15 @@ class AddCommentUI : BaseActivity() {
                     override fun onNetTaskCancel(netRequest: NetRequest) {
                     }
                 })
+            } else {
+                if (Util.isNullOrNil(createCommentRequest.Comment.Content)
+                        || createCommentRequest.Comment.Content.length < 15) {
+                    showErrorMsg(R.string.comment_error_content_length_too_short)
+                } else if (createCommentRequest.Comment.CompanyId == 0L){
+                    showErrorMsg(R.string.comment_error_not_select_company)
+                } else if (createCommentRequest.Comment.InsuranceTypeId == 0L) {
+                    showErrorMsg(R.string.comment_error_not_select_insurance_type)
+                }
             }
         })
 
@@ -143,21 +177,26 @@ class AddCommentUI : BaseActivity() {
         commentET = findViewById(R.id.comment_et)
     }
 
-    fun initIVArrays(ivs : Array<ImageView?>, listener : View.OnClickListener) {
+    fun initIVArrays(ivs: Array<ImageView?>, listener: View.OnClickListener) {
         for (i in ivs.indices) {
             ivs[i]?.tag = i
             ivs[i]?.setOnClickListener(listener)
         }
     }
 
+    fun showErrorMsg(errorMsgRes : Int) {
+        errorMsgTV.setText(errorMsgRes)
+        errorMsgLayout.visibility = View.VISIBLE
+    }
+
     class StarIVClickListener : View.OnClickListener {
 
         var starsIV: Array<ImageView?>
-        var initRes : Int
-        var clickRes : Int
-        var score : Int
+        var initRes: Int
+        var clickRes: Int
+        var score: Int
 
-        constructor(starsIV: Array<ImageView?>, initRes : Int, clickRes : Int) {
+        constructor(starsIV: Array<ImageView?>, initRes: Int, clickRes: Int) {
             this.starsIV = starsIV
             this.initRes = initRes
             this.clickRes = clickRes
@@ -187,18 +226,34 @@ class AddCommentUI : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CompanySelectRequestCode && resultCode == Activity.RESULT_OK) {
             var selectCompany = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectCompany), BBCompany::class.java)
-            var selectInsuranceType = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectInsuranceType), BBInsuranceType::class.java)
             companyNameTV.tag = selectCompany
             companyNameTV.text = selectCompany.Name
             companyThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectCompany.ThumbUrl)
+            companyNameTV.visibility = View.VISIBLE
+            companyThumbIv.visibility = View.VISIBLE
+            selectCompanyTV.visibility = View.GONE
+        }
+        if (requestCode == InsuranceTypeSelectRequestCode && resultCode == Activity.RESULT_OK) {
+            var selectInsuranceType = JSON.parseObject(data?.getStringExtra(UIConstants.InsuranceSelectListUI.KeySelectInsuranceType), BBInsuranceType::class.java)
             insuranceTypeNameTV.tag = selectInsuranceType
             insuranceTypeNameTV.text = selectInsuranceType.Name
             insuranceTypeThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectInsuranceType.ThumbUrl)
-            companyNameTV.visibility = View.VISIBLE
-            companyThumbIv.visibility = View.VISIBLE
             insuranceTypeNameTV.visibility = View.VISIBLE
             insuranceTypeThumbIv.visibility = View.VISIBLE
-            selectCompanyTV.visibility = View.GONE
+            selectInsuranceTypeTV.visibility = View.GONE
         }
+    }
+
+    private fun checkCommentValid(comment : BBComment) : Boolean {
+        if (Util.isNullOrNil(comment.Content)) {
+            return false
+        }
+        if (comment.CompanyId == 0L) {
+            return false
+        }
+        if (comment.InsuranceTypeId == 0L) {
+            return false
+        }
+        return true
     }
 }

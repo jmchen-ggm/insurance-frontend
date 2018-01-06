@@ -71,7 +71,7 @@ class ArticleAdapter : BBBaseAdapter {
         return learnArticleList.size
     }
 
-    override fun handleItemClick(view: View?, dataItem: BaseDataItem, isHandle: Boolean) {
+    override fun handleItemClick(view: View, dataItem: BaseDataItem, isHandle: Boolean) {
         var learnArticleDataItem = dataItem as ArticleDataItem
         var intent = Intent(uiComponent.getComponentContext(), BBWebViewUI::class.java)
         intent.putExtra(UIConstants.IntentKey.KeyTitle, learnArticleDataItem.entity.Title)

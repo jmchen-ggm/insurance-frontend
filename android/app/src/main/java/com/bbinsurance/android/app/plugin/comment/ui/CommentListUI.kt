@@ -38,6 +38,10 @@ class CommentListUI : BaseListActivity() {
         adapter?.refreshCommentList()
     }
 
+    override fun supportLoadMore(): Boolean {
+        return true
+    }
+
     override fun onLoadMore() {
         adapter?.refreshCommentList()
     }
