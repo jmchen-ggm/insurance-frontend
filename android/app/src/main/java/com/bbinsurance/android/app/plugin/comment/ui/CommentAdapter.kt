@@ -10,6 +10,7 @@ import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.protocol.BBComment
 import com.bbinsurance.android.app.protocol.BBListCommentRequest
 import com.bbinsurance.android.app.protocol.BBListCommentResponse
+import com.bbinsurance.android.app.protocol.BBUpCommentResponse
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
@@ -66,6 +67,7 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
     override fun createDataItem(position: Int): BaseDataItem {
         var commentDataItem = CommentDataItem(position)
         commentDataItem.comment = commentList[position]
+        commentDataItem.upNetListener = upNetListener
         return commentDataItem
     }
 
@@ -73,4 +75,28 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
         super.finish()
         BBCore.Instance.accountCore.syncService.removeListener(this)
     }
+
+    private var upNetListener = object : NetListener {
+        override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
+            if (netResponse.respCode == 200) {
+                var upCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
+                        BBUpCommentResponse::class.java)
+                for (i in commentList.indices) {
+                    if (commentList[i].Id == upCommentResponse.Comment.Id) {
+                        commentList[i] = upCommentResponse.Comment
+                        break
+                    }
+                }
+                clearCache()
+                notifyDataSetChanged()
+            }
+        }
+
+        override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
+        }
+
+        override fun onNetTaskCancel(netRequest: NetRequest) {
+        }
+    }
+
 }

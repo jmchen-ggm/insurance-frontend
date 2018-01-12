@@ -23,4 +23,5 @@ open class BBComment {
     var ViewCount : Int = 0
     var ReplyCount : Int = 0
     var Flags : Long = 0L
+    var IsUp : Boolean = false
 }

@@ -176,6 +176,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:id="@+id/like_layout"
                 android:paddingRight="10dp"
                 android:background="@drawable/comment_like_bg"
                 android:gravity="center_vertical"
