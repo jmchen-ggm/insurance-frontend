@@ -1,6 +1,7 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
+import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.protocol.BBComment
 import com.bbinsurance.android.app.protocol.BBUpCommentRequest
 import com.bbinsurance.android.app.ui.item.BaseDataItem
@@ -90,13 +92,18 @@ class CommentDataItem : BaseDataItem {
         commentViewHolder.upTV?.text = context.getString(R.string.comment_up_info, comment.UpCount)
         commentViewHolder.replyTV?.text = context.getString(R.string.comment_reply_info, comment.ReplyCount)
         commentViewHolder.likeLayout?.setOnClickListener({
-            var netRequest = NetRequest(ProtocolConstants.FunId.FuncUpComment, ProtocolConstants.URI.DataBin)
-            var upCommentRequest = BBUpCommentRequest()
-            upCommentRequest.CommentUp.Uin = BBCore.Instance.accountCore.loginService.getUIN()
-            upCommentRequest.CommentUp.CommentId = comment.Id
-            upCommentRequest.IsUp = !comment.IsUp
-            netRequest.body = JSON.toJSONString(upCommentRequest)
-            BBCore.Instance.netCore.startRequestAsync(netRequest, upNetListener)
+            if (BBCore.Instance.accountCore.loginService.isLogin()) {
+                var netRequest = NetRequest(ProtocolConstants.FunId.FuncUpComment, ProtocolConstants.URI.DataBin)
+                var upCommentRequest = BBUpCommentRequest()
+                upCommentRequest.CommentUp.Uin = BBCore.Instance.accountCore.loginService.getUIN()
+                upCommentRequest.CommentUp.CommentId = comment.Id
+                upCommentRequest.IsUp = !comment.IsUp
+                netRequest.body = JSON.toJSONString(upCommentRequest)
+                BBCore.Instance.netCore.startRequestAsync(netRequest, upNetListener)
+            } else {
+                var intent = Intent(context, LoginUI::class.java)
+                context.startActivity(intent)
+            }
         })
         if (comment.IsUp) {
             commentViewHolder.likeIV?.setImageResource(R.drawable.like_icon_yellow)

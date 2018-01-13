@@ -29,7 +29,9 @@ class AccountSyncService : NetListener {
     override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
         for (listener : IAccountSyncListener in accountListenerList) {
             if (netResponse.respCode == 200) {
-                listener.onAccountSyncSuccess()
+                var bbGetUserResponse = JSON.parseObject(netResponse.bbResp.Body.toString(), BBGetUserResponse::class.java)
+                var contactEntity = bbUserToEntity(bbGetUserResponse.User)
+                listener.onAccountSyncSuccess(contactEntity)
             } else {
                 listener.onAccountSyncFail()
             }

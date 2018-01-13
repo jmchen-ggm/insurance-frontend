@@ -184,6 +184,12 @@ class CommentDetailUI : BaseListActivity() {
             netRequest.body = JSON.toJSONString(upCommentRequest)
             BBCore.Instance.netCore.startRequestAsync(netRequest, upNetListener)
         })
+
+        commentLayout.setOnClickListener({
+            replyCommentET.requestFocus()
+            showVKB(replyCommentET)
+        })
+
         if (comment.IsUp) {
             likeIV.setImageResource(R.drawable.like_icon_yellow)
             likeLayout.setBackgroundResource(R.drawable.comment_like_yellow_bg)

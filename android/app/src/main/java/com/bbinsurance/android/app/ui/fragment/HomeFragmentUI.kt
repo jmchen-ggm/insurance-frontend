@@ -15,9 +15,11 @@ import com.bbinsurance.android.app.BBApplication
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
+import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
+import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
 import com.bbinsurance.android.app.plugin.company.ui.CompanyListUI
 import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeListUI
@@ -192,15 +194,19 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         convenientBanner.startTurning(2000)
     }
 
+    private var waitUinCallback = 0L
     private fun updateCommentView() {
         if (getHomeDataResponse!!.TopCommentList.size > 0) {
             var topComment = getHomeDataResponse!!.TopCommentList[0]
             hotCommentLayout.visibility = View.VISIBLE
             var contactEntity = BBCore.Instance.accountCore.syncService.getContact(topComment.Uin)
             if (contactEntity != null) {
+                BBCore.Instance.accountCore.syncService.addListener(accountSyncListener)
                 hotCommentAvatarIV.setImageURI(BBCore.Instance.accountCore.getContactThumbUrl(contactEntity))
                 hotCommentNickNameTV.text = contactEntity.Nickname
             } else {
+                waitUinCallback = topComment.Uin
+                BBCore.Instance.accountCore.syncService.removeListener(accountSyncListener)
                 hotCommentNickNameTV.text = String.format("%d", topComment.Uin)
                 hotCommentAvatarIV.setImageURI("res://sadf/" + R.drawable.tab_my_icon)
             }
@@ -264,5 +270,15 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                 }
             }
         })
+    }
+
+    var accountSyncListener = object : IAccountSyncListener {
+        override fun onAccountSyncFail() {
+        }
+        override fun onAccountSyncSuccess(entity : ContactEntity) {
+            if (waitUinCallback == entity.Id) {
+                updateCommentView()
+            }
+        }
     }
 }

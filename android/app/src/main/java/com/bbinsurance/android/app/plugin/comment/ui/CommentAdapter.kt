@@ -6,10 +6,12 @@ import com.alibaba.fastjson.JSON
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.core.BBCore
+import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
+import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
@@ -20,7 +22,7 @@ import com.bbinsurance.android.app.ui.item.BaseDataItem
  */
 class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
 
-    override fun onAccountSyncSuccess() {
+    override fun onAccountSyncSuccess(entity : ContactEntity) {
         notifyDataSetChanged()
     }
 
@@ -137,10 +139,15 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
     }
 
     private var commentClickListener = View.OnClickListener { view ->
-        var comment = view?.getTag() as BBComment
-        var intent = Intent(uiComponent.getComponentContext(), CommentDetailUI::class.java)
-        intent.putExtra(UIConstants.CommentDetailUI.KeyComment, JSON.toJSONString(comment))
-        intent.putExtra(UIConstants.CommentDetailUI.KeyNeedKeyboard, true)
-        uiComponent.getComponentContext().startActivity(intent)
+        if (BBCore.Instance.accountCore.loginService.isLogin()) {
+            var comment = view?.getTag() as BBComment
+            var intent = Intent(uiComponent.getComponentContext(), CommentDetailUI::class.java)
+            intent.putExtra(UIConstants.CommentDetailUI.KeyComment, JSON.toJSONString(comment))
+            intent.putExtra(UIConstants.CommentDetailUI.KeyNeedKeyboard, true)
+            uiComponent.getComponentContext().startActivity(intent)
+        } else {
+            var intent = Intent(uiComponent.getComponentContext(), LoginUI::class.java)
+            uiComponent.getComponentContext().startActivity(intent)
+        }
     }
 }
