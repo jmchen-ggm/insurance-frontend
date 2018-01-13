@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
+import android.view.View
 import com.alibaba.fastjson.JSON
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.core.BBCore
@@ -7,10 +8,7 @@ import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
-import com.bbinsurance.android.app.protocol.BBComment
-import com.bbinsurance.android.app.protocol.BBListCommentRequest
-import com.bbinsurance.android.app.protocol.BBListCommentResponse
-import com.bbinsurance.android.app.protocol.BBUpCommentResponse
+import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
@@ -99,4 +97,39 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
         }
     }
 
+    override fun handleItemClick(view: View, dataItem: BaseDataItem, isHandle: Boolean) {
+        var commentDataItem = dataItem as CommentDataItem
+        viewComment(commentDataItem.comment.Id)
+    }
+
+    private fun viewComment(commentId : Long) {
+        var netRequest = NetRequest(ProtocolConstants.FunId.FuncViewComment, ProtocolConstants.URI.DataBin)
+        var viewCommentRequest = BBViewCommentRequest()
+        viewCommentRequest.Id = commentId
+        netRequest.body = JSON.toJSONString(viewCommentRequest)
+        BBCore.Instance.netCore.startRequestAsync(netRequest, viewNetListener)
+    }
+
+    private var viewNetListener = object : NetListener {
+        override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
+            if (netResponse.respCode == 200) {
+                var viewCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
+                        BBViewCommentResponse::class.java)
+                for (i in commentList.indices) {
+                    if (commentList[i].Id == viewCommentResponse.Comment.Id) {
+                        commentList[i] = viewCommentResponse.Comment
+                        break
+                    }
+                }
+                clearCache()
+                notifyDataSetChanged()
+            }
+        }
+
+        override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
+        }
+
+        override fun onNetTaskCancel(netRequest: NetRequest) {
+        }
+    }
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:padding="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/avatar_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="{nickname}"
+                android:textSize="@dimen/HintTextSize"
+                android:textColor="@color/main_blue_color"
+                android:layout_height="wrap_content"
+                android:id="@+id/nickname_tv"/>
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:text="{time}"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/content_tv"
+            android:textSize="@dimen/HintTextSize"
+            android:textColor="@color/black"
+            android:text="{content}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

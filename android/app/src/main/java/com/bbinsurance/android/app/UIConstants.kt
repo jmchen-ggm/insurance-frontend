@@ -24,6 +24,12 @@ class UIConstants {
         }
     }
 
+    class CommentDetailUI {
+        companion object {
+            val KeyComment = "key_comment"
+        }
+    }
+
     class CompanySelectListUI {
         companion object {
             val KeySelectCompany = "key_select_company"

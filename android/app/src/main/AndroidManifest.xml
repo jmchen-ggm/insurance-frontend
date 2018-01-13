@@ -30,5 +30,7 @@
         <activity android:name=".plugin.company.ui.CompanySelectListUI"/>
         <activity android:name=".plugin.company.ui.InsuranceTypeListUI"/>
         <activity android:name=".plugin.company.ui.InsuranceTypeSelectListUI"/>
+        <activity android:name=".plugin.comment.ui.CommentDetailUI"
+                  android:windowSoftInputMode="adjustPan|stateHidden"/>
     </application>
 </manifest>

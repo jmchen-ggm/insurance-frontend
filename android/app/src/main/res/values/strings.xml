@@ -44,6 +44,7 @@
     <string name="comment_star_info">%d星</string>
     <string name="comment_hint">亲对我们的服务有什么意见？请尽管说~</string>
     <string name="comment_post">发表</string>
+    <string name="comment_detail_title">评论详情</string>
 
     <string name="login_username_tip">用户名/手机号</string>
     <string name="login_password_tip">请填写密码</string>
@@ -69,4 +70,11 @@
     <string name="comment_error_content_length_too_short">评论内容太短，需要大于15个字</string>
     <string name="comment_error_not_select_company">评论未选择对应的保险公司</string>
     <string name="comment_error_not_select_insurance_type">评论未选择对应的保险种类</string>
+
+    <string name="comment_reply_uin_prefix">回复%s：</string>
+
+    <string name="comment_sub_1_colons">公司信誉：</string>
+    <string name="comment_sub_2_colons">代理人服务：</string>
+    <string name="comment_sub_3_colons">理赔速度：</string>
+    <string name="comment_sub_4_colons">收益回报：</string>
 </resources>
