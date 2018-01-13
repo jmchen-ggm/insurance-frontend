@@ -20,12 +20,12 @@ import android.view.inputmethod.InputMethodManager
 abstract class BaseActivity : AppCompatActivity() {
     val TAG = "BB.BaseActivity"
 
-    lateinit var actionBarView : View
-    lateinit var actionBarParams : ActionBar.LayoutParams
-    lateinit var titleTV : TextView
-    lateinit var backBtn : ImageButton
-    lateinit var optionBtn : ImageButton
-    lateinit var optionTV : TextView
+    lateinit var actionBarView: View
+    lateinit var actionBarParams: ActionBar.LayoutParams
+    lateinit var titleTV: TextView
+    lateinit var backBtn: ImageButton
+    lateinit var optionBtn: ImageButton
+    lateinit var optionTV: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,28 +64,28 @@ abstract class BaseActivity : AppCompatActivity() {
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
     }
 
-    open fun needActionBar() : Boolean {
+    open fun needActionBar(): Boolean {
         return true;
     }
 
-    open fun setBBTitle(id : Int) {
+    open fun setBBTitle(id: Int) {
         titleTV.setText(id)
         updateActionBar()
     }
 
-    open fun setBBTitle(title : String) {
+    open fun setBBTitle(title: String) {
         titleTV.text = title
         updateActionBar()
     }
 
-    open fun setOptionBtn(srcId : Int, listener : View.OnClickListener) {
+    open fun setOptionBtn(srcId: Int, listener: View.OnClickListener) {
         optionBtn.visibility = View.VISIBLE
         optionBtn.setImageResource(srcId)
         optionBtn.setOnClickListener(listener)
         updateActionBar()
     }
 
-    open fun setOptionTV(srcId : Int, listener : View.OnClickListener) {
+    open fun setOptionTV(srcId: Int, listener: View.OnClickListener) {
         optionTV.visibility = View.VISIBLE
         optionTV.setText(srcId)
         optionTV.setOnClickListener(listener)
@@ -100,7 +100,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    abstract fun getLayoutId() : Int
+    abstract fun getLayoutId(): Int
 
     override fun onDestroy() {
         super.onDestroy()
@@ -139,5 +139,15 @@ abstract class BaseActivity : AppCompatActivity() {
     fun hideVKB() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager;
         imm.hideSoftInputFromWindow(actionBarView.windowToken, 0)
+    }
+
+    fun showVKB(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager;
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED)
+    }
+
+    fun isShowVKB() : Boolean {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager;
+        return imm.isActive
     }
 }

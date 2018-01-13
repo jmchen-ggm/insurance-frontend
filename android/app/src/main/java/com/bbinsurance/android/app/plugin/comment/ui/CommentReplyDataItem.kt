@@ -12,6 +12,7 @@ import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.protocol.BBCommentReply
 import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.app.ui.widget.FrescoUtil
+import com.bbinsurance.android.lib.util.TimeUtil
 import com.facebook.drawee.view.SimpleDraweeView
 
 /**
@@ -62,6 +63,7 @@ class CommentReplyDataItem : BaseDataItem {
             prefix = context.getString(R.string.comment_reply_uin_prefix, replyContactEntity?.Nickname)
         }
         holder.contentTV?.text = prefix + commentReply.Content
+        holder.timeTV?.text = TimeUtil.formatTimeInList(context, commentReply.Timestamp)
     }
 
 

@@ -77,4 +77,12 @@
     <string name="comment_sub_2_colons">代理人服务：</string>
     <string name="comment_sub_3_colons">理赔速度：</string>
     <string name="comment_sub_4_colons">收益回报：</string>
+
+    <string name="comment_score_desc_1">非常好</string>
+    <string name="comment_score_desc_2">很好</string>
+    <string name="comment_score_desc_3">一般</string>
+    <string name="comment_score_desc_4">很差</string>
+
+    <string name="comment_company">评价公司：</string>
+    <string name="comment_insurance_type">保险种类：</string>
 </resources>

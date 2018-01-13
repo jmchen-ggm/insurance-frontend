@@ -13,7 +13,9 @@ open class BBComment {
     var Content : String = ""
     var TotalScore : Int = 0
     var CompanyId : Long = 0
+    var CompanyName : String = ""
     var InsuranceTypeId : Long = 0
+    var InsuranceTypeName : String = ""
     var Score1 : Int = 0
     var Score2 : Int = 0
     var Score3 : Int = 0

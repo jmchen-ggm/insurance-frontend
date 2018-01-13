@@ -1,8 +1,10 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
+import android.content.Intent
 import android.view.View
 import com.alibaba.fastjson.JSON
 import com.bbinsurance.android.app.ProtocolConstants
+import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
@@ -66,6 +68,7 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
         var commentDataItem = CommentDataItem(position)
         commentDataItem.comment = commentList[position]
         commentDataItem.upNetListener = upNetListener
+        commentDataItem.commentClickListener = commentClickListener
         return commentDataItem
     }
 
@@ -131,5 +134,13 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
 
         override fun onNetTaskCancel(netRequest: NetRequest) {
         }
+    }
+
+    private var commentClickListener = View.OnClickListener { view ->
+        var comment = view?.getTag() as BBComment
+        var intent = Intent(uiComponent.getComponentContext(), CommentDetailUI::class.java)
+        intent.putExtra(UIConstants.CommentDetailUI.KeyComment, JSON.toJSONString(comment))
+        intent.putExtra(UIConstants.CommentDetailUI.KeyNeedKeyboard, true)
+        uiComponent.getComponentContext().startActivity(intent)
     }
 }

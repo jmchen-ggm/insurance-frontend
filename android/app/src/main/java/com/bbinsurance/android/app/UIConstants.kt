@@ -27,6 +27,7 @@ class UIConstants {
     class CommentDetailUI {
         companion object {
             val KeyComment = "key_comment"
+            val KeyNeedKeyboard = "key_need_keyboard"
         }
     }
 

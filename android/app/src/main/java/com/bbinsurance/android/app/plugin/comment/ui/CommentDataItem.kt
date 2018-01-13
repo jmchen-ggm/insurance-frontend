@@ -30,6 +30,7 @@ class CommentDataItem : BaseDataItem {
 
     }
 
+    lateinit var commentClickListener: View.OnClickListener
     lateinit var comment: BBComment
     lateinit var upNetListener: NetListener
 
@@ -79,6 +80,9 @@ class CommentDataItem : BaseDataItem {
                 viewHolder.starsIV[index]?.setImageResource(R.drawable.star_gray)
             }
         }
+        commentViewHolder.commentLayout?.setTag(comment)
+        commentViewHolder.commentLayout?.setOnClickListener(commentClickListener)
+
         commentViewHolder.scoreTV?.text = context.getString(R.string.comment_star_info, scoreIndex)
         commentViewHolder.timeTV?.text = TimeUtil.formatTimeInList(context, comment.Timestamp)
         commentViewHolder.contentTV?.text = comment.Content.trim()
