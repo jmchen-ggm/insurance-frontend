@@ -17,6 +17,12 @@ class UIConstants {
         }
     }
 
+    class GlobalRequestCode {
+        companion object {
+            val LoginRequestCode = 0x1000;
+        }
+    }
+
     class IntentKey {
         companion object {
             val KeyTitle = "key_title"

@@ -201,12 +201,12 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
             hotCommentLayout.visibility = View.VISIBLE
             var contactEntity = BBCore.Instance.accountCore.syncService.getContact(topComment.Uin)
             if (contactEntity != null) {
-                BBCore.Instance.accountCore.syncService.addListener(accountSyncListener)
+                BBCore.Instance.accountCore.syncService.removeListener(accountSyncListener)
                 hotCommentAvatarIV.setImageURI(BBCore.Instance.accountCore.getContactThumbUrl(contactEntity))
                 hotCommentNickNameTV.text = contactEntity.Nickname
             } else {
+                BBCore.Instance.accountCore.syncService.addListener(accountSyncListener)
                 waitUinCallback = topComment.Uin
-                BBCore.Instance.accountCore.syncService.removeListener(accountSyncListener)
                 hotCommentNickNameTV.text = String.format("%d", topComment.Uin)
                 hotCommentAvatarIV.setImageURI("res://sadf/" + R.drawable.tab_my_icon)
             }

@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.plugin.account.ui
 
+import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -17,7 +18,8 @@ import com.bbinsurance.android.app.ui.widget.BBProgressDialog
 class LoginUI : BaseActivity(), IAccountLoginListener {
 
     override fun onLoginSuccess() {
-        dialog?.dismiss();
+        dialog?.dismiss()
+        setResult(Activity.RESULT_OK)
         finish()
     }
 
@@ -51,7 +53,10 @@ class LoginUI : BaseActivity(), IAccountLoginListener {
 
         BBCore.Instance.accountCore.loginService.addListener(this)
 
-        setBackBtn(true, View.OnClickListener { finish() })
+        setBackBtn(true, View.OnClickListener {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+        })
     }
 
     override fun onDestroy() {

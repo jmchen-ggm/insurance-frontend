@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -15,6 +16,7 @@ import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
+import com.bbinsurance.android.app.plugin.account.AccountCore
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
@@ -35,7 +37,7 @@ class CommentDetailUI : BaseListActivity() {
         return adapter!!
     }
 
-    var replyUin : Long = 0L
+    var replyUin: Long = 0L
     override fun initData() {
         var commentStr = intent.getStringExtra(UIConstants.CommentDetailUI.KeyComment)
         comment = JSON.parseObject(commentStr, BBComment::class.java)

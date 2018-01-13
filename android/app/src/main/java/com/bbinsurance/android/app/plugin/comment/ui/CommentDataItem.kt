@@ -15,6 +15,7 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
+import com.bbinsurance.android.app.plugin.account.AccountCore
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.protocol.BBComment
 import com.bbinsurance.android.app.protocol.BBUpCommentRequest
@@ -101,8 +102,7 @@ class CommentDataItem : BaseDataItem {
                 netRequest.body = JSON.toJSONString(upCommentRequest)
                 BBCore.Instance.netCore.startRequestAsync(netRequest, upNetListener)
             } else {
-                var intent = Intent(context, LoginUI::class.java)
-                context.startActivity(intent)
+                AccountCore.goToLoginUI(context, Intent())
             }
         })
         if (comment.IsUp) {

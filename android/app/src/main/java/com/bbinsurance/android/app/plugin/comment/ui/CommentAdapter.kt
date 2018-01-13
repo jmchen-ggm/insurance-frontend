@@ -10,6 +10,7 @@ import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
+import com.bbinsurance.android.app.plugin.account.AccountCore
 import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.protocol.*
@@ -22,7 +23,7 @@ import com.bbinsurance.android.app.ui.item.BaseDataItem
  */
 class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
 
-    override fun onAccountSyncSuccess(entity : ContactEntity) {
+    override fun onAccountSyncSuccess(entity: ContactEntity) {
         notifyDataSetChanged()
     }
 
@@ -31,10 +32,14 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
     }
 
     private var commentList = ArrayList<BBComment>()
-    fun refreshCommentList() {
+    fun refreshCommentList(isFromStart: Boolean) {
         var netRequest = NetRequest(ProtocolConstants.FunId.FuncListComment, ProtocolConstants.URI.DataBin)
         var listCommentRequest = BBListCommentRequest()
-        listCommentRequest.StartIndex = commentList.size
+        if (isFromStart) {
+            listCommentRequest.StartIndex = 0
+        } else {
+            listCommentRequest.StartIndex = commentList.size
+        }
         listCommentRequest.PageSize = 20
         netRequest.body = JSON.toJSONString(listCommentRequest)
         BBCore.Instance.netCore.startRequestAsync(netRequest, object : NetListener {
@@ -42,8 +47,14 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
                 if (netResponse.respCode == 200) {
                     var listCommentResponse = JSON.parseObject(netResponse.bbResp.Body.toString(),
                             BBListCommentResponse::class.java)
+                    if (isFromStart) {
+                        commentList.clear()
+                    }
                     commentList.addAll(listCommentResponse.CommentList)
                     uiComponent.onLoadMoreFinish()
+                    if (isFromStart) {
+                        clearCache()
+                    }
                     notifyDataSetChanged()
                 }
             }
@@ -107,7 +118,7 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
         viewComment(commentDataItem.comment.Id)
     }
 
-    private fun viewComment(commentId : Long) {
+    private fun viewComment(commentId: Long) {
         var netRequest = NetRequest(ProtocolConstants.FunId.FuncViewComment, ProtocolConstants.URI.DataBin)
         var viewCommentRequest = BBViewCommentRequest()
         viewCommentRequest.Id = commentId
@@ -146,8 +157,7 @@ class CommentAdapter : BBBaseAdapter, IAccountSyncListener {
             intent.putExtra(UIConstants.CommentDetailUI.KeyNeedKeyboard, true)
             uiComponent.getComponentContext().startActivity(intent)
         } else {
-            var intent = Intent(uiComponent.getComponentContext(), LoginUI::class.java)
-            uiComponent.getComponentContext().startActivity(intent)
+            AccountCore.goToLoginUI(uiComponent.getComponentContext(), Intent())
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.bbinsurance.android.app.ui
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.ActionBar
@@ -11,7 +12,9 @@ import android.widget.TextView
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.lib.log.BBLog
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
 import android.view.inputmethod.InputMethodManager
+import com.bbinsurance.android.app.UIConstants
 
 
 /**
@@ -149,5 +152,24 @@ abstract class BaseActivity : AppCompatActivity() {
     fun isShowVKB() : Boolean {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager;
         return imm.isActive
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == UIConstants.GlobalRequestCode.LoginRequestCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                onLoginSuccess()
+            } else {
+                onLoginCancel()
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    open fun onLoginSuccess() {
+
+    }
+
+    open fun onLoginCancel() {
+
     }
 }
