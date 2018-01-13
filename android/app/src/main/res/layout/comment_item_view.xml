@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:padding="10dp"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+             android:padding="10dp"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -41,9 +41,49 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:paddingTop="5dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="@dimen/HintTextSize"
+                android:text="@string/comment_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/HintTextSize"
+                android:id="@+id/company_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/HintTextSize"
+                android:text="@string/comment_insurance_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/HintTextSize"
+                android:id="@+id/insurance_type_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:paddingTop="10dp"
             android:paddingBottom="5dp"
             android:gravity="center_vertical"
             android:layout_height="wrap_content">
@@ -107,7 +147,8 @@
             android:layout_height="wrap_content"/>
 
         <RelativeLayout
-            android:padding="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -122,7 +163,7 @@
 
             <TextView
                 android:id="@+id/up_tv"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="{up}"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/view_tv"
@@ -196,11 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/like"/>
-
             </LinearLayout>
-
         </RelativeLayout>
     </LinearLayout>
-
-
 </FrameLayout>

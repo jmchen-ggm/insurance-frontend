@@ -43,6 +43,8 @@ class CommentDataItem : BaseDataItem {
         viewHolder.thumbIV = view?.findViewById(R.id.thumb_iv)
         viewHolder.nickNameTV = view?.findViewById(R.id.nickname_tv)
         viewHolder.timeTV = view?.findViewById(R.id.time_tv)
+        viewHolder.companyNameTV = view?.findViewById(R.id.company_name_tv)
+        viewHolder.insuranceTypeNameTV = view?.findViewById(R.id.insurance_type_name_tv)
         viewHolder.scoreTV = view?.findViewById(R.id.score_tv)
         viewHolder.viewTV = view?.findViewById(R.id.view_tv)
         viewHolder.upTV = view?.findViewById(R.id.up_tv)
@@ -112,11 +114,15 @@ class CommentDataItem : BaseDataItem {
             commentViewHolder.likeIV?.setImageResource(R.drawable.like_icon)
             commentViewHolder.likeLayout?.setBackgroundResource(R.drawable.comment_like_bg)
         }
+        commentViewHolder.companyNameTV?.text = comment.CompanyName
+        commentViewHolder.insuranceTypeNameTV?.text = comment.InsuranceTypeName
     }
 
     class CommentViewHolder : BaseViewHolder() {
         var thumbIV: SimpleDraweeView? = null
         var nickNameTV: TextView? = null
+        var companyNameTV: TextView? = null
+        var insuranceTypeNameTV: TextView? = null
         var contentTV: TextView? = null
         var viewTV: TextView? = null
         var upTV: TextView? = null

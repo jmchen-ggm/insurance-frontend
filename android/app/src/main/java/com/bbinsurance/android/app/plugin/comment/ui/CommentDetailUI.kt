@@ -1,6 +1,5 @@
 package com.bbinsurance.android.app.plugin.comment.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -16,7 +15,7 @@ import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
-import com.bbinsurance.android.app.plugin.account.AccountCore
+import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
@@ -27,7 +26,13 @@ import com.facebook.drawee.view.SimpleDraweeView
 /**
  * Created by jiaminchen on 18/1/13.
  */
-class CommentDetailUI : BaseListActivity() {
+class CommentDetailUI : BaseListActivity(), IAccountSyncListener {
+    override fun onAccountSyncSuccess(entity: ContactEntity) {
+        adapter?.notifyDataSetChanged()
+    }
+
+    override fun onAccountSyncFail() {
+    }
 
     var adapter: CommentDetailAdapter? = null
     override fun getAdapter(): BBBaseAdapter {
@@ -82,6 +87,12 @@ class CommentDetailUI : BaseListActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter?.refreshCommentReplyList(comment.Id)
+        BBCore.Instance.accountCore.syncService.addListener(this)
+    }
+
+    override fun onDestroy() {
+        BBCore.Instance.accountCore.syncService.removeListener(this)
+        super.onDestroy()
     }
 
     lateinit var avatarIV: SimpleDraweeView
