@@ -23,6 +23,7 @@ import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
 import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
 import com.bbinsurance.android.app.plugin.company.ui.CompanyListUI
 import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeListUI
+import com.bbinsurance.android.app.plugin.init.GetInsuranceBaseDataTask
 import com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BannerAdapter
@@ -259,6 +260,9 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                         updateView()
                     }
                 }
+                // 在做完第一次同步HomeData以后就要开始跑基本的保险数据了
+                var task = GetInsuranceBaseDataTask()
+                BBCore.Instance.threadCore.post(task)
             }
 
             override fun onNetDoneInSubThread(netRequest: NetRequest, netResponse: NetResponse) {
