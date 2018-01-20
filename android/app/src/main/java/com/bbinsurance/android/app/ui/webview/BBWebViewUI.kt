@@ -32,7 +32,7 @@ class BBWebViewUI : BaseActivity() {
         webView = findViewById(R.id.webview)
 
         val webSettings = webView.settings
-        webSettings.javaScriptEnabled = false
+        webSettings.javaScriptEnabled = true
         webSettings.cacheMode = WebSettings.LOAD_DEFAULT
         webSettings.setSupportZoom(false)
         webSettings.useWideViewPort = true

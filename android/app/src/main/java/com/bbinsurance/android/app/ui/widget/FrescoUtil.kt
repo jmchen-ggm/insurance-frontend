@@ -19,8 +19,15 @@ class FrescoUtil {
                     .setRoundingParams(cornerRoundParams).build()
         }
 
-        fun getCircleHierarchy() : GenericDraweeHierarchy {
+        fun getTopCornerRound5DPHierarchy(): GenericDraweeHierarchy {
             var cornerSize = BBApplication.ApplicationContext.resources.getDimensionPixelSize(R.dimen.CornerRoundSize5DP).toFloat()
+            val cornerRoundParams = RoundingParams()
+            cornerRoundParams.setCornersRadii(cornerSize, cornerSize, 0f, 0f)
+            return GenericDraweeHierarchyBuilder.newInstance(BBApplication.ApplicationContext.resources)
+                    .setRoundingParams(cornerRoundParams).build()
+        }
+
+        fun getCircleHierarchy() : GenericDraweeHierarchy {
             val cornerRoundParams = RoundingParams()
             cornerRoundParams.roundAsCircle = true
             return GenericDraweeHierarchyBuilder.newInstance(BBApplication.ApplicationContext.resources)

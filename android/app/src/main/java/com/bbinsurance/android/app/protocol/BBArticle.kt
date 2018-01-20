@@ -11,4 +11,5 @@ class BBArticle {
     var Timestamp = ""
     var Url = ""
     var ThumbUrl = ""
+    var ViewCount = 0
 }

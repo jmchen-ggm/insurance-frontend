@@ -41,6 +41,8 @@ open class NetTask : Runnable {
         bbReq.Bin.Timestamp = netRequest.timestamp
 
         bbReq.Header.Uin = BBCore.Instance.accountCore.loginService.getUIN()
+        bbReq.Header.Username = BBCore.Instance.accountCore.loginService.getUsername()
+        bbReq.Header.Token = BBCore.Instance.accountCore.loginService.getToken()
 
         bbReq.Body = JSON.parse(netRequest.body) as JSON
         doRequest(bbReq)

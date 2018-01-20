@@ -23,6 +23,7 @@ open class ProtocolConstants {
             val FuncGetInsuranceTypeById = 11
             val FuncReplyComment = 12
             val FuncGetListCommentReply = 13
+            val FuncViewArticle = 14;
 
             val FuncRegisterUser = 101
             val FuncLogin = 102

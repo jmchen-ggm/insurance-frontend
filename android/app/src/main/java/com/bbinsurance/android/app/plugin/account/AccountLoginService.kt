@@ -33,7 +33,7 @@ class AccountLoginService : NetListener {
     }
 
     override fun onNetDoneInMainThread(netRequest: NetRequest, netResponse: NetResponse) {
-        for (listener : IAccountLoginListener in accountListenerList) {
+        for (listener: IAccountLoginListener in accountListenerList) {
             if (netResponse.respCode == 200) {
                 listener.onLoginSuccess()
             } else {
@@ -51,8 +51,8 @@ class AccountLoginService : NetListener {
             contactStorage.insertContact(contactEntity)
             currentUser.Uin = contactEntity.Id
             currentUser.Username = contactEntity.Username
-            currentUser.Token = ""
-            currentUser.TokenUpdateTime = 0L
+            currentUser.Token = bbLoginResponse.Token
+            currentUser.TokenUpdateTime = bbLoginResponse.Timestamp
             var configEntity = ConfigEntity()
             configEntity.Key = AccountConstants.CurrentUserObjKey
             configEntity.Value = JSON.toJSONString(currentUser)
@@ -60,7 +60,7 @@ class AccountLoginService : NetListener {
         }
     }
 
-    private fun bbUserToEntity(bbUser : BBUser) : ContactEntity {
+    private fun bbUserToEntity(bbUser: BBUser): ContactEntity {
         var contactEntity = ContactEntity()
         contactEntity.Id = bbUser.Id
         contactEntity.Username = bbUser.Username
@@ -77,8 +77,9 @@ class AccountLoginService : NetListener {
         }
     }
 
-    var currentUser : CurrentAccountConfigEntity
-    var contactStorage : ContactStorage
+    var currentUser: CurrentAccountConfigEntity
+    var contactStorage: ContactStorage
+
     constructor() {
         var configStr = BBCore.Instance.configCore.storage.getConfigValue(AccountConstants.CurrentUserObjKey, "")
         if (!Util.isNullOrNil(configStr)) {
@@ -115,15 +116,19 @@ class AccountLoginService : NetListener {
         return currentUser.Uin
     }
 
-    fun getUsername() : String {
+    fun getUsername(): String {
         return currentUser.Username
     }
 
-    fun isLogin() : Boolean {
+    fun getToken(): String {
+        return currentUser.Token
+    }
+
+    fun isLogin(): Boolean {
         return !Util.isNullOrNil(currentUser.Username)
     }
 
-    fun getCurrentContactEntity() : ContactEntity {
+    fun getCurrentContactEntity(): ContactEntity {
         return BBCore.Instance.accountCore.contactStorage.getContact(currentUser.Username)
     }
 }
