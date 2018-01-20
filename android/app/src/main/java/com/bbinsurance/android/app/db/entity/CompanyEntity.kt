@@ -13,4 +13,6 @@ class CompanyEntity {
     var Name = ""
     var Desc = ""
     var ThumbUrl = ""
+    var Flags = 0L
+    var DetailData = ""
 }

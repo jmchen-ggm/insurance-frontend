@@ -148,7 +148,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                 var insuranceTypeThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.insurance_type_iv)
                 var insuranceTypeNameTV = itemView.findViewById<TextView>(R.id.insurance_type_name_tv)
                 insuranceTypeNameTV.text = insuranceType.Name
-                insuranceTypeThumbIV.setImageURI(ProtocolConstants.URL.FileServer + insuranceType.ThumbUrl)
+                insuranceTypeThumbIV.setImageURI(insuranceType.ThumbUrl)
                 insuranceTypeItemContainer.addView(itemView)
                 if (insuranceTypeItemContainer.childCount > 2) {
                     break
@@ -172,7 +172,7 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                 var companyThumbIV = itemView.findViewById<SimpleDraweeView>(R.id.company_iv)
                 var companyNameTV = itemView.findViewById<TextView>(R.id.company_name_tv)
                 companyNameTV.text = company.Name
-                companyThumbIV.setImageURI(ProtocolConstants.URL.FileServer + company.ThumbUrl)
+                companyThumbIV.setImageURI(company.ThumbUrl)
                 companyItemContainer.addView(itemView)
                 if (companyItemContainer.childCount > 4) {
                     break
