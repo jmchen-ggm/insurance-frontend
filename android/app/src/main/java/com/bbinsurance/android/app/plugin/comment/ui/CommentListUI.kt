@@ -7,6 +7,7 @@ import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.plugin.account.AccountCore
+import com.bbinsurance.android.app.plugin.comment.CommentLogic
 import com.bbinsurance.android.app.ui.BaseListActivity
 import com.bbinsurance.android.app.ui.adapter.BBBaseAdapter
 import com.bbinsurance.android.app.ui.item.BaseDataItem
@@ -29,12 +30,7 @@ class CommentListUI : BaseListActivity() {
         setBBTitle(R.string.comment)
         setBackBtn(true, View.OnClickListener { finish() })
         setOptionBtn(R.drawable.add_icon, View.OnClickListener {
-            if (BBCore.Instance.accountCore.loginService.isLogin()) {
-                var intent = Intent(this, AddCommentUI::class.java)
-                startActivity(intent)
-            } else {
-                AccountCore.goToLoginUI(this, Intent())
-            }
+            CommentLogic.goToAddCommentUI(this, intent)
         })
 
         adapter?.refreshCommentList(true)
@@ -58,15 +54,11 @@ class CommentListUI : BaseListActivity() {
     }
 
     override fun handleItemClick(view: View, dataItem: BaseDataItem, isHandle: Boolean): Boolean {
-        if (BBCore.Instance.accountCore.loginService.isLogin()) {
-            var commentDataItem = dataItem as CommentDataItem
-            commentDataItem.comment.ViewCount++
-            var intent = Intent(this, CommentDetailUI::class.java)
-            intent.putExtra(UIConstants.CommentDetailUI.KeyComment, JSON.toJSONString(commentDataItem.comment))
-            startActivity(intent)
-        } else {
-            AccountCore.goToLoginUI(this, Intent())
-        }
+        var commentDataItem = dataItem as CommentDataItem
+        commentDataItem.comment.ViewCount++
+        var intent = Intent()
+        intent.putExtra(UIConstants.CommentDetailUI.KeyComment, JSON.toJSONString(commentDataItem.comment))
+        CommentLogic.goToCommentDetailUI(this, intent)
         return true
     }
 

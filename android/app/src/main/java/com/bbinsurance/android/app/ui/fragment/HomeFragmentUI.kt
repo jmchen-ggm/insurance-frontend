@@ -14,12 +14,14 @@ import com.alibaba.fastjson.JSON
 import com.bbinsurance.android.app.BBApplication
 import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
+import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.db.entity.ContactEntity
 import com.bbinsurance.android.app.net.NetListener
 import com.bbinsurance.android.app.net.NetRequest
 import com.bbinsurance.android.app.net.NetResponse
 import com.bbinsurance.android.app.plugin.account.IAccountSyncListener
+import com.bbinsurance.android.app.plugin.comment.CommentLogic
 import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
 import com.bbinsurance.android.app.plugin.company.ui.CompanyListUI
 import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeListUI
@@ -194,6 +196,14 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         if (getHomeDataResponse!!.TopCommentList.size > 0) {
             var topComment = getHomeDataResponse!!.TopCommentList[0]
             hotCommentLayout.visibility = View.VISIBLE
+            hotCommentLayout.setOnClickListener({
+                var intent = Intent()
+                topComment.ViewCount++;
+                intent.putExtra(UIConstants.CommentDetailUI.KeyComment, JSON.toJSONString(topComment))
+                CommentLogic.goToCommentDetailUI(context, intent)
+                viewComment(topComment.Id)
+                hotCommentInfoTV.text = getString(R.string.comment_info, topComment.ViewCount, topComment.UpCount)
+            })
             var contactEntity = BBCore.Instance.accountCore.syncService.getContact(topComment.Uin)
             if (contactEntity != null) {
                 BBCore.Instance.accountCore.syncService.removeListener(accountSyncListener)
@@ -235,6 +245,14 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
             hasCacheData = false
             refreshHomeDataList()
         }
+    }
+
+    private fun viewComment(commentId: Long) {
+        var netRequest = NetRequest(ProtocolConstants.FunId.FuncViewComment, ProtocolConstants.URI.DataBin)
+        var viewCommentRequest = BBViewCommentRequest()
+        viewCommentRequest.Id = commentId
+        netRequest.body = JSON.toJSONString(viewCommentRequest)
+        BBCore.Instance.netCore.startRequestAsync(netRequest)
     }
 
     private fun refreshHomeDataList() {

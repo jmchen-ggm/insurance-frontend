@@ -10,6 +10,7 @@ import android.widget.Button
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
+import com.bbinsurance.android.app.plugin.comment.CommentLogic
 
 /**
  * Created by jiaminchen on 17/12/26.
@@ -25,22 +26,12 @@ class AddFragmentUI : Fragment() {
         askBtn = view.findViewById(R.id.ask_btn)
 
         commentBtn.setOnClickListener({
-            goToCommentUI();
+            CommentLogic.goToAddCommentUI(context, Intent());
         })
         askBtn.setOnClickListener({
-            goToCommentUI()
+            CommentLogic.goToAddCommentUI(context, Intent());
         })
 
         return view
-    }
-
-    fun goToCommentUI() {
-        if (BBCore.Instance.accountCore.loginService.isLogin()) {
-            var intent = Intent(context, AddFragmentUI::class.java)
-            startActivity(intent)
-        } else {
-            var intent = Intent(context, LoginUI::class.java)
-            startActivity(intent)
-        }
     }
 }
