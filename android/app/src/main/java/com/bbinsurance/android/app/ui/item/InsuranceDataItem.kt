@@ -39,7 +39,7 @@ class InsuranceDataItem : BaseDataItem {
         holder.descTV.text = Util.nullAs(entity.Desc, "")
         holder.companyTV.text = Util.nullAs(entity.CompanyName, "")
         holder.thumbIV.hierarchy = InsuranceAdapter.getCornerRoundHierarchy()
-        holder.thumbIV.setImageURI(ProtocolConstants.URL.FileServer + entity.ThumbUrl)
+        holder.thumbIV.setImageURI(entity.ThumbUrl)
     }
 
     override fun fillData(context: Context, viewHolder: BaseViewHolder) {

@@ -21,7 +21,7 @@ class BannerDataItem : Holder<BBInsurance> {
         descTV.text = Util.nullAs(entity.Desc, "")
         companyTV.text = Util.nullAs(entity.CompanyName, "")
         thumbIV.hierarchy = InsuranceAdapter.getCornerRoundHierarchy()
-        thumbIV.setImageURI(ProtocolConstants.URL.FileServer + entity.ThumbUrl)
+        thumbIV.setImageURI(entity.ThumbUrl)
     }
 
     lateinit var thumbIV: SimpleDraweeView

@@ -227,7 +227,7 @@ class AddCommentUI : BaseActivity() {
         if (requestCode == CompanySelectRequestCode && resultCode == Activity.RESULT_OK) {
             selectCompany = JSON.parseObject(data?.getStringExtra(UIConstants.CompanySelectListUI.KeySelectCompany), BBCompany::class.java)
             companyNameTV.text = selectCompany?.Name
-            companyThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectCompany?.ThumbUrl)
+            companyThumbIv.setImageURI(selectCompany?.ThumbUrl)
             companyNameTV.visibility = View.VISIBLE
             companyThumbIv.visibility = View.VISIBLE
             selectCompanyTV.visibility = View.GONE
@@ -235,7 +235,7 @@ class AddCommentUI : BaseActivity() {
         if (requestCode == InsuranceTypeSelectRequestCode && resultCode == Activity.RESULT_OK) {
             selectInsuranceType = JSON.parseObject(data?.getStringExtra(UIConstants.InsuranceSelectListUI.KeySelectInsuranceType), BBInsuranceType::class.java)
             insuranceTypeNameTV.text = selectInsuranceType?.Name
-            insuranceTypeThumbIv.setImageURI(ProtocolConstants.URL.FileServer + selectInsuranceType?.ThumbUrl)
+            insuranceTypeThumbIv.setImageURI(selectInsuranceType?.ThumbUrl)
             insuranceTypeNameTV.visibility = View.VISIBLE
             insuranceTypeThumbIv.visibility = View.VISIBLE
             selectInsuranceTypeTV.visibility = View.GONE

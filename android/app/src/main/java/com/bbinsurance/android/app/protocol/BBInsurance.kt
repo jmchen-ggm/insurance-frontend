@@ -11,6 +11,10 @@ class BBInsurance {
     var InsuranceTypeName = ""
     var CompanyId = 0L
     var CompanyName = ""
+    var AgeFrom = 0
+    var AgeTo = 0
+    var AnnualCompensation = 0
+    var AnnualPremium = 0
     var Timestamp = 0L
     var ThumbUrl = ""
     var DetailData = ""

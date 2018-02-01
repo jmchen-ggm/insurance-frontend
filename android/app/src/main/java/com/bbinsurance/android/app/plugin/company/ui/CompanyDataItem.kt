@@ -35,7 +35,7 @@ class CompanyDataItem : BaseDataItem {
         var companyViewHolder = viewHolder as CompanyViewHolder
         companyViewHolder.nameTV?.text = company.Name
         companyViewHolder.descTV?.text = company.Desc
-        companyViewHolder.thumbIV?.setImageURI(ProtocolConstants.URL.FileServer + company.ThumbUrl)
+        companyViewHolder.thumbIV?.setImageURI(company.ThumbUrl)
     }
 
     class CompanyViewHolder : BaseViewHolder() {

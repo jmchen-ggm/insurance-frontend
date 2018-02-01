@@ -150,9 +150,6 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                 insuranceTypeNameTV.text = insuranceType.Name
                 insuranceTypeThumbIV.setImageURI(insuranceType.ThumbUrl)
                 insuranceTypeItemContainer.addView(itemView)
-                if (insuranceTypeItemContainer.childCount > 2) {
-                    break
-                }
             }
             insuranceTypeHeaderLayout.setOnClickListener({
                 var intent = Intent(context, InsuranceTypeListUI::class.java)
@@ -174,9 +171,6 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
                 companyNameTV.text = company.Name
                 companyThumbIV.setImageURI(company.ThumbUrl)
                 companyItemContainer.addView(itemView)
-                if (companyItemContainer.childCount > 4) {
-                    break
-                }
             }
             companyHeaderLayout.setOnClickListener({
                 var intent = Intent(context, CompanyListUI::class.java)
