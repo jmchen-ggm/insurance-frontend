@@ -30,6 +30,8 @@ class InsuranceDetailUI : BaseActivity() {
     private lateinit var loadingView : View
     private lateinit var insuranceDetail : BBInsuranceDetail
 
+    private lateinit var insuranceDetailAdapter : InsuranceDetailAdapter
+
     override fun initData() {
         super.initData()
         var id = intent.getLongExtra(UIConstants.InsuranceDetailUI.KeyInsuranceId, 0L)
@@ -53,6 +55,7 @@ class InsuranceDetailUI : BaseActivity() {
                 updateHeaderView()
                 expandLv.visibility = View.VISIBLE
                 loadingView.visibility = View.GONE
+                insuranceDetailAdapter.setData(JSON.parseObject(insuranceDetail.DetailData))
             }
         }
 
@@ -73,12 +76,13 @@ class InsuranceDetailUI : BaseActivity() {
 
         loadingView = findViewById(R.id.loading_view)
         expandLv = findViewById(R.id.expand_lv)
+        insuranceDetailAdapter = InsuranceDetailAdapter(this)
 
         var headView = getHeaderView()
         if (headView != null) {
             expandLv.addHeaderView(headView)
         }
-        expandLv.setAdapter(InsuranceDetailAdapter())
+        expandLv.setAdapter(insuranceDetailAdapter)
     }
 
     private lateinit var thumbIV : SimpleDraweeView
