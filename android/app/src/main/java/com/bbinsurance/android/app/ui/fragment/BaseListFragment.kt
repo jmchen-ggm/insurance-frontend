@@ -59,8 +59,13 @@ abstract class BaseListFragment : Fragment(), ListBaseUIComponent {
 
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             var dataItem = getAdapter().getItem(position)
-            getAdapter().handleItemClick(view!!, dataItem, false)
+            var handleResult = handleItemClick(view!!, dataItem, false)
+            getAdapter().handleItemClick(view!!, dataItem, handleResult)
         }
+    }
+
+    open fun handleItemClick(view : View, dataItem : BaseDataItem, isHandle : Boolean) : Boolean {
+        return false
     }
 
     override fun onLoadMoreFinish() {

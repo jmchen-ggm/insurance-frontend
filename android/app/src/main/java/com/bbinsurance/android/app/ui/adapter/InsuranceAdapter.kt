@@ -13,7 +13,7 @@ import com.bbinsurance.android.app.protocol.BBListInsuranceRequest
 import com.bbinsurance.android.app.protocol.BBListInsuranceResponse
 import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
-import com.bbinsurance.android.app.ui.item.InsuranceDataItem
+import com.bbinsurance.android.app.plugin.insurance.ui.InsuranceDataItem
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
 import com.facebook.drawee.generic.RoundingParams

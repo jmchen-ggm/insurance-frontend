@@ -30,6 +30,12 @@ class UIConstants {
         }
     }
 
+    class InsuranceDetailUI {
+        companion object {
+            val KeyInsuranceId = "key_insurance_id"
+        }
+    }
+
     class CommentDetailUI {
         companion object {
             val KeyComment = "key_comment"

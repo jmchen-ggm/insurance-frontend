@@ -1,15 +1,15 @@
-package com.bbinsurance.android.app.ui.item
+package com.bbinsurance.android.app.plugin.insurance.ui
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.bbinsurance.android.app.ProtocolConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.protocol.BBInsurance
 import com.bbinsurance.android.app.ui.adapter.InsuranceAdapter
+import com.bbinsurance.android.app.ui.item.BaseDataItem
 import com.bbinsurance.android.lib.Util
 import com.facebook.drawee.view.SimpleDraweeView
 
@@ -36,7 +36,15 @@ class InsuranceDataItem : BaseDataItem {
     override fun fillView(context: Context, viewHolder: BaseViewHolder) {
         var holder = viewHolder as RecommendInsuranceViewHolder
         holder.titleTV.text = entity.Name
-        holder.descTV.text = Util.nullAs(entity.Desc, "")
+        if (Util.isNullOrNil(entity.Desc)) {
+            if (entity.AnnualCompensation != 0) {
+                holder.descTV.text = Util.nullAs(entity.Desc, context.getString(R.string.annal_compensation_desc, entity.AnnualCompensation / 10000))
+            } else {
+                holder.descTV.text = Util.nullAs(entity.Desc, "")
+            }
+        } else {
+            holder.descTV.text = Util.nullAs(entity.Desc, "")
+        }
         holder.companyTV.text = Util.nullAs(entity.CompanyName, "")
         holder.thumbIV.hierarchy = InsuranceAdapter.getCornerRoundHierarchy()
         holder.thumbIV.setImageURI(entity.ThumbUrl)

@@ -5,9 +5,10 @@
                 android:padding="10dp"
                 android:layout_height="wrap_content">
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:background="@drawable/insurance_item_selector"
-                 android:layout_height="132dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/insurance_item_selector"
+        android:layout_height="132dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/thumb_iv"

@@ -11,7 +11,7 @@ import com.bbinsurance.android.app.protocol.BBListInsuranceRequest
 import com.bbinsurance.android.app.protocol.BBListInsuranceResponse
 import com.bbinsurance.android.app.ui.component.ListBaseUIComponent
 import com.bbinsurance.android.app.ui.item.BaseDataItem
-import com.bbinsurance.android.app.ui.item.InsuranceDataItem
+import com.bbinsurance.android.app.plugin.insurance.ui.InsuranceDataItem
 
 /**
  * Created by jiaminchen on 17/12/20.

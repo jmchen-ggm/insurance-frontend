@@ -21,7 +21,7 @@ import com.bbinsurance.android.app.UIConstants
  * Created by jiaminchen on 2017/10/24.
  */
 abstract class BaseActivity : AppCompatActivity() {
-    val TAG = "BB.BaseActivity"
+    private val TAG = "BB.BaseActivity"
 
     lateinit var actionBarView: View
     lateinit var actionBarParams: ActionBar.LayoutParams
