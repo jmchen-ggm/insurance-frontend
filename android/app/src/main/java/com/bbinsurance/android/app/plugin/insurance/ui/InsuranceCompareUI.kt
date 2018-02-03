@@ -143,6 +143,9 @@ class InsuranceCompareUI : BaseActivity() {
         compareBtn.isEnabled = false
         compareBtn.setOnClickListener({
             compareAdapter.setData(leftDetail!!, rightDetail!!)
+            expandLv.expandGroup(0)
+            expandLv.expandGroup(1)
+            expandLv.expandGroup(2)
         })
     }
 
@@ -159,6 +162,7 @@ class InsuranceCompareUI : BaseActivity() {
                 var id = data!!.getLongExtra(UIConstants.InsuranceSelectUI.KeyInsuranceId, -1)
                 requestDetailData(id, rightDetailInsuranceNetListener)
             }
+            compareAdapter.clearData()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

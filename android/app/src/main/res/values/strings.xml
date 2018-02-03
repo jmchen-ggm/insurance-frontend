@@ -86,11 +86,11 @@
     <string name="comment_company">评价公司：</string>
     <string name="comment_insurance_type">保险种类：</string>
 
-    <string name="annal_compensation_desc">每年赔偿上限： %d万 港币</string>
+    <string name="annal_compensation_desc">每年赔偿上限： %d万</string>
 
     <string name="insurance_detail">保险详情</string>
-    <string name="annal_compensation">每年赔偿上限：%d万港币</string>
-    <string name="annal_premium">每年平均保费：%d港币</string>
+    <string name="annal_compensation">每年赔偿上限：%d万</string>
+    <string name="annal_premium">每年平均保费：%d</string>
     <string name="insurance_age_range" formatted="false">年龄范围：%d岁-%d岁</string>
 
     <string name="insurance_compare">保险对比</string>
@@ -99,4 +99,9 @@
 
     <string name="insurance_age_range_compare">年龄范围</string>
     <string name="insurance_age_range_number" formatted="false">%d岁-%d岁</string>
+
+    <string name="insurance_compensation_compare">每年赔偿上限</string>
+    <string name="insurance_compensation_number" formatted="false">%d万</string>
+
+    <string name="insurance_premium_compare">每年平均保费</string>
 </resources>

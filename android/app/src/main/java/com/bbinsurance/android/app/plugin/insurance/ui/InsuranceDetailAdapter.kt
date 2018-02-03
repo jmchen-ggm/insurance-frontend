@@ -81,9 +81,9 @@ class InsuranceDetailAdapter : BaseExpandableListAdapter {
     private var groupList = ArrayList<InsuranceDetailGroup>()
     fun setData(detailData: JSONObject) {
         groupList.add(parseGroup(detailData.getJSONObject("score")))
-        groupList.add(parseGroup(detailData.getJSONObject("premium")))
         groupList.add(parseGroup(detailData.getJSONObject("nonSeriousProtected")))
         groupList.add(parseGroup(detailData.getJSONObject("seriousProtected")))
+        groupList.add(parseGroup(detailData.getJSONObject("premium")))
         notifyDataSetChanged()
 
     }
