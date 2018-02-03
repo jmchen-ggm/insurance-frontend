@@ -1,4 +1,4 @@
-package com.bbinsurance.android.app.plugin.insurance.ui
+package com.bbinsurance.android.app.plugin.insurance.model
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bbinsurance.android.app.R
-import com.bbinsurance.android.app.plugin.insurance.model.InsuranceDetailGroup
-import com.bbinsurance.android.app.ui.item.BaseDataItem
 
 /**
  * Created by jiaminchen on 18/2/3.

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:id="@+id/left_insurance_layout"
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/company_left_thumb_iv"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="48dp"
+                android:background="@color/grey_color_1"
+                android:layout_height="48dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/TitleTextSize"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:text="@string/init_compare_insurance"
+                android:id="@+id/insurance_left_name_tv"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:text="VS"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:id="@+id/right_insurance_layout"
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/company_right_thumb_iv"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="48dp"
+                android:background="@color/grey_color_1"
+                android:layout_height="48dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/TitleTextSize"
+                android:textColor="@color/black"
+                android:text="@string/init_compare_insurance"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:id="@+id/insurance_right_name_tv"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/compare_btn"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/compare"/>
+
+    <ExpandableListView
+        android:id="@+id/expand_lv"
+        android:background="@null"
+        android:divider="@null"
+        android:groupIndicator="@null"
+        android:scrollbars="none"
+        android:childDivider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ExpandableListView>
+</LinearLayout>

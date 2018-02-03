@@ -20,6 +20,8 @@ class UIConstants {
     class GlobalRequestCode {
         companion object {
             val LoginRequestCode = 0x1000;
+            val SelectLeftInsuranceRequestCode = 0x2000;
+            val SelectRightInsuranceRequestCode = 0x2001;
         }
     }
 
@@ -31,6 +33,12 @@ class UIConstants {
     }
 
     class InsuranceDetailUI {
+        companion object {
+            val KeyInsuranceId = "key_insurance_id"
+        }
+    }
+
+    class InsuranceSelectUI {
         companion object {
             val KeyInsuranceId = "key_insurance_id"
         }

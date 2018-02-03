@@ -26,6 +26,7 @@ import com.bbinsurance.android.app.plugin.comment.ui.CommentListUI
 import com.bbinsurance.android.app.plugin.company.ui.CompanyListUI
 import com.bbinsurance.android.app.plugin.company.ui.InsuranceTypeListUI
 import com.bbinsurance.android.app.plugin.init.GetInsuranceBaseDataTask
+import com.bbinsurance.android.app.plugin.insurance.ui.InsuranceCompareUI
 import com.bbinsurance.android.app.plugin.learn.ui.LearnArticleUI
 import com.bbinsurance.android.app.protocol.*
 import com.bbinsurance.android.app.ui.adapter.BannerAdapter
@@ -117,6 +118,11 @@ class HomeFragmentUI : Fragment(), BannerBaseUIComponent<BBInsurance> {
         companyLayout = convertView.findViewById(R.id.company_layout)
         companyItemContainer = convertView.findViewById(R.id.company_item_container)
         companyHeaderLayout = convertView.findViewById(R.id.company_header_layout)
+
+        compareLayout.setOnClickListener({
+            var intent = Intent(context, InsuranceCompareUI::class.java)
+            startActivity(intent)
+        })
 
         evaluateLayout.setOnClickListener({
             var intent = Intent(context, CommentListUI::class.java)

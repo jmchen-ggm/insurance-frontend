@@ -92,4 +92,11 @@
     <string name="annal_compensation">每年赔偿上限：%d万港币</string>
     <string name="annal_premium">每年平均保费：%d港币</string>
     <string name="insurance_age_range" formatted="false">年龄范围：%d岁-%d岁</string>
+
+    <string name="insurance_compare">保险对比</string>
+    <string name="compare">对比</string>
+    <string name="init_compare_insurance">请选择保险</string>
+
+    <string name="insurance_age_range_compare">年龄范围</string>
+    <string name="insurance_age_range_number" formatted="false">%d岁-%d岁</string>
 </resources>

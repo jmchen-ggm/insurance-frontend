@@ -33,5 +33,7 @@
         <activity android:name=".plugin.comment.ui.CommentDetailUI"
                   android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".plugin.insurance.ui.InsuranceDetailUI"/>
+        <activity android:name=".plugin.insurance.ui.InsuranceSelectUI"/>
+        <activity android:name=".plugin.insurance.ui.InsuranceCompareUI"/>
     </application>
 </manifest>
