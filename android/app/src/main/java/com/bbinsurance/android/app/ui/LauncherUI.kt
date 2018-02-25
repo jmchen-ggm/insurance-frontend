@@ -1,22 +1,26 @@
 package com.bbinsurance.android.app.ui
 
+import android.animation.ObjectAnimator
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.BottomSheetDialog
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Button
 import android.widget.EditText
-import android.widget.RelativeLayout
-import android.widget.TextView
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.bbinsurance.android.app.AppConstants
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
+import com.bbinsurance.android.app.plugin.comment.CommentLogic
 import com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI
 import com.bbinsurance.android.app.ui.fragment.*
 import com.bbinsurance.android.lib.util.PermissionUtil
-import com.facebook.drawee.view.SimpleDraweeView
 
 /**
  * Created by jiaminchen on 2017/10/23.
@@ -29,13 +33,12 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         return R.layout.launcher_ui
     }
 
-    private lateinit var launcherHeader : View
+    private lateinit var launcherHeader: View
     private lateinit var searchET: EditText
     private lateinit var commentView: View
     private var homeFragment: Fragment? = null
     private var discoverFragment: Fragment? = null
     private var myFragment: Fragment? = null
-    private var addFragment: Fragment? = null
     private var messageFragment: Fragment? = null
 
     override fun initView() {
@@ -87,10 +90,12 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
         replaceFragments(position);
     }
 
+    private var currentFragmentIndex = 0
     private fun replaceFragments(position: Int) {
         supportFragmentManager.beginTransaction().apply {
             when (position) {
                 0 -> {
+                    currentFragmentIndex = 0
                     if (homeFragment == null) {
                         homeFragment = HomeFragmentUI()
                     }
@@ -98,6 +103,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
                     replace(R.id.home_activity_frag_container, homeFragment)
                 }
                 1 -> {
+                    currentFragmentIndex = 1
                     if (discoverFragment == null) {
                         discoverFragment = DiscoverFragmentUI()
                     }
@@ -105,13 +111,10 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
                     replace(R.id.home_activity_frag_container, discoverFragment)
                 }
                 2 -> {
-                    if (addFragment == null) {
-                        addFragment = AddFragmentUI()
-                    }
-                    launcherHeader.visibility = View.GONE
-                    replace(R.id.home_activity_frag_container, addFragment)
+                    showAddDialog()
                 }
                 3 -> {
+                    currentFragmentIndex = 3
                     if (messageFragment == null) {
                         messageFragment = MessageFragmentUI()
                     }
@@ -119,6 +122,7 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
                     replace(R.id.home_activity_frag_container, messageFragment)
                 }
                 4 -> {
+                    currentFragmentIndex = 4
                     if (myFragment == null) {
                         myFragment = MyFragmentUI()
                     }
@@ -131,5 +135,34 @@ class LauncherUI : BaseActivity(), BottomNavigationBar.OnTabSelectedListener {
 
     override fun needActionBar(): Boolean {
         return false
+    }
+
+    private var addDialog: BottomSheetDialog? = null
+    private fun showAddDialog() {
+        if (addDialog == null) {
+            addDialog = BottomSheetDialog(this)
+            var addDialogView = LayoutInflater.from(this).inflate(R.layout.add_dialog_ui, null)
+            var textBtn : View = addDialogView.findViewById(R.id.text_btn)
+            var askBtn : View = addDialogView.findViewById(R.id.ask_btn)
+            var commentBtn : View = addDialogView.findViewById(R.id.comment_btn)
+            textBtn.setOnClickListener(dialogClickListener)
+            askBtn.setOnClickListener(dialogClickListener)
+            commentBtn.setOnClickListener(dialogClickListener)
+            addDialog?.setContentView(addDialogView)
+        }
+        addDialog?.show()
+        addDialog?.setOnDismissListener({
+            bottomNavigationBar.selectTab(currentFragmentIndex)
+        })
+    }
+    private var dialogClickListener = View.OnClickListener { view ->
+        var scaleXAnim = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.2f, 1f).setDuration(400);
+        scaleXAnim.interpolator = AccelerateDecelerateInterpolator()
+        var scaleYAnim = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f, 1f).setDuration(400);
+        scaleYAnim.interpolator = AccelerateDecelerateInterpolator()
+        scaleXAnim.start()
+        scaleYAnim.start()
+        CommentLogic.goToAddCommentUI(this, Intent())
+        addDialog?.dismiss()
     }
 }

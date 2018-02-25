@@ -6,7 +6,6 @@ import com.bbinsurance.android.app.core.BBCore
 import com.bbinsurance.android.app.plugin.account.ui.LoginUI
 import com.bbinsurance.android.app.plugin.comment.ui.AddCommentUI
 import com.bbinsurance.android.app.plugin.comment.ui.CommentDetailUI
-import com.bbinsurance.android.app.ui.fragment.AddFragmentUI
 
 /**
  * Created by jiaminchen on 18/2/2.

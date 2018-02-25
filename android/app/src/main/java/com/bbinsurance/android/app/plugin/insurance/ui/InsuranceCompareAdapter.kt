@@ -95,8 +95,8 @@ class InsuranceCompareAdapter : BaseExpandableListAdapter {
         var compensationGroup = InsuranceCompareGroup()
         compensationGroup.name = context.getString(R.string.insurance_compensation_compare)
         var compensationChild = InsuranceCompareChild()
-        compensationChild.left = context.getString(R.string.insurance_compensation_number, leftDetail.AnnualCompensation)
-        compensationChild.right = context.getString(R.string.insurance_compensation_number, rightDetail.AnnualCompensation)
+        compensationChild.left = context.getString(R.string.insurance_compensation_number, leftDetail.AnnualCompensation / 10000)
+        compensationChild.right = context.getString(R.string.insurance_compensation_number, rightDetail.AnnualCompensation / 10000)
         compensationGroup.children.add(compensationChild)
         groupList.add(compensationGroup)
 

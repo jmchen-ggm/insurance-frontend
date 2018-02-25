@@ -104,4 +104,8 @@
     <string name="insurance_compensation_number" formatted="false">%d万</string>
 
     <string name="insurance_premium_compare">每年平均保费</string>
+
+    <string name="add_text_string">吐槽</string>
+    <string name="add_ask_string">提问</string>
+    <string name="add_comment_string">评论</string>
 </resources>

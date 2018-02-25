@@ -3,6 +3,7 @@ package com.bbinsurance.android.app.plugin.insurance.ui
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import android.widget.Spinner
 import com.bbinsurance.android.app.R
 import com.bbinsurance.android.app.UIConstants
 import com.bbinsurance.android.app.ui.BaseListActivity
@@ -15,6 +16,9 @@ import com.bbinsurance.android.app.ui.item.BaseDataItem
  */
 class InsuranceSelectUI : BaseListActivity() {
 
+    lateinit var selectCompanySpinner : Spinner
+    lateinit var selectInsuranceTypeSpinner : Spinner
+
     override fun initView() {
         super.initView()
 
@@ -22,6 +26,10 @@ class InsuranceSelectUI : BaseListActivity() {
         setBackBtn(true, View.OnClickListener {
             finish()
         })
+
+        selectCompanySpinner = findViewById(R.id.select_company_spinner)
+        selectInsuranceTypeSpinner = findViewById(R.id.select_insurance_type_spinner)
+
     }
 
     override fun getLayoutId(): Int {
